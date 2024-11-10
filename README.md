@@ -2,16 +2,16 @@ Mako Bakery Website
 Website Mako Bakery adalah platform fullstack untuk menampilkan profil perusahaan dan mengelola menu produk. Proyek ini menggunakan Remix v2 sebagai framework frontend dan backend, dengan Prisma sebagai ORM untuk manajemen database.
 
 ## Fitur
-# Autentikasi
+- Autentikasi
 Login dengan dua role: User dan Admin.
 Sistem autentikasi yang membedakan akses antara pengguna umum dan admin.
-# Tampilan Menu Produk
+- Tampilan Menu Produk
 Pengguna dapat melihat daftar menu produk yang disediakan oleh Mako Bakery.
-# Rating dan Komentar
+- Rating dan Komentar
 Pengguna dapat memberikan rating dan komentar pada setiap produk. Fitur ini memungkinkan pengunjung untuk berbagi pengalaman mereka.
-# Dashboard Admin
+- Dashboard Admin
 Admin memiliki akses ke dashboard untuk mengelola menu, termasuk menambah, mengedit, dan menghapus produk.
-# Tampilan UX/UI yang Disempurnakan
+- Tampilan UX/UI yang Disempurnakan
 Desain antarmuka pengguna dibuat lebih menarik dan mudah digunakan.
 ## Teknologi yang Digunakan
 Framework: Remix v2
