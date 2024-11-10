@@ -23,14 +23,6 @@ Website Mako Bakery adalah platform fullstack untuk menampilkan profil perusahaa
 - Tampilan UX/UI yang Disempurnakan
   Desain antarmuka pengguna dibuat lebih menarik dan mudah digunakan.
 
-Persiapan Proyek
-Prasyarat
-
-- Node.js 16 atau lebih tinggi
-- MongoDB
-- Prisma
-- Instalasi
-
 Clone repositori ini:
 
 ```bash
@@ -48,7 +40,7 @@ Konfigurasi Prisma:
 Buat file .env dan atur koneksi database Anda:
 
 ```bash
-DATABASE_URL="your_mongouri"
+DATABASE_URL="mongodb+srv://username:password@yourCluster.qrphrrv.mongodb.net/?retryWrites=true&w=majority&appName=yourClusterName"
 ```
 
 ## Menjalankan Proyek
@@ -79,12 +71,18 @@ routes/ - Menyimpan semua file route sesuai dengan struktur Remix v2.
 
 Fork proyek ini.
 
+Buat branch fitur 
 ```bash
-Buat branch fitur (git checkout -b feature/NamaFitur).
-Commit perubahan (git commit -m 'Menambahkan NamaFitur').
-Push ke branch (git push origin feature/NamaFitur).
+git checkout -b feature/NamaFitur
 ```
-
+Commit perubahan
+```bash
+git commit -m 'Menambahkan NamaFitur'
+```
+Push ke branch
+```bash
+git push origin feature/NamaFitur
+```
 Ajukan pull request.
 
 ## Lisensi
