@@ -1,40 +1,107 @@
-# Welcome to Remix!
+Mako Bakery Website
+Website Mako Bakery adalah platform fullstack untuk menampilkan profil perusahaan dan mengelola menu produk. Proyek ini menggunakan Remix v2 sebagai framework frontend dan backend, dengan Prisma sebagai ORM untuk manajemen database.
 
-- 📖 [Remix docs](https://remix.run/docs)
+Fitur
+Autentikasi
 
-## Development
+Login dengan dua role: User dan Admin.
+Sistem autentikasi yang membedakan akses antara pengguna umum dan admin.
+Tampilan Menu Produk
 
-Run the dev server:
+Pengguna dapat melihat daftar menu produk yang disediakan oleh Mako Bakery.
+Rating dan Komentar
 
-```shellscript
+Pengguna dapat memberikan rating dan komentar pada setiap produk.
+Fitur ini memungkinkan pengunjung untuk berbagi pengalaman mereka.
+Dashboard Admin
+
+Admin memiliki akses ke dashboard untuk mengelola menu, termasuk menambah, mengedit, dan menghapus produk.
+Tampilan UX/UI yang Disempurnakan
+
+Desain antarmuka pengguna dibuat lebih menarik dan mudah digunakan.
+Teknologi yang Digunakan
+Framework: Remix v2
+ORM: Prisma
+Database: Sesuai konfigurasi Prisma (misalnya, PostgreSQL, MySQL, SQLite)
+Bahasa: JavaScript / TypeScript (tergantung pada konfigurasi Anda)
+Frontend Libraries: React dengan Remix dan pustaka tambahan lainnya sesuai kebutuhan UI
+Persiapan Proyek
+Prasyarat
+Node.js 16 atau lebih tinggi
+Database (PostgreSQL, MySQL, atau SQLite)
+Prisma
+Instalasi
+Clone repositori ini:
+
+```bash
+Salin kode
+git clone https://github.com/username/mako-bakery.git
+cd mako-bakery
+```
+
+Instal dependensi:
+
+```bash
+Salin kode
+npm install
+```
+
+Konfigurasi Prisma:
+Buat file .env dan atur koneksi database Anda:
+
+```bash
+Salin kode
+DATABASE_URL="mysql://username:password@localhost:3306/makobakery"
+```
+
+Migrasi Database:
+
+Jalankan migrasi untuk membuat tabel yang dibutuhkan:
+
+```bash
+Salin kode
+npx prisma migrate dev --name init
+```
+
+Menjalankan Proyek
+Pengembangan Lokal:
+
+```bash
+Salin kode
 npm run dev
 ```
 
-## Deployment
+Membangun untuk Produksi:
 
-First, build your app for production:
-
-```sh
+```bash
+Salin kode
 npm run build
-```
-
-Then run the app in production mode:
-
-```sh
 npm start
 ```
 
-Now you'll need to pick a host to deploy it to.
+Struktur Direktori
 
-### DIY
+```bash
+app/ - Folder utama untuk Remix, mencakup semua route, komponen, dan logika bisnis.
+prisma/ - Folder untuk skema Prisma.
+public/ - File statis, seperti gambar dan CSS.
+routes/ - Menyimpan semua file route sesuai dengan struktur Remix v2.
+```
 
-If you're familiar with deploying Node applications, the built-in Remix app server is production-ready.
+Penggunaan
+User
+Akses: Dapat melihat produk dan memberi rating serta komentar.
+Admin
+Akses Tambahan: Dapat mengelola produk melalui dashboard admin.
+Kontribusi
+Fork proyek ini.
 
-Make sure to deploy the output of `npm run build`
+```bash
+Buat branch fitur (git checkout -b feature/NamaFitur).
+Commit perubahan (git commit -m 'Menambahkan NamaFitur').
+Push ke branch (git push origin feature/NamaFitur).
+Ajukan pull request.
+```
 
-- `build/server`
-- `build/client`
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever css framework you prefer. See the [Vite docs on css](https://vitejs.dev/guide/features.html#css) for more information.
+Lisensi
+Proyek ini dilisensikan di bawah lisensi MIT.
