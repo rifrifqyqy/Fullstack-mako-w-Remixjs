@@ -10,3 +10,21 @@ body {
     color-scheme: dark;
   }
 }
+
+/* swiper js style buton */
+/* Menyembunyikan tombol jika tidak diaktifkan */
+.swiper-button-disabled {
+  opacity: 0.3;
+}
+
+/* Tombol navigasi */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff; /* Warna putih untuk tombol */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 1.5rem;
+}
+
