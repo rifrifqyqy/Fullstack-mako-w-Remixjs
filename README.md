@@ -55,10 +55,12 @@ npm start
 ```
 
 Struktur Direktori
+```bash
 app/ - Folder utama untuk Remix, mencakup semua route, komponen, dan logika bisnis.
 prisma/ - Folder untuk skema Prisma.
 public/ - File statis, seperti gambar dan CSS.
 routes/ - Menyimpan semua file route sesuai dengan struktur Remix v2.
+```
 Penggunaan
 User
 Akses: Dapat melihat produk dan memberi rating serta komentar.
