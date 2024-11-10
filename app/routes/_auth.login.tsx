@@ -18,6 +18,8 @@ export async function action({ request }) {
     const user = await prisma.user.findUnique({ where: { username } });
     console.log("user found", user);
     if (!user || !(await bcrypt.compare(password, user.password))) {
+      console.log("Password received:", password);
+      console.log("Stored hashed password:", user.password);
       return json({ error: "Username atau password salah" }, { status: 400 });
     }
 
