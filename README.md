@@ -34,8 +34,8 @@ Prasyarat
 Clone repositori ini:
 
 ```bash
-git clone https://github.com/username/mako-bakery.git
-cd mako-bakery
+git clone https://github.com/rifrifqyqy/fullstack-mako-w-remixjs.git
+cd fullstack-mako-w-remixjs
 ```
 
 Instal dependensi:
