@@ -20,12 +20,7 @@ Pengguna dapat memberikan rating dan komentar pada setiap produk. Fitur ini memu
 Admin memiliki akses ke dashboard untuk mengelola menu, termasuk menambah, mengedit, dan menghapus produk.
 - Tampilan UX/UI yang Disempurnakan
 Desain antarmuka pengguna dibuat lebih menarik dan mudah digunakan.
-## Teknologi yang Digunakan
-Framework: Remix v2
-ORM: Prisma
-Database: Sesuai konfigurasi Prisma (misalnya, PostgreSQL, MySQL, SQLite)
-Bahasa: JavaScript / TypeScript (tergantung pada konfigurasi Anda)
-Frontend Libraries: React dengan Remix dan pustaka tambahan lainnya sesuai kebutuhan UI
+
 Persiapan Proyek
 Prasyarat
 - Node.js 16 atau lebih tinggi
