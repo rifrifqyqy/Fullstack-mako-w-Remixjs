@@ -2,7 +2,7 @@ Mako Bakery Website
 Website Mako Bakery adalah platform fullstack untuk menampilkan profil perusahaan dan mengelola menu produk. Proyek ini menggunakan Remix v2 sebagai framework frontend dan backend, dengan Prisma sebagai ORM untuk manajemen database.
 ## Technologies
 
-![Remix](https://img.shields.io/badge/Remix.svg?style=for-the-badge&logo=remix&logoColor=white)
+![Remix](https://img.shields.io/badge/Remix.svg?style=for-the-badge&logo=remixjs&logoColor=white)
 ![Rails](https://img.shields.io/badge/ruby%20on%20RAILS-d21203.svg?style=for-the-badge&logo=ruby-on-rails&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) 
 ![MongoDB](https://img.shields.io/badge/MongoID-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white) 
