@@ -1,6 +1,6 @@
 import { NavLink } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
 // interface types navbar
@@ -48,6 +48,7 @@ export function RemixNavbarMenu({
   // logout modal logic
   const handleLogout = async () => {
     window.location.href = "/logout";
+    localStorage.removeItem("toastShown");
   };
   const handleClick = (e: React.MouseEvent) => {
     if (btn_to === "/logout") {
