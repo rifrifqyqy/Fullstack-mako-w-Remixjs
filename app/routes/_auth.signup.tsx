@@ -46,7 +46,7 @@ export async function action({ request }) {
       },
     });
 
-    return redirect("/auth/login");
+    return redirect("/login");
   } catch (error: any) {
     console.error(error);
     return json(
