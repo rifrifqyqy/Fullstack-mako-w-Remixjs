@@ -1,12 +1,15 @@
 import { prisma } from "utils/db.server";
 import { json } from "@remix-run/node";
-import { useActionData, Form } from "@remix-run/react";
+import { useActionData, Form, useNavigation } from "@remix-run/react";
 import bcrypt from "bcryptjs";
 import { createSession } from "utils/session.server";
+import { useEffect, useState } from "react";
 
 type ActionData = {
   error?: string;
   request?: string;
+  state: boolean;
+  success?: boolean;
 };
 export async function action({ request }) {
   const formData = await request.formData();
@@ -50,7 +53,19 @@ export async function action({ request }) {
 
 export default function Login() {
   const actionData = useActionData<ActionData>();
+  const navigation = useNavigation();
+  navigation.formData;
+  navigation.formMethod;
+  navigation.formAction;
+  const isSubmitting = navigation.state === "submitting";
+  const loadingSubmitting = navigation.state === "loading";
 
+  // modal logic
+  useEffect(() => {
+    if (actionData?.success) {
+      setShowModal(true);
+    }
+  }, [actionData]);
   return (
     <Form method="post">
       <div>
@@ -64,7 +79,8 @@ export default function Login() {
         </label>
       </div>
       {actionData?.error && <p>{actionData.error}</p>}
-      <button type="submit">Login</button>
+      <button type="submit"> {isSubmitting ? "Logging in..." : "Login"}</button>
+      {/* Modal login sukses */}
     </Form>
   );
 }
