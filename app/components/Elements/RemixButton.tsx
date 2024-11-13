@@ -10,7 +10,7 @@ type RemixButtonProps = {
   target?: string;
   rel?: string;
   children?: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 export default function RemixButton({
