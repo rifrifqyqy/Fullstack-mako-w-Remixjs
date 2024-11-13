@@ -84,7 +84,7 @@ export default function HomeLayout() {
               key={activeCategory.name}
               src={activeCategory.img}
               alt={activeCategory.name}
-              className="absolute h-fit w-full rounded-xl"
+              className="absolute h-fit w-full rounded-3xl"
             />
           </AnimatePresence>
         </section>
