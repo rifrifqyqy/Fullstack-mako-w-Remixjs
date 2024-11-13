@@ -35,11 +35,18 @@ export async function getUserSession(request: Request) {
 // Middleware untuk mengharuskan admin
 export async function requireAdmin(request: Request) {
   const userId = await getUserSession(request);
-  const user = await prisma.user.findUnique({ where: { id: userId } });
-
-  if (user?.role !== "admin") {
+  if (!userId) {
     throw redirect("/login");
   }
+  const user = await prisma.user.findUnique({
+    where: { id: userId },
+  });
+
+  // Jika user tidak ditemukan atau bukan admin, redirect ke login
+  if (!user || user.role !== "admin") {
+    throw redirect("/login");
+  }
+  return user;
 }
 
 // Fungsi untuk logout
