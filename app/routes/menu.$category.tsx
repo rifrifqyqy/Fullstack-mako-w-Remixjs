@@ -5,6 +5,7 @@ import { LoaderFunction } from "@remix-run/node";
 export const loader: LoaderFunction = async ({ params }) => {
   const { category } = params;
   // Ambil data menu berdasarkan kategori jika perlu
+  
   return json({ category });
 };
 
