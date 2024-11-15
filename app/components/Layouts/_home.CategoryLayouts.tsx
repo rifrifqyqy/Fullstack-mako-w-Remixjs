@@ -2,6 +2,7 @@ import dataCategory from "../../../data/category.json";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NavLink, useNavigate } from "@remix-run/react";
+import RemixButton from "../Elements/RemixButton";
 
 // types
 interface CategoryType {
@@ -9,7 +10,7 @@ interface CategoryType {
   img: string;
 }
 
-export default function HomeLayout() {
+export default function HomeCategoryLayout() {
   // State untuk menyimpan kategori yang aktif
   const [activeCategory, setActiveCategory] = useState<CategoryType>(
     dataCategory[0],
@@ -71,6 +72,13 @@ export default function HomeLayout() {
                   {activeCategory.name}
                 </p>
               </figure>
+              <RemixButton
+                to={`/menu/${activeCategory.name}`}
+                title=""
+                stylebtn="w-fit mx-auto uppercase text-lg"
+              >
+                {activeCategory.name}
+              </RemixButton>
             </section>
           </div>
         </NavLink>
