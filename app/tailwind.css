@@ -28,3 +28,10 @@ body {
   font-size: 1.5rem;
 }
 
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Untuk browser berbasis Webkit seperti Chrome, Edge, dan Safari */
+}
+.scrollbar-hide {
+  -ms-overflow-style: none; /* Untuk Internet Explorer dan Edge */
+  scrollbar-width: none; /* Untuk Firefox */
+}
