@@ -10,13 +10,13 @@ import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import RemixButton from "~/components/Elements/RemixButton";
-import HomeLayout from "~/components/Layouts/_home.CategoryLayouts";
 import BreadMarquee from "~/components/Fragments/RemixMarquee";
 import { getLatestMenu } from "utils/menu.server";
 import { Suspense, useEffect, useState } from "react";
 import { CardSkeleton_1 } from "~/components/Skeletons/CardSkeleton";
-import LoadingModal from "~/components/Fragments/LoadingModal";
+import HomeCategoryLayout from "~/components/Layouts/_home.CategoryLayouts";
 
+// =============================================== END IMPORTS STORE =============================================== //
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -260,6 +260,24 @@ export default function Index() {
         {/* menampilkan current user */}
         {currentUser ? currentUser.username : "guest"}
       </div>
+
+      {/* category layout */}
+
+      <section className="mt-16 px-8">
+        <HomeCategoryLayout />
+      </section>
+      <section className="mt-12 flex h-[650px] w-full px-8">
+        <figure className="overflow-hidden rounded-3xl border-2 border-gray-300">
+          <img
+            src="images/dotpattern.png"
+            className="w-full object-cover"
+            alt=""
+          />
+        </figure>
+      </section>
+
+      {/* ====================== toast, modal, alert components ====================== */}
+      {/* toast component for welcome login */}
       <AnimatePresence mode="wait">
         {showToast && (
           <motion.div
@@ -276,21 +294,6 @@ export default function Index() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* category layout */}
-
-      <section className="mt-16 px-8">
-        <HomeLayout />
-      </section>
-      <section className="mt-12 flex h-[650px] w-full px-8">
-        <figure className="overflow-hidden rounded-3xl border-2 border-gray-300">
-          <img
-            src="images/dotpattern.png"
-            className="w-full object-cover"
-            alt=""
-          />
-        </figure>
-      </section>
     </main>
   );
 }
