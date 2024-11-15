@@ -21,7 +21,7 @@ export const loader: LoaderFunction = async () => {
 };
 export default function Menu() {
   const menus = useLoaderData<Menu[]>();
-  const [activeCategory, setActiveCategory] = useState("danish");
+  const [activeCategory, setActiveCategory] = useState("bread");
   const filteredMenus = menus.filter(
     (menu) => menu.kategori === activeCategory,
   );
