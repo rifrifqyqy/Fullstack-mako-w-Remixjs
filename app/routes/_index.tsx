@@ -255,18 +255,24 @@ export default function Index() {
         </figure>
       </section>
 
-      <div>
-        <h1>Welcome to Remix!</h1>
-        {/* menampilkan current user */}
-        {currentUser ? currentUser.username : "guest"}
-      </div>
-
       {/* category layout */}
-
-      <section className="mt-16 px-8">
+      <section className="mt-24 flex flex-col gap-16 px-8">
+        <article className="flex flex-col gap-2">
+          <div className="flex w-fit gap-4 rounded-full bg-zinc-200 px-4 py-1">
+            <img src="images/danish.png" alt="" className="h-8" />
+            <img src="images/buns.png" alt="" className="h-8" />
+            <img src="images/cookie.png" alt="" className="h-8" />
+          </div>
+          <h1 className="text-[54px] font-semibold">
+            Temukan berbagai pilihan roti, kue, dan{" "}
+            <span className="text-primary-100">pastry</span> yang{" "}
+            <span className="text-primary-100">disiapkan</span> khusus untuk
+            Anda.
+          </h1>
+        </article>
         <HomeCategoryLayout />
       </section>
-      <section className="mt-12 flex h-[650px] w-full px-8">
+      <section className="mt-20 flex h-[650px] w-full px-8">
         <figure className="overflow-hidden rounded-3xl border-2 border-gray-300">
           <img
             src="images/dotpattern.png"
@@ -275,6 +281,7 @@ export default function Index() {
           />
         </figure>
       </section>
+      {/* end category layout */}
 
       {/* ====================== toast, modal, alert components ====================== */}
       {/* toast component for welcome login */}
@@ -294,6 +301,7 @@ export default function Index() {
           </motion.div>
         )}
       </AnimatePresence>
+      {/* end toast */}
     </main>
   );
 }
