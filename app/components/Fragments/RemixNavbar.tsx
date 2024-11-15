@@ -1,4 +1,4 @@
-import { NavLink } from "@remix-run/react";
+import { Link, NavLink } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -162,9 +162,9 @@ export function RemixNavbarMenu({
             )}
           </RemixButton>
         </div>
-        <nav className="absolute flex h-[70px] w-full">
+        <Link to="/" className="absolute flex h-[70px] w-full">
           <img src="images/mako.svg" className="mx-auto my-auto h-12" alt="" />
-        </nav>
+        </Link>
       </nav>
     </motion.section>
   );
