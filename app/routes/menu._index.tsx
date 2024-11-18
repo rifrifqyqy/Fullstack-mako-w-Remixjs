@@ -1,11 +1,15 @@
+/* eslint-disable import/no-unresolved */
 // app/routes/dashboard/menu.tsx
 import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getAllMenu } from "utils/menu.server";
 import categoryMenu from "data/category.json";
 import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
-import { Suspense, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { Suspense } from "react";
+import { AnimatePresence } from "framer-motion";
+import BreadCard from "~/components/Fragments/CardProduct";
+import { useCategory } from "helper/CategoryContext";
+
 type Menu = {
   id: number;
   title: string;
@@ -13,6 +17,7 @@ type Menu = {
   thumb: string;
   gallery: string[];
   kategori: string;
+  price: number;
 };
 // Loader function untuk mengambil data menu
 export const loader: LoaderFunction = async () => {
@@ -21,11 +26,11 @@ export const loader: LoaderFunction = async () => {
 };
 export default function Menu() {
   const menus = useLoaderData<Menu[]>();
-  const [activeCategory, setActiveCategory] = useState("bread");
+  const { activeCategory, setActiveCategory } = useCategory();
+
   const filteredMenus = menus.filter(
     (menu) => menu.kategori === activeCategory,
   );
-  console.log(menus);
 
   // handleclick category
   const handleCategoryClick = (category: string) => {
@@ -34,7 +39,7 @@ export default function Menu() {
 
   return (
     <main className="flex flex-col px-8">
-      <RemixNavbarMenu to="" />
+      <RemixNavbarMenu />
       <section className="relative mt-8 flex h-[200px] w-full overflow-hidden rounded-3xl bg-cover">
         <article className="m-auto flex flex-col gap-2">
           <h1 className="z-10 mx-auto w-fit text-5xl font-semibold uppercase text-white">
@@ -73,65 +78,40 @@ export default function Menu() {
           </Suspense>
         </ul>
       </header>
-      <section className="menu-data mt-6 grid grid-cols-4 justify-items-center gap-12">
-        <AnimatePresence mode="popLayout">
-          {filteredMenus.length > 0 ? (
-            filteredMenus.map((menu) => (
-              <motion.div
-                className="menu-item rounded-xl border p-2"
-                key={menu.id}
-                variants={CARD_ANIMATION}
-                initial="hidden"
-                animate="visible"
-                exit="exit"
-              >
+      <section className="menu-data mt-6 grid grid-cols-5 justify-items-center gap-6">
+        <Suspense fallback={<div>Loading...</div>}>
+          <AnimatePresence mode="wait">
+            {filteredMenus.length > 0 ? (
+              filteredMenus.map((menu) => (
+                <BreadCard key={menu.id}>
+                  <BreadCard.Toppings
+                    DirecTo={`/menu/${menu.id}`}
+                    thumb={menu.thumb}
+                    title={menu.title}
+                    kategori={menu.kategori}
+                  />
+                  <BreadCard.Layer
+                    title={menu.title}
+                    description={menu.description}
+                    price={menu.price}
+                  />
+                </BreadCard>
+              ))
+            ) : (
+              <div className="col-span-5 flex h-full w-full flex-col items-center justify-center gap-4 rounded-3xl border-2 p-8">
                 <img
-                  src={menu.thumb}
-                  alt={menu.title}
-                  className="aspect-square w-full object-cover"
+                  src="/images/no-data.png"
+                  className="aspect-auto h-32"
+                  alt=""
                 />
-                <h1>{menu.title}</h1>
-                <p>{menu.description}</p>
-                <p>{menu.kategori}</p>
-              </motion.div>
-            ))
-          ) : (
-            <div className="col-span-4 flex h-full w-full flex-col items-center justify-center gap-4 rounded-3xl border-2 p-8">
-              <img
-                src="/images/no-data.png"
-                className="aspect-auto h-32"
-                alt=""
-              />
-              <p className="text-center font-semibold">No menu available</p>
-            </div>
-          )}
-        </AnimatePresence>
+                <p className="text-center font-semibold">No menu available</p>
+              </div>
+            )}
+          </AnimatePresence>
+        </Suspense>
       </section>
     </main>
   );
 }
 
 // ========================== ANIMATION ==========================
-
-const CARD_ANIMATION = {
-  hidden: {
-    opacity: 0,
-    y: "-10%",
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.83, 0, 0.17, 1],
-    },
-  },
-  exit: {
-    opacity: 0,
-    y: "10%",
-    transition: {
-      duration: 0.5,
-      ease: [0.83, 0, 0.17, 1],
-    },
-  },
-};
