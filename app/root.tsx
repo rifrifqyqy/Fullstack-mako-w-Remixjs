@@ -8,6 +8,9 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
+import { CategoryProvider } from "helper/CategoryContext";
+import { useGlobalLoading } from "helper/LoadingContext";
+import LoadingModal from "./components/Fragments/LoadingModal";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,6 +26,7 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  const { isLoading } = useGlobalLoading();
   return (
     <html lang="en">
       <head>
@@ -32,6 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
+        {isLoading && <LoadingModal title=" Memuat..." />}
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -41,5 +46,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <CategoryProvider>
+      <Outlet />
+    </CategoryProvider>
+  );
 }
