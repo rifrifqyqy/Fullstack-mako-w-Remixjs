@@ -1,9 +1,10 @@
+/* eslint-disable import/no-unresolved */
 import type { MetaFunction } from "@remix-run/node";
 import { prisma } from "utils/db.server";
 import { json, LoaderFunction } from "@remix-run/node";
 import { NavLink, useLoaderData } from "@remix-run/react";
 import { getUserSession } from "utils/session.server";
-import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
+import { RemixNavbarHome } from "~/components/Fragments/RemixNavbar";
 import { AnimatePresence, motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
@@ -15,6 +16,7 @@ import { getLatestMenu } from "utils/menu.server";
 import { Suspense, useEffect, useState } from "react";
 import { CardSkeleton_1 } from "~/components/Skeletons/CardSkeleton";
 import HomeCategoryLayout from "~/components/Layouts/_home.CategoryLayouts";
+import Accordion from "~/components/Elements/RAccordion";
 
 // =============================================== END IMPORTS STORE =============================================== //
 export const meta: MetaFunction = () => {
@@ -77,7 +79,7 @@ export default function Index() {
   // button handle previous image index
   return (
     <main className="">
-      <RemixNavbarMenu
+      <RemixNavbarHome
         to="/"
         btn_title={currentUser ? `` : "Login"}
         btn_to={currentUser ? "/logout" : "/login"}
@@ -207,16 +209,27 @@ export default function Index() {
             </motion.h1>
           </article>
           <h1 className="absolute bottom-0 z-20 mb-[5%]">
-            <RemixButton
-              to="/"
-              stylebtn="text-[18px] font-medium px-6 py-3"
-              title="Browse Pastries"
-            />
+            <motion.div
+              variants={ANIMATE_SCALE}
+              initial="hidden"
+              animate="visible"
+            >
+              <RemixButton
+                to="/menu"
+                stylebtn="text-[18px] font-medium px-6 py-3"
+                title="Browse Pastries"
+              />
+            </motion.div>
           </h1>
 
           {/* latest menu card */}
           <Suspense fallback={<CardSkeleton_1 />}>
-            <div className="absolute bottom-0 right-0 z-20 m-4 flex flex-col gap-2">
+            <motion.div
+              variants={ANIMATE_FRIGHT}
+              initial="hidden"
+              animate="visible"
+              className="absolute bottom-0 right-0 z-20 m-4 flex flex-col gap-2"
+            >
               <h1 className="w-fit rounded-full bg-zinc-200/20 px-4 py-2 font-medium text-white backdrop-blur-md">
                 Latest Menu
               </h1>
@@ -250,7 +263,7 @@ export default function Index() {
                   className="aspect-square w-[240px] rounded-xl object-cover"
                 />
               </div>
-            </div>
+            </motion.div>
           </Suspense>
         </figure>
       </section>
@@ -272,16 +285,15 @@ export default function Index() {
         </article>
         <HomeCategoryLayout />
       </section>
-      <section className="mt-20 flex h-[650px] w-full px-8">
-        <figure className="overflow-hidden rounded-3xl border-2 border-gray-300">
-          <img
-            src="images/dotpattern.png"
-            className="w-full object-cover"
-            alt=""
-          />
-        </figure>
-      </section>
       {/* end category layout */}
+      {/* accordion */}
+      <section className="mt-32 flex flex-col gap-12 px-8">
+        <h1 className="mx-auto text-4xl font-semibold">
+          Frequently Asked Questions
+        </h1>
+        <Accordion items={accordionData} />
+      </section>
+      <div className="h-44"></div>
 
       {/* ====================== toast, modal, alert components ====================== */}
       {/* toast component for welcome login */}
@@ -305,6 +317,25 @@ export default function Index() {
     </main>
   );
 }
+
+// ===================== ACCORDION DATA =====================
+const accordionData = [
+  {
+    title: " Apakah semua produk dibuat fresh setiap hari?",
+    content:
+      "Ya! Semua produk kami dibuat segar setiap hari dengan bahan-bahan berkualitas premium untuk menjamin rasa terbaik.",
+  },
+  {
+    title: "Apakah bisa memesan kue ulang tahun atau kue custom?",
+    content:
+      "Tentu saja! Kami menerima pesanan kue ulang tahun, kue pernikahan, atau kue custom lainnya. Silakan hubungi kami melalui Kontak untuk konsultasi desain dan rasa.",
+  },
+  {
+    title: "Bagaimana cara memesan produk Mako Bakery?",
+    content:
+      "Anda dapat mengunjungi outlet kami langsung atau melaui pihak ketiga, yaitu GoFood, GrabFood, atau ShopeeFood.",
+  },
+];
 
 // ===================== animation logic =====================
 
@@ -333,6 +364,36 @@ const ANIMATE_TITLE_1 = {
   visible: {
     opacity: 1,
     y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.76, 0, 0.24, 1],
+    },
+  },
+};
+
+const ANIMATE_FRIGHT = {
+  hidden: {
+    opacity: 0,
+    x: "50%",
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.76, 0, 0.24, 1],
+    },
+  },
+};
+
+const ANIMATE_SCALE = {
+  hidden: {
+    scale: 0.6,
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
     transition: {
       duration: 0.8,
       ease: [0.76, 0, 0.24, 1],
