@@ -29,6 +29,7 @@ model Menu {
   kategori    String   @default("bread")
   thumb       String
   gallery     String[]
+  price       Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
