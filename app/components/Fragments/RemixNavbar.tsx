@@ -11,6 +11,7 @@ type RemixNavbarProps = {
   btn_title?: string;
   color?: string;
   userIcon?: boolean;
+  goBack?: () => void;
 };
 
 // list menu navbar
@@ -25,18 +26,23 @@ const navbarMenu: RemixNavbarProps[] = [
   },
 ];
 
-export function RemixNavbarHome({ to }: RemixNavbarProps) {
+export function RemixNavbarMenu() {
+  const goBack = () => {
+    setTimeout(() => {
+      window.history.back();
+    }, 500);
+  };
   return (
-    <nav>
-      {navbarMenu.map((menu, index) => (
-        <NavLink key={index} to={to}>
-          {menu.title}
+    <nav className="sticky top-0 z-50 mt-4 w-full">
+      <nav className="flex items-center justify-between rounded-xl border border-primary-100 bg-white/70 px-8 py-4 backdrop-blur-md">
+        <NavLink to="" role="button" onClick={goBack}>
+          Kembali
         </NavLink>
-      ))}
+      </nav>
     </nav>
   );
 }
-export function RemixNavbarMenu({
+export function RemixNavbarHome({
   title,
   btn_to = "",
   btn_title = "Button",
