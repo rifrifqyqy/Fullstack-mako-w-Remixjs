@@ -17,3 +17,14 @@ export async function getLatestMenu() {
     orderBy: { id: "desc" },
   });
 }
+// :DELETE data menu berdasarkan id
+export async function deleteMenu(id: string) {
+  try {
+    return await prisma.menu.delete({
+      where: { id },
+    });
+  } catch (error) {
+    console.error("Error deleting menu:", error);
+    throw new Error("Failed to delete menu. Ensure the ID is correct.");
+  }
+}
