@@ -2,7 +2,7 @@
 import { Form, useActionData } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 import { prisma } from "utils/db.server";
-import LoadingModal from "~/components/Fragments/LoadingModal"; // Import Modal
+import LoadingModal from "~/components/Fragments/LoadingModal";
 import { uploadToCloudinary } from "utils/cloudinary.server";
 import { useState } from "react";
 import { requireAdmin } from "utils/session.server";
@@ -20,8 +20,9 @@ export async function action({ request }: { request: Request }) {
   const kategori = formData.get("kategori") as string;
   const thumb = formData.get("thumb") as File | null;
   const gallery = formData.getAll("gallery") as File[];
+  const price = parseFloat(formData.get("price") as string);
 
-  if (!title || !description || !kategori || !thumb) {
+  if (!title || !description || !kategori || !thumb || isNaN(price)) {
     return json({ error: "Semua field harus diisi" }, { status: 400 });
   }
 
@@ -41,26 +42,24 @@ export async function action({ request }: { request: Request }) {
       kategori,
       thumb: thumbUrl,
       gallery: galleryUrls,
+      price,
     },
   });
-
-  // Redirect ke halaman dashboard menu setelah berhasil
-  return redirect("/"); // Pastikan redirect ke halaman yang tepat
+  return redirect("/");
 }
 
 export default function NewMenu() {
-  const [isLoading, setIsLoading] = useState(false); // State untuk modal
+  const [isLoading, setIsLoading] = useState(false);
   const actionData = useActionData<ActionData>();
 
   return (
     <>
-      {isLoading && <LoadingModal />}{" "}
-      {/* Tampilkan modal jika isLoading true */}
+      {isLoading && <LoadingModal title="Menyimpan Roti..." />}{" "}
       <Form
         method="post"
         encType="multipart/form-data"
         className="mx-auto max-w-xl space-y-6"
-        onSubmit={() => setIsLoading(true)} // Menandakan sedang proses pengiriman
+        onSubmit={() => setIsLoading(true)}
       >
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -130,6 +129,19 @@ export default function NewMenu() {
               className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
             />
           </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Price
+          </label>
+          <input
+            type="number"
+            name="price"
+            required
+            step="0.01"
+            min="0"
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          />
         </div>
 
         {actionData?.error && (
