@@ -1,7 +1,8 @@
 import { Link, NavLink } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
-import { motion } from "framer-motion";
+import { easeIn, motion } from "framer-motion";
 import { useState, useEffect } from "react";
+import { useScrollDirection } from "helper/scrollDirection";
 
 // interface types navbar
 type RemixNavbarProps = {
@@ -32,42 +33,51 @@ export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
       window.history.back();
     }, 500);
   };
+  const scrollDirection = useScrollDirection();
+  const showNavbar = scrollDirection !== "down";
   return (
-    <motion.nav
-      variants={NAV_ANIMATION}
-      initial="hidden"
-      animate="visible"
-      className="sticky top-0 z-50 mt-4 w-full"
+    <motion.section
+      variants={NAV_ANIMATION_SCROLL}
+      initial="begin"
+      animate={showNavbar ? "begin" : "end"}
+      className="sticky top-4 z-50 mt-4 w-full"
     >
-      <nav className="flex items-center justify-between rounded-2xl border border-zinc-300 bg-white/80 px-8 py-4 backdrop-blur-md">
-        <NavLink
-          to=""
-          role="button"
-          className={
-            "flex items-center justify-center gap-2 rounded-full py-1 pr-3 font-semibold uppercase text-primary-100 transition-all hover:bg-zinc-200 active:scale-95"
-          }
-          onClick={goBack}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
+      <motion.nav
+        variants={NAV_ANIMATION}
+        initial="hidden"
+        animate="visible"
+        className=""
+      >
+        <nav className="flex items-center justify-between rounded-2xl border-2 border-zinc-300 bg-white/80 px-8 py-3 backdrop-blur-md">
+          <NavLink
+            to=""
+            role="button"
+            className={
+              "flex items-center justify-center gap-2 rounded-full py-1 pr-3 font-semibold uppercase text-primary-100 transition-all hover:bg-zinc-200 active:scale-95"
+            }
+            onClick={goBack}
           >
-            <path
-              fill="none"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="m14 7l-5 5l5 5"
-            />
-          </svg>
-          Kembali
-        </NavLink>
-        <h1 className="text-xl font-semibold uppercase">{NavbarTitle}</h1>
-      </nav>
-    </motion.nav>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+            >
+              <path
+                fill="none"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="m14 7l-5 5l5 5"
+              />
+            </svg>
+            Kembali
+          </NavLink>
+          <h1 className="text-xl font-semibold uppercase">{NavbarTitle}</h1>
+        </nav>
+      </motion.nav>
+    </motion.section>
   );
 }
 export function RemixNavbarHome({
@@ -78,6 +88,9 @@ export function RemixNavbarHome({
   userIcon = false,
 }: RemixNavbarProps) {
   const [showModal, setShowModal] = useState(false);
+
+  const scrollDirection = useScrollDirection();
+  const showNavbar = scrollDirection !== "down";
 
   // logout modal logic
   const handleLogout = async () => {
@@ -107,9 +120,14 @@ export function RemixNavbarHome({
       variants={NAV_ANIMATION}
       initial="hidden"
       animate="visible"
-      className="sticky top-0 z-[999] flex w-full bg-white px-4"
+      className="sticky top-0 z-[999] flex w-full px-4"
     >
-      <nav className="relative flex w-full items-center justify-between rounded-xl p-4">
+      <motion.nav
+        variants={NAV_ANIMATION_SCROLL}
+        initial="begin"
+        animate={showNavbar ? "begin" : "end"}
+        className="relative flex w-full items-center justify-between rounded-2xl bg-white p-4"
+      >
         <h1 className="flex">
           {title}
           <svg
@@ -205,7 +223,7 @@ export function RemixNavbarHome({
             />
           </Link>
         </div>
-      </nav>
+      </motion.nav>
     </motion.section>
   );
 }
@@ -224,6 +242,22 @@ const NAV_ANIMATION = {
       duration: 0.5,
       ease: [0.83, 0, 0.17, 1],
       staggerChildren: 0.2,
+    },
+  },
+};
+
+// nav scroll
+const NAV_ANIMATION_SCROLL = {
+  begin: {
+    y: 0,
+  },
+  end: {
+    y: -100,
+    transition: {
+      duration: 0.3,
+      type: "spring",
+      bounce: 0,
+      ease: ["easeIn", "easeOut"],
     },
   },
 };
