@@ -1,11 +1,12 @@
-import { Link } from "@remix-run/react";
+import { Link, useFetcher } from "@remix-run/react";
 import { motion } from "framer-motion";
 import { priceFormat } from "helper/priceFormat";
 import { transformHyphenToSpace } from "helper/transformText";
+
 export default function BreadCard({ children }: BreadTypes) {
   return (
     <motion.div
-      className="menu-item group flex flex-col gap-2 rounded-2xl border border-zinc-200 bg-white p-2 transition-all hover:border-primary-100"
+      className="menu-item group flex flex-col gap-2 rounded-2xl border-zinc-200 bg-white p-2 transition-all hover:border-primary-100"
       style={{ boxShadow: "rgba(0, 0, 0, 0.1) -4px 9px 25px -6px" }}
       variants={CARD_ANIMATION}
       initial="hidden"
@@ -36,14 +37,31 @@ function Toppings({ title, thumb, kategori, DirecTo }: ToppingsTypes) {
   );
 }
 
-function Layer({ title, description, price }: LayerTypes) {
+function Layer({ title, description, price, deleteID }: LayerTypes) {
+  const fetcher = useFetcher();
+
+  // handle delete menu
+  const handleDelete = () => {
+    if (!confirm("Are you sure you want to delete this menu?")) return;
+    fetcher.submit(
+      { id: deleteID },
+      { method: "post", action: "/menu/delete" },
+    );
+  };
   return (
     <article className="flex h-full flex-col gap-2 rounded-xl bg-zinc-100 p-3">
-      <h1 className="text-xl font-semibold text-primary-100">{title}</h1>
+      <h1 className="text-xl font-semibold text-primary-100 line-clamp-1">{title}</h1>
       <p className="line-clamp-2 text-[.875rem] text-zinc-600">{description}</p>
-      <p className="ml-auto text-xl font-bold capitalize text-zinc-800">
+      <p className="ml-auto mt-auto text-xl font-bold capitalize text-zinc-800">
         {priceFormat(price)}
       </p>
+      
+      {/* <button
+        onClick={handleDelete}
+        className="rounded bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-700"
+      >
+        {fetcher.state === "submitting" ? "Deleting..." : "Delete"}
+      </button> */}
     </article>
   );
 }
@@ -61,6 +79,7 @@ type LayerTypes = {
   title: string;
   description: string;
   price: number;
+  deleteID: number;
 };
 BreadCard.Toppings = Toppings;
 BreadCard.Layer = Layer;
