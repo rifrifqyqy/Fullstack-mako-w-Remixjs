@@ -1,19 +1,17 @@
-import { useEffect, useState } from "react";
+import { useNavigation } from "@remix-run/react";
+import { useState, useEffect } from "react";
 
 export const useGlobalLoading = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const navigation = useNavigation();
 
   useEffect(() => {
-    const handlePopState = () => {
+    if (navigation.state === "loading") {
       setIsLoading(true);
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 800);
-    };
-
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState); 
-  }, []);
+    } else if (navigation.state === "idle") {
+      setIsLoading(false);
+    }
+  }, [navigation.state]);
 
   return { isLoading };
 };
