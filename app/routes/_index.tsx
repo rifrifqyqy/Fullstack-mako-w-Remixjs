@@ -2,7 +2,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { prisma } from "utils/db.server";
 import { json, LoaderFunction } from "@remix-run/node";
-import { NavLink, useLoaderData } from "@remix-run/react";
+import { Link, NavLink, useLoaderData } from "@remix-run/react";
 import { getUserSession } from "utils/session.server";
 import { RemixNavbarHome } from "~/components/Fragments/RemixNavbar";
 import { AnimatePresence, motion } from "framer-motion";
@@ -287,13 +287,58 @@ export default function Index() {
       </section>
       {/* end category layout */}
       {/* accordion */}
-      <section className="mt-32 flex flex-col gap-12 px-8">
-        <h1 className="mx-auto text-4xl font-semibold">
-          Frequently Asked Questions
-        </h1>
-        <Accordion items={accordionData} />
+      <section className="mt-32 px-8">
+        <div className="flex flex-col gap-12 rounded-3xl border-2 border-zinc-200 px-8 pb-4 pt-12">
+          <article className="mx-auto flex w-fit items-center gap-4">
+            <motion.img
+              variants={ANIMATE_KEYFRAME_2}
+              initial="hidden"
+              animate="visible"
+              src="images/toast.png"
+              className="h-12"
+              alt=""
+            />
+            <h1 className="text-3xl font-semibold text-primary-100">
+              Frequently Asked Questions
+            </h1>
+            <motion.img
+              variants={ANIMATE_KEYFRAME}
+              initial="hidden"
+              animate="visible"
+              src="images/cookie.png"
+              className="h-12"
+              alt=""
+            />
+          </article>
+          <Accordion items={accordionData} />
+        </div>
       </section>
-      <div className="h-44"></div>
+
+      {/* cta layout */}
+      <section className="mt-24 h-[280px] px-8">
+        <figure
+          className="relative grid h-full w-full grid-cols-2 items-center justify-between rounded-3xl border-2 border-primary-100 bg-cover bg-center bg-repeat"
+          style={{ backgroundImage: "url(images/dotpattern.png)" }}
+        >
+          <div className="relative h-full">
+            <img
+              src="images/mockupmako.png"
+              alt=""
+              className="absolute bottom-0 left-1/3 w-[220px]"
+            />
+          </div>
+          <article className="flex flex-col gap-6 pr-8">
+            <h1 className="text-3xl font-semibold text-zinc-800">
+              Download <span className="text-primary-100">MAKO</span> App on
+              Google Play Store & Apple App Store
+            </h1>
+            <div className="flex gap-4">
+              <img src="images/googleplay-btn.png" className="h-12" alt="" />
+              <img src="images/appstore-btn.png" className="h-12" alt="" />
+            </div>
+          </article>
+        </figure>
+      </section>
 
       {/* ====================== toast, modal, alert components ====================== */}
       {/* toast component for welcome login */}
@@ -314,6 +359,33 @@ export default function Index() {
         )}
       </AnimatePresence>
       {/* end toast */}
+
+      {/* footer */}
+      <footer className="mt-24 flex h-full w-full flex-col items-center justify-center gap-6 bg-primary-100 px-8 pb-4 pt-16">
+        <h1 className="overflow-hidden rounded-lg bg-white px-4 py-2 text-3xl font-semibold text-white">
+          <img src="images/mako.svg" alt="" className="h-12" />
+        </h1>
+        <article className="flex flex-col items-center">
+          <ul className="flex gap-16 text-lg text-zinc-200">
+            <Link to="">Home</Link>
+            <Link to="">Menu</Link>
+            <Link to="">Outlet</Link>
+            <Link to="">About</Link>
+            <Link to="">Contact</Link>
+          </ul>
+          <div className="mt-6 flex items-center gap-4">
+            <img src="images/fb.svg" alt="" className="h-10" />
+            <img src="images/insta.svg" alt="" className="h-10" />
+            <p className="text-zinc-200">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+              iusto quaerat aliquid!
+            </p>
+          </div>
+        </article>
+        <p className="mt-16 w-full border-t border-zinc-200 pt-4 text-center text-sm text-zinc-200">
+          © 2024 MAKO BAKERY. All rights reserved | Designed by Luo Egamediev
+        </p>
+      </footer>
     </main>
   );
 }
@@ -338,6 +410,40 @@ const accordionData = [
 ];
 
 // ===================== animation logic =====================
+
+const ANIMATE_KEYFRAME = {
+  hidden: {
+    opacity: 1,
+    rotate: -15,
+  },
+  visible: {
+    opacity: 1,
+    rotate: 15,
+    transition: {
+      duration: 0.2,
+      repeat: Infinity,
+      repeatType: "reverse",
+      repeatDelay: 0.7,
+    },
+  },
+};
+const ANIMATE_KEYFRAME_2 = {
+  hidden: {
+    opacity: 1,
+    rotate: -15,
+  },
+  visible: {
+    opacity: 1,
+    rotate: 15,
+    transition: {
+      delay: 0.4,
+      duration: 0.2,
+      repeat: Infinity,
+      repeatType: "reverse",
+      repeatDelay: 0.7,
+    },
+  },
+};
 
 const ANIMATION_BANNER = {
   hidden: {
