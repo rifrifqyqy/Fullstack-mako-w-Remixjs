@@ -2,7 +2,7 @@
 // app/routes/dashboard/menu.tsx
 import { json, LoaderFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { getAllMenu } from "utils/menu.server";
+import { deleteMenu, getAllMenu } from "utils/menu.server";
 import categoryMenu from "data/category.json";
 import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
 import { Suspense } from "react";
@@ -24,6 +24,7 @@ export const loader: LoaderFunction = async () => {
   const menu = await getAllMenu();
   return json(menu);
 };
+
 export default function Menu() {
   const menus = useLoaderData<Menu[]>();
   const { activeCategory, setActiveCategory } = useCategory();
@@ -39,7 +40,7 @@ export default function Menu() {
 
   return (
     <main className="flex flex-col px-8">
-      <RemixNavbarMenu />
+      <RemixNavbarMenu NavbarTitle="Menu Pages" />
       <section className="relative mt-8 flex h-[200px] w-full overflow-hidden rounded-3xl bg-cover">
         <article className="m-auto flex flex-col gap-2">
           <h1 className="z-10 mx-auto w-fit text-5xl font-semibold uppercase text-white">
@@ -78,7 +79,7 @@ export default function Menu() {
           </Suspense>
         </ul>
       </header>
-      <section className="menu-data mt-6 grid grid-cols-5 justify-items-center gap-6">
+      <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-6 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
         <Suspense fallback={<div>Loading...</div>}>
           <AnimatePresence mode="wait">
             {filteredMenus.length > 0 ? (
@@ -94,6 +95,7 @@ export default function Menu() {
                     title={menu.title}
                     description={menu.description}
                     price={menu.price}
+                    deleteID={menu.id}
                   />
                 </BreadCard>
               ))
