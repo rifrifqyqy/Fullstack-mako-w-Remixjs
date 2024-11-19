@@ -19,11 +19,11 @@ const AccordionItem = ({
     <div className="">
       <button
         onClick={onClick}
-        className={`flex w-full items-center justify-between rounded-xl px-6 py-3 text-left text-lg font-semibold transition-all focus:outline-none ${isActive ? "bg-primary-100 text-white" : "bg-gray-200 text-zinc-600"}`}
+        className={`flex w-full items-center justify-between rounded-full px-8 py-3 text-left text-lg font-semibold transition-all focus:outline-none ${isActive ? "bg-primary-100 text-white" : "bg-white text-zinc-600 hover:bg-zinc-200"}`}
       >
         {title}
         <span
-          className={`transition-transform ${isActive ? "rotate-180" : "rotate-0"}`}
+          className={`rounded-full p-2 transition-all ${isActive ? "rotate-180 bg-white text-primary-100" : "rotate-0"}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -67,7 +67,7 @@ const Accordion = ({ items }: AccordionProps) => {
   };
 
   return (
-    <div className="flex w-full flex-col gap-4 rounded-lg">
+    <div className="flex w-full flex-col rounded-lg">
       {items.map((item, index) => (
         <AccordionItem
           key={index}
