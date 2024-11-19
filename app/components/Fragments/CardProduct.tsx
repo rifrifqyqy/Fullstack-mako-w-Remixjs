@@ -6,7 +6,7 @@ import { transformHyphenToSpace } from "helper/transformText";
 export default function BreadCard({ children }: BreadTypes) {
   return (
     <motion.div
-      className="menu-item group flex flex-col gap-2 rounded-2xl border-zinc-200 bg-white p-2 transition-all hover:border-primary-100"
+      className="menu-item group flex flex-col gap-2 rounded-2xl border-2 border-transparent bg-white p-2 transition-all hover:border-primary-100"
       style={{ boxShadow: "rgba(0, 0, 0, 0.1) -4px 9px 25px -6px" }}
       variants={CARD_ANIMATION}
       initial="hidden"
@@ -50,12 +50,14 @@ function Layer({ title, description, price, deleteID }: LayerTypes) {
   };
   return (
     <article className="flex h-full flex-col gap-2 rounded-xl bg-zinc-100 p-3">
-      <h1 className="text-xl font-semibold text-primary-100 line-clamp-1">{title}</h1>
+      <h1 className="line-clamp-1 text-xl font-semibold text-primary-100">
+        {title}
+      </h1>
       <p className="line-clamp-2 text-[.875rem] text-zinc-600">{description}</p>
       <p className="ml-auto mt-auto text-xl font-bold capitalize text-zinc-800">
         {priceFormat(price)}
       </p>
-      
+
       {/* <button
         onClick={handleDelete}
         className="rounded bg-red-500 px-4 py-2 text-sm text-white hover:bg-red-700"
