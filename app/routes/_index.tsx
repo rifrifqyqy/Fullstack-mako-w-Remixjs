@@ -77,6 +77,11 @@ export default function Index() {
     }
   }, [currentUser]);
   // button handle previous image index
+
+  const sentence =
+    "Temukan berbagai pilihan roti, kue, dan pastry yang disiapkan khusus untuk Anda.";
+  const words = sentence.split(" ");
+
   return (
     <main className="">
       <RemixNavbarHome
@@ -276,12 +281,27 @@ export default function Index() {
             <img src="images/buns.png" alt="" className="h-8" />
             <img src="images/cookie.png" alt="" className="h-8" />
           </div>
-          <h1 className="text-[54px] font-semibold">
-            Temukan berbagai pilihan roti, kue, dan{" "}
-            <span className="text-primary-100">pastry</span> yang{" "}
-            <span className="text-primary-100">disiapkan</span> khusus untuk
-            Anda.
-          </h1>
+          <motion.div
+            variants={sentenceAnimation}
+            initial="hidden"
+            whileInView="visible"
+            className="text-[54px] font-semibold"
+          >
+            {words.map((word, index) => (
+              <span key={index} className="inline-block overflow-clip">
+                <motion.span
+                  variants={wordAnimation}
+                  className={`mr-2 inline-block ${
+                    ["pastry", "disiapkan"].includes(word)
+                      ? "text-primary-100"
+                      : ""
+                  }`}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+          </motion.div>
         </article>
         <HomeCategoryLayout />
       </section>
@@ -408,6 +428,7 @@ const accordionData = [
       "Anda dapat mengunjungi outlet kami langsung atau melaui pihak ketiga, yaitu GoFood, GrabFood, atau ShopeeFood.",
   },
 ];
+// ===================== END ACCORDION DATA =====================
 
 // ===================== animation logic =====================
 
@@ -503,6 +524,27 @@ const ANIMATE_SCALE = {
     transition: {
       duration: 0.8,
       ease: [0.76, 0, 0.24, 1],
+    },
+  },
+};
+
+const wordAnimation = {
+  hidden: {
+    opacity: 1,
+    y: "100%",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
+const sentenceAnimation = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.2,
     },
   },
 };
