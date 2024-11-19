@@ -7,12 +7,12 @@ export const useGlobalLoading = () => {
     const handlePopState = () => {
       setIsLoading(true);
       setTimeout(() => {
-        setIsLoading(false); // Sembunyikan modal setelah loading selesai
-      }, 500); // Simulasi waktu loading
+        setIsLoading(false);
+      }, 800);
     };
 
-    window.addEventListener("popstate", handlePopState); // Listener untuk back/forward
-    return () => window.removeEventListener("popstate", handlePopState); // Bersihkan listener
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState); 
   }, []);
 
   return { isLoading };
