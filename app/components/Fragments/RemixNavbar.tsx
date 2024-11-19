@@ -26,20 +26,48 @@ const navbarMenu: RemixNavbarProps[] = [
   },
 ];
 
-export function RemixNavbarMenu() {
+export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
   const goBack = () => {
     setTimeout(() => {
       window.history.back();
     }, 500);
   };
   return (
-    <nav className="sticky top-0 z-50 mt-4 w-full">
-      <nav className="flex items-center justify-between rounded-xl border border-primary-100 bg-white/70 px-8 py-4 backdrop-blur-md">
-        <NavLink to="" role="button" onClick={goBack}>
+    <motion.nav
+      variants={NAV_ANIMATION}
+      initial="hidden"
+      animate="visible"
+      className="sticky top-0 z-50 mt-4 w-full"
+    >
+      <nav className="flex items-center justify-between rounded-2xl border border-zinc-300 bg-white/80 px-8 py-4 backdrop-blur-md">
+        <NavLink
+          to=""
+          role="button"
+          className={
+            "flex items-center justify-center gap-2 rounded-full py-1 pr-3 font-semibold uppercase text-primary-100 transition-all hover:bg-zinc-200 active:scale-95"
+          }
+          onClick={goBack}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+          >
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="m14 7l-5 5l5 5"
+            />
+          </svg>
           Kembali
         </NavLink>
+        <h1 className="text-xl font-semibold uppercase">{NavbarTitle}</h1>
       </nav>
-    </nav>
+    </motion.nav>
   );
 }
 export function RemixNavbarHome({
@@ -168,9 +196,15 @@ export function RemixNavbarHome({
             )}
           </RemixButton>
         </div>
-        <Link to="/" className="absolute flex h-[70px] w-full">
-          <img src="images/mako.svg" className="mx-auto my-auto h-12" alt="" />
-        </Link>
+        <div className="absolute flex h-[70px] w-full items-center">
+          <Link to="/" className="mx-auto w-fit">
+            <img
+              src="images/mako.svg"
+              className="mx-auto my-auto h-12"
+              alt=""
+            />
+          </Link>
+        </div>
       </nav>
     </motion.section>
   );
