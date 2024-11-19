@@ -3,6 +3,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NavLink } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
+import { transformHyphenToSpace } from "helper/transformText";
 
 // types
 interface CategoryType {
@@ -32,7 +33,7 @@ export default function HomeCategoryLayout() {
               tabIndex={0}
               className={`menu group/item flex w-full cursor-pointer items-center justify-between gap-44 rounded-full border border-zinc-300 p-2 text-center capitalize transition-all ${activeCategory?.name === category.name ? "bg-primary-100 text-white" : "bg-zinc-50"}`}
             >
-              <h1 className="ml-2">{category.name}</h1>
+              <h1 className="ml-2">{transformHyphenToSpace(category.name)}</h1>
               <div className="w-fit rounded-full bg-white p-1 transition-all group-hover/item:rotate-45">
                 <svg
                   width="24"
@@ -64,7 +65,7 @@ export default function HomeCategoryLayout() {
                   alt=""
                 />
                 <p className="text-4xl uppercase text-white">
-                  {activeCategory.name}
+                  {transformHyphenToSpace(activeCategory.name)}
                 </p>
               </figure>
               <RemixButton
@@ -72,7 +73,7 @@ export default function HomeCategoryLayout() {
                 title=""
                 stylebtn="w-fit mx-auto uppercase text-lg"
               >
-                {activeCategory.name}
+                {transformHyphenToSpace(activeCategory.name)}
               </RemixButton>
             </section>
           </div>
