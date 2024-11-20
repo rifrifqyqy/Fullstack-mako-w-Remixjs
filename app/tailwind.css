@@ -35,3 +35,9 @@ body {
   -ms-overflow-style: none; /* Untuk Internet Explorer dan Edge */
   scrollbar-width: none; /* Untuk Firefox */
 }
+
+.default-input {
+  background-color: white; /* Atur ke warna yang Anda inginkan */
+  appearance: none;
+  -webkit-appearance: none;
+}
