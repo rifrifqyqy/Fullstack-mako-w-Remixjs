@@ -2,6 +2,7 @@ import { Link, useFetcher } from "@remix-run/react";
 import { motion } from "framer-motion";
 import { priceFormat } from "helper/priceFormat";
 import { transformHyphenToSpace } from "helper/transformText";
+import { useState } from "react";
 
 export default function BreadCard({ children }: BreadTypes) {
   return (
@@ -19,13 +20,26 @@ export default function BreadCard({ children }: BreadTypes) {
 }
 
 function Toppings({ title, thumb, kategori, DirecTo }: ToppingsTypes) {
+  const [isLoaded, setIsLoaded] = useState(false);
   return (
     <figure className="relative">
       <Link to={DirecTo}>
+        {/* onload placeholder image */}
+        {!isLoaded && (
+          <img
+            src="images/placeholder-img.jpg"
+            alt=""
+            className="absolute inset-0 aspect-square w-full rounded-xl object-cover"
+          />
+        )}
+
         <img
           src={thumb}
           alt={title}
-          className="aspect-square w-full rounded-xl object-cover"
+          className={`aspect-square w-full rounded-xl object-cover transition-opacity duration-500 ${
+            isLoaded ? "opacity-100" : "opacity-0"
+          }`}
+          onLoad={() => setIsLoaded(true)}
         />
         <div className="absolute bottom-0 flex h-fit w-full p-3">
           <h1 className="ml-auto rounded-full bg-primary-100 px-4 py-1 text-sm font-semibold uppercase text-white">
