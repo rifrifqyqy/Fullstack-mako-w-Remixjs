@@ -66,7 +66,7 @@ export default function HomeCategoryLayout() {
         animate="visible"
         className="relative col-span-2 cursor-pointer transition-all hover:brightness-[85%]"
       >
-        <NavLink to={`/menu/${activeCategory.name}`}>
+        <NavLink to={`/menu?category=${activeCategory.name}`}>
           <div className="absolute z-10 flex h-full w-full flex-col gap-4 opacity-0 hover:opacity-100">
             <section className="m-auto flex flex-col gap-10">
               <figure className="flex items-center gap-8">
