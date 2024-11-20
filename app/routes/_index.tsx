@@ -17,6 +17,7 @@ import { Suspense, useEffect, useState } from "react";
 import { CardSkeleton_1 } from "~/components/Skeletons/CardSkeleton";
 import HomeCategoryLayout from "~/components/Layouts/_home.CategoryLayouts";
 import Accordion from "~/components/Elements/RAccordion";
+import RemixFooter from "~/components/Layouts/RemixFooter";
 
 // =============================================== END IMPORTS STORE =============================================== //
 export const meta: MetaFunction = () => {
@@ -99,14 +100,14 @@ export default function Index() {
         <BreadMarquee />
         <ul className="flex gap-4">
           <NavLink
-            to="/"
-            className="h-fit rounded-full border border-zinc-300 px-4 py-2 font-medium"
+            to="/menu"
+            className="h-fit rounded-full px-4 py-2 font-medium ring-[1px] ring-zinc-300 transition-all hover:bg-primary-100 hover:text-white hover:ring-0"
           >
             Menu
           </NavLink>
           <NavLink
             to="/"
-            className="h-fit rounded-full border border-zinc-300 px-4 py-2 font-medium"
+            className="h-fit rounded-full px-4 py-2 font-medium ring-[1px] ring-zinc-300 transition-all hover:bg-primary-100 hover:text-white hover:ring-0"
           >
             Outlet
           </NavLink>
@@ -276,11 +277,16 @@ export default function Index() {
       {/* category layout */}
       <section className="mt-24 flex flex-col gap-16 px-8">
         <article className="flex flex-col gap-2">
-          <div className="flex w-fit gap-4 rounded-full bg-zinc-200 px-4 py-1">
+          <motion.div
+            variants={ANIMATE_TITLE_1}
+            initial="hidden"
+            animate="visible"
+            className="flex w-fit gap-4 rounded-full bg-zinc-200 px-4 py-1"
+          >
             <img src="images/danish.png" alt="" className="h-8" />
             <img src="images/buns.png" alt="" className="h-8" />
             <img src="images/cookie.png" alt="" className="h-8" />
-          </div>
+          </motion.div>
           <motion.div
             variants={sentenceAnimation}
             initial="hidden"
@@ -353,8 +359,18 @@ export default function Index() {
               Google Play Store & Apple App Store
             </h1>
             <div className="flex gap-4">
-              <img src="images/googleplay-btn.png" className="h-12" alt="" />
-              <img src="images/appstore-btn.png" className="h-12" alt="" />
+              <Link
+                to="https://play.google.com/store/apps/details?id=com.mako.app"
+                className="flex h-fit w-fit transition-all hover:opacity-80 active:scale-95"
+              >
+                <img src="images/googleplay-btn.png" className="h-12" alt="" />
+              </Link>
+              <Link
+                to="https://apps.apple.com/id/app/mako-cake-and-bakery/id1623760961"
+                className="flex h-fit w-fit transition-all hover:opacity-80 active:scale-95"
+              >
+                <img src="images/appstore-btn.png" className="h-12" alt="" />
+              </Link>
             </div>
           </article>
         </figure>
@@ -381,31 +397,7 @@ export default function Index() {
       {/* end toast */}
 
       {/* footer */}
-      <footer className="mt-24 flex h-full w-full flex-col items-center justify-center gap-6 bg-primary-100 px-8 pb-4 pt-16">
-        <h1 className="overflow-hidden rounded-lg bg-white px-4 py-2 text-3xl font-semibold text-white">
-          <img src="images/mako.svg" alt="" className="h-12" />
-        </h1>
-        <article className="flex flex-col items-center">
-          <ul className="flex gap-16 text-lg text-zinc-200">
-            <Link to="">Home</Link>
-            <Link to="">Menu</Link>
-            <Link to="">Outlet</Link>
-            <Link to="">About</Link>
-            <Link to="">Contact</Link>
-          </ul>
-          <div className="mt-6 flex items-center gap-4">
-            <img src="images/fb.svg" alt="" className="h-10" />
-            <img src="images/insta.svg" alt="" className="h-10" />
-            <p className="text-zinc-200">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
-              iusto quaerat aliquid!
-            </p>
-          </div>
-        </article>
-        <p className="mt-16 w-full border-t border-zinc-200 pt-4 text-center text-sm text-zinc-200">
-          © 2024 MAKO BAKERY. All rights reserved | Designed by Luo Egamediev
-        </p>
-      </footer>
+      <RemixFooter />
     </main>
   );
 }
@@ -536,7 +528,9 @@ const wordAnimation = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 },
+    transition: {
+      duration: 0.3,
+    },
   },
 };
 
