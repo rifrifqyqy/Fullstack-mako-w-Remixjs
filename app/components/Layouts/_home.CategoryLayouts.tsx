@@ -19,9 +19,15 @@ export default function HomeCategoryLayout() {
   return (
     <main className="grid grid-cols-3 gap-4">
       <section className="col-span-1">
-        <ul className="flex w-fit flex-col gap-4">
+        <motion.ul
+          variants={ANIMATION_WRAP}
+          initial="hidden"
+          animate="visible"
+          className="flex w-fit flex-col gap-4"
+        >
           {dataCategory.map((category) => (
-            <div
+            <motion.div
+              variants={ANIMATE_FLEFT}
               role="button"
               key={category.name}
               onClick={() => setActiveCategory(category)}
@@ -48,13 +54,18 @@ export default function HomeCategoryLayout() {
                   />
                 </svg>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </ul>
+        </motion.ul>
       </section>
 
       {/* Image Section */}
-      <section className="relative col-span-2 cursor-pointer transition-all hover:brightness-[85%]">
+      <motion.section
+        variants={ANIMATE_FRIGHT}
+        initial="hidden"
+        animate="visible"
+        className="relative col-span-2 cursor-pointer transition-all hover:brightness-[85%]"
+      >
         <NavLink to={`/menu/${activeCategory.name}`}>
           <div className="absolute z-10 flex h-full w-full flex-col gap-4 opacity-0 hover:opacity-100">
             <section className="m-auto flex flex-col gap-10">
@@ -69,7 +80,7 @@ export default function HomeCategoryLayout() {
                 </p>
               </figure>
               <RemixButton
-                to={`/menu/${activeCategory.name}`}
+                to={`/menu?category=${activeCategory.name}`}
                 title=""
                 stylebtn="w-fit mx-auto uppercase text-lg"
               >
@@ -92,7 +103,7 @@ export default function HomeCategoryLayout() {
             />
           </AnimatePresence>
         </section>
-      </section>
+      </motion.section>
     </main>
   );
 }
@@ -116,6 +127,48 @@ const ANIMATION_IMAGE = {
     y: "-50%",
     transition: {
       duration: 0.2,
+      ease: [0.76, 0, 0.24, 1],
+    },
+  },
+};
+
+const ANIMATION_WRAP = {
+  hidden: {
+    opacity: 1,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const ANIMATE_FLEFT = {
+  hidden: {
+    opacity: 0,
+    x: "-100%",
+  },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.76, 0, 0.24, 1],
+    },
+  },
+};
+
+const ANIMATE_FRIGHT = {
+  hidden: {
+    opacity: 0,
+  },
+  visible: {
+    opacity: 1,
+
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.2,
       ease: [0.76, 0, 0.24, 1],
     },
   },
