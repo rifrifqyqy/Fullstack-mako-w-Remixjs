@@ -19,7 +19,7 @@ const AccordionItem = ({
     <div className="">
       <button
         onClick={onClick}
-        className={`flex w-full items-center justify-between rounded-full px-8 py-3 text-left text-lg font-semibold transition-all focus:outline-none ${isActive ? "bg-primary-100 text-white" : "bg-white text-zinc-600 hover:bg-zinc-200"}`}
+        className={`flex w-full items-center justify-between rounded-full pl-8 py-3 pr-3 text-left text-lg font-semibold transition-all focus:outline-none ${isActive ? "bg-primary-100 text-white" : "bg-white text-zinc-600 hover:bg-zinc-200"}`}
       >
         {title}
         <span
