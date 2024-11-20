@@ -1,6 +1,6 @@
 import { Link, NavLink } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
-import { easeIn, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useScrollDirection } from "helper/scrollDirection";
 
@@ -29,9 +29,7 @@ const navbarMenu: RemixNavbarProps[] = [
 
 export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
   const goBack = () => {
-    setTimeout(() => {
-      window.history.back();
-    }, 500);
+    window.history.back();
   };
   const scrollDirection = useScrollDirection();
   const showNavbar = scrollDirection !== "down";
