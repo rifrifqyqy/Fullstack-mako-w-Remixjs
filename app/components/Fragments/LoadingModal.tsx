@@ -6,7 +6,7 @@ export default function LoadingModal({ title }: { title: string }) {
       <div className="rounded-2xl bg-white px-16 py-8 shadow-lg">
         <div className="flex flex-col items-center justify-center gap-8 text-center">
           <img
-            src="/gif/breadbutter.gif"
+            src="/gif/breadbutter2.gif"
             title="loading"
             className="h-32"
             alt="loading"
