@@ -82,7 +82,7 @@ export default function Menu() {
             <Suspense fallback={<div>Loading...</div>}>
               {categoryMenu.map((category) => (
                 <button
-                  className={`w-full text-nowrap rounded-xl px-4 py-2 text-center font-semibold capitalize transition-all duration-300 ${
+                  className={`flex w-full items-center justify-center gap-2 text-nowrap rounded-xl px-4 py-2 text-center font-semibold capitalize transition-all duration-300 ${
                     activeCategory === category.name
                       ? "bg-primary-100 text-white"
                       : "bg-zinc-200"
@@ -90,9 +90,12 @@ export default function Menu() {
                   key={category.name}
                   onClick={() => handleCategoryClick(category.name)}
                 >
-                  {category.displayName}{" "}
-                  {activeCategory === category.name &&
-                    `(${filteredMenus.length})`}
+                  {category.displayName}
+                  {activeCategory === category.name && (
+                    <p className="rounded-full bg-white px-2 text-sm text-primary-100">
+                      {filteredMenus.length}
+                    </p>
+                  )}
                 </button>
               ))}
             </Suspense>
