@@ -6,6 +6,7 @@ import "swiper/css/navigation";
 import RemixButton from "~/components/Elements/RemixButton";
 import { Suspense } from "react";
 import { CardSkeleton_1 } from "~/components/Skeletons/CardSkeleton";
+import { Link } from "@remix-run/react";
 
 // image banner
 const Banner = [
@@ -29,7 +30,7 @@ export default function HeroBanner({
 }: Bakery) {
   return (
     <section className="mt-4 flex px-8">
-      <figure className="overflow-hidden relative flex h-[620px] w-full justify-center rounded-3xl">
+      <figure className="relative flex h-[620px] w-full justify-center overflow-hidden rounded-3xl">
         <AnimatePresence mode="wait">
           <Swiper
             modules={[Navigation, Autoplay]}
@@ -145,46 +146,48 @@ export default function HeroBanner({
 
         {/* latest menu card */}
         <Suspense fallback={<CardSkeleton_1 />}>
-          <motion.div
-            variants={ANIMATE_FRIGHT}
-            initial="hidden"
-            animate="visible"
-            className="absolute bottom-0 right-0 z-20 m-4 flex flex-col gap-2"
-          >
-            <h1 className="w-fit rounded-full bg-zinc-200/20 px-4 py-2 font-medium text-white backdrop-blur-md">
-              Latest Menu
-            </h1>
-            <div
-              key={keyBakery}
-              className="flex flex-col gap-2 rounded-2xl bg-zinc-200/20 p-2 backdrop-blur-md transition-shadow duration-300"
+          <Link to={`/menu/${keyBakery}`}>
+            <motion.div
+              variants={ANIMATE_FRIGHT}
+              initial="hidden"
+              animate="visible"
+              className="absolute bottom-0 right-0 z-20 m-4 flex flex-col gap-2"
             >
-              <article className="flex items-center justify-between">
-                <h1 className="text-lg font-medium text-white">
-                  {bakeryTitle}
-                </h1>
-                <div className="rounded-full bg-white p-1">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M9.68356 6.47716C9.26947 6.48726 8.94197 6.83113 8.95207 7.24522C8.96217 7.65931 9.30605 7.98681 9.72014 7.97671L9.68356 6.47716ZM16.968 7.79994C17.3821 7.78984 17.7096 7.44596 17.6995 7.03187C17.6894 6.61778 17.3455 6.29028 16.9314 6.30038L16.968 7.79994ZM17.6995 7.06845C17.7096 6.65436 17.3821 6.31048 16.968 6.30038C16.5539 6.29028 16.21 6.61778 16.1999 7.03187L17.6995 7.06845ZM16.0231 14.2797C16.013 14.6938 16.3405 15.0377 16.7546 15.0478C17.1687 15.0579 17.5126 14.7304 17.5227 14.3163L16.0231 14.2797ZM17.48 7.58049C17.7729 7.2876 17.7729 6.81272 17.48 6.51983C17.1871 6.22694 16.7123 6.22694 16.4194 6.51983L17.48 7.58049ZM6.51987 16.4193C6.22698 16.7122 6.22698 17.1871 6.51987 17.48C6.81276 17.7729 7.28764 17.7729 7.58053 17.48L6.51987 16.4193ZM9.72014 7.97671L16.968 7.79994L16.9314 6.30038L9.68356 6.47716L9.72014 7.97671ZM16.1999 7.03187L16.0231 14.2797L17.5227 14.3163L17.6995 7.06845L16.1999 7.03187ZM16.4194 6.51983L6.51987 16.4193L7.58053 17.48L17.48 7.58049L16.4194 6.51983Z"
-                      fill="black"
-                    />
-                  </svg>
-                </div>
-              </article>
+              <h1 className="w-fit rounded-full bg-zinc-200/20 px-4 py-2 font-medium text-white backdrop-blur-md">
+                Latest Menu
+              </h1>
+              <div
+                key={keyBakery}
+                className="flex flex-col gap-2 rounded-2xl bg-zinc-200/20 p-2 backdrop-blur-md transition-shadow duration-300"
+              >
+                <article className="flex items-center justify-between">
+                  <h1 className="text-lg font-medium text-white">
+                    {bakeryTitle}
+                  </h1>
+                  <div className="rounded-full bg-white p-1">
+                    <svg
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M9.68356 6.47716C9.26947 6.48726 8.94197 6.83113 8.95207 7.24522C8.96217 7.65931 9.30605 7.98681 9.72014 7.97671L9.68356 6.47716ZM16.968 7.79994C17.3821 7.78984 17.7096 7.44596 17.6995 7.03187C17.6894 6.61778 17.3455 6.29028 16.9314 6.30038L16.968 7.79994ZM17.6995 7.06845C17.7096 6.65436 17.3821 6.31048 16.968 6.30038C16.5539 6.29028 16.21 6.61778 16.1999 7.03187L17.6995 7.06845ZM16.0231 14.2797C16.013 14.6938 16.3405 15.0377 16.7546 15.0478C17.1687 15.0579 17.5126 14.7304 17.5227 14.3163L16.0231 14.2797ZM17.48 7.58049C17.7729 7.2876 17.7729 6.81272 17.48 6.51983C17.1871 6.22694 16.7123 6.22694 16.4194 6.51983L17.48 7.58049ZM6.51987 16.4193C6.22698 16.7122 6.22698 17.1871 6.51987 17.48C6.81276 17.7729 7.28764 17.7729 7.58053 17.48L6.51987 16.4193ZM9.72014 7.97671L16.968 7.79994L16.9314 6.30038L9.68356 6.47716L9.72014 7.97671ZM16.1999 7.03187L16.0231 14.2797L17.5227 14.3163L17.6995 7.06845L16.1999 7.03187ZM16.4194 6.51983L6.51987 16.4193L7.58053 17.48L17.48 7.58049L16.4194 6.51983Z"
+                        fill="black"
+                      />
+                    </svg>
+                  </div>
+                </article>
 
-              <img
-                src={bakeryThumb}
-                alt=""
-                className="aspect-square w-[240px] rounded-xl object-cover"
-              />
-            </div>
-          </motion.div>
+                <img
+                  src={bakeryThumb}
+                  alt=""
+                  className="aspect-square w-[240px] rounded-xl object-cover"
+                />
+              </div>
+            </motion.div>
+          </Link>
         </Suspense>
       </figure>
     </section>
