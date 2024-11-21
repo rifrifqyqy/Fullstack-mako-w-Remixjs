@@ -56,7 +56,7 @@ export default function Menu() {
   }, [searchParams, setActiveCategory, navigate]);
 
   return (
-    <main className="container">
+    <main className="wrapper">
       {/* component menu */}
       <main className="flex flex-col px-8">
         <RemixNavbarMenu NavbarTitle="Menu Books" />
@@ -101,7 +101,7 @@ export default function Menu() {
             </Suspense>
           </ul>
         </header>
-        <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-6 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
           <Suspense fallback={<div>Loading...</div>}>
             <AnimatePresence mode="wait">
               {filteredMenus.length > 0 ? (
