@@ -1,8 +1,13 @@
 import { prisma } from "utils/db.server";
 import { json } from "@remix-run/node";
-import { useActionData, Form, useNavigation } from "@remix-run/react";
+import {
+  useActionData,
+  Form,
+  useNavigation,
+  useLoaderData,
+} from "@remix-run/react";
 import bcrypt from "bcryptjs";
-import { createSession } from "utils/session.server";
+import { createSession, storage } from "utils/session.server";
 import { useEffect, useState } from "react";
 import RemixButton from "~/components/Elements/RemixButton";
 import LoginBanner from "~/components/Layouts/LoginBanner";
@@ -17,6 +22,8 @@ export async function action({ request }) {
   const formData = await request.formData();
   const username = formData.get("username");
   const password = formData.get("password");
+  const session = await storage.getSession(request.headers.get("Cookie"));
+  const successMessage = session.get("successMessage") || null;
 
   try {
     console.log("Processing login for user:", username);
@@ -52,23 +59,112 @@ export async function action({ request }) {
     return json({ error: "Terjadi kesalahan pada server." }, { status: 500 });
   }
 }
+export async function loader({ request }) {
+  const session = await storage.getSession(request.headers.get("Cookie"));
+  const successMessage = session.get("successMessage") || null;
 
+  // Menghapus pesan setelah dibaca
+  session.unset("successMessage");
+
+  return json(
+    { successMessage },
+    {
+      headers: {
+        "Set-Cookie": await storage.commitSession(session),
+      },
+    },
+  );
+}
 export default function Login() {
   const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState(false);
+  const [toast, setToast] = useState(false);
   navigation.formData;
   navigation.formMethod;
   navigation.formAction;
   const isSubmitting = navigation.state === "submitting";
-  const loadingSubmitting = navigation.state === "loading";
+  const { successMessage } = useLoaderData<{ successMessage: string }>();
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
+  // toast useeffect untuk memunculkan success message
+  useEffect(() => {
+    if (successMessage) {
+      setToast(true);
+    }
+    setTimeout(() => {
+      setToast(false);
+    }, 3000);
+  }, [successMessage]);
 
+  const toggleToast = () => {
+    setToast((prev) => !prev);
+  };
   return (
-    <main className="grid max-h-dvh grid-cols-2">
+    <main className="relative grid max-h-dvh grid-cols-2">
+      {toast && successMessage && (
+        <div className="fixed right-0 top-0 z-50 m-4 flex h-fit w-fit items-start gap-4 rounded-xl bg-white px-4 py-3 shadow-md">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 48 48"
+            className="mt-1 text-green-600"
+          >
+            <defs>
+              <mask id="ipSCheckOne0">
+                <g fill="none" strokeLinejoin="round" strokeWidth="4">
+                  <path
+                    fill="#fff"
+                    stroke="#fff"
+                    d="M24 44a19.94 19.94 0 0 0 14.142-5.858A19.94 19.94 0 0 0 44 24a19.94 19.94 0 0 0-5.858-14.142A19.94 19.94 0 0 0 24 4A19.94 19.94 0 0 0 9.858 9.858A19.94 19.94 0 0 0 4 24a19.94 19.94 0 0 0 5.858 14.142A19.94 19.94 0 0 0 24 44Z"
+                  />
+                  <path
+                    stroke="#000"
+                    strokeLinecap="round"
+                    d="m16 24l6 6l12-12"
+                  />
+                </g>
+              </mask>
+            </defs>
+            <path
+              fill="currentColor"
+              d="M0 0h48v48H0z"
+              mask="url(#ipSCheckOne0)"
+            />
+          </svg>
+          <div className="relative flex gap-3">
+            <article className="flex flex-col gap-1">
+              <p className="text-base font-medium text-primary-100">
+                Login Berhasil
+              </p>
+              <p className="text-sm text-zinc-600">
+                Silahkan Masukkan akun anda!
+              </p>
+            </article>
+
+            <button
+              onClick={toggleToast}
+              className="mb-auto rounded-full p-1 text-sm hover:bg-slate-300 active:scale-90"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M18.36 19.78L12 13.41l-6.36 6.37l-1.42-1.42L10.59 12L4.22 5.64l1.42-1.42L12 10.59l6.36-6.36l1.41 1.41L13.41 12l6.36 6.36z"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      )}
+
       <section className="flex">
         <Form
           method="post"

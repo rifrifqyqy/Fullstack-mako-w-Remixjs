@@ -2,8 +2,9 @@ import { prisma } from "utils/db.server";
 import { json, redirect } from "@remix-run/node";
 import { useActionData, Form, useNavigation } from "@remix-run/react";
 import bcrypt from "bcryptjs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginBanner from "~/components/Layouts/LoginBanner";
+import { storage } from "utils/session.server";
 
 type ActionData = {
   error?: string;
@@ -47,8 +48,14 @@ export async function action({ request }) {
         role: "user",
       },
     });
-
-    return redirect("/login");
+    // Simpan pesan sukses dalam sesi
+    const session = await storage.getSession();
+    session.set("successMessage", "Akun berhasil dibuat! Silakan login.");
+    return redirect("/login", {
+      headers: {
+        "Set-Cookie": await storage.commitSession(session),
+      },
+    });
   } catch (error: any) {
     console.error(error);
     return json(
@@ -71,7 +78,12 @@ export default function Signup() {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-
+  useEffect(() => {
+    if (actionData?.successMessage) {
+      // Tampilkan toast manual
+      alert(actionData.successMessage); // Bisa ganti dengan library toast
+    }
+  }, [actionData]);
   return (
     <main className="grid max-h-dvh grid-cols-2">
       <section className="flex">

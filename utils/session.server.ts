@@ -30,7 +30,7 @@ export async function getUserSession(request: Request) {
   const session = await storage.getSession(request.headers.get("Cookie"));
   const userId = session.get("userId");
   return userId;
-}
+} 
 
 // Middleware untuk mengharuskan admin
 export async function requireAdmin(request: Request) {
