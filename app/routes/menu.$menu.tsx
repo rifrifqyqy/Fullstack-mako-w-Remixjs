@@ -160,7 +160,7 @@ export default function MenuDetail() {
               <h2 className="mb-auto text-2xl font-bold text-primary-100">
                 {priceFormat(menu.price)}
               </h2>
-              <h2 className="trasition-all flex cursor-pointer items-center justify-end text-zinc-500 hover:text-zinc-900">
+              <h2 className="trasition-all flex text-sm cursor-pointer items-center justify-end text-zinc-500 hover:text-zinc-900">
                 ⓘ informasi pembelian
               </h2>
             </article>
