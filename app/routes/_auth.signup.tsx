@@ -101,14 +101,16 @@ export default function Signup() {
           </article>
 
           <div className="mt-24 flex flex-col gap-6">
-            <div>
+            <div
+              className={`${inputStyle} relative flex items-center justify-between focus-within:ring-2 focus-within:ring-primary-100`}
+            >
               <input
                 type="text"
                 name="username"
                 id="username"
                 required
                 placeholder="Username"
-                className={`${inputStyle} px-6 py-3.5`}
+                className="default-input h-full w-full appearance-none rounded-full px-6 py-4 outline-none focus:outline-none"
               />
             </div>
             <div
