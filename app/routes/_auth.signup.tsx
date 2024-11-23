@@ -1,16 +1,19 @@
 import { prisma } from "utils/db.server";
 import { json, redirect } from "@remix-run/node";
-import { useActionData, Form, useNavigation } from "@remix-run/react";
+import { useActionData, Form, useNavigation, Link } from "@remix-run/react";
 import bcrypt from "bcryptjs";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoginBanner from "~/components/Layouts/LoginBanner";
 import { storage } from "utils/session.server";
+import HeaderAuthNav from "~/components/Fragments/HeaderAuthNav";
 
+// type data define
 type ActionData = {
   error?: string;
 };
 
-export async function action({ request }) {
+//  BACKEND LOGIC
+export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
   const username = formData.get("username") as string;
   const password = formData.get("password") as string;
@@ -39,7 +42,6 @@ export async function action({ request }) {
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
-
     // Buat user baru
     await prisma.user.create({
       data: {
@@ -78,15 +80,11 @@ export default function Signup() {
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-  useEffect(() => {
-    if (actionData?.successMessage) {
-      // Tampilkan toast manual
-      alert(actionData.successMessage); // Bisa ganti dengan library toast
-    }
-  }, [actionData]);
+
   return (
     <main className="grid max-h-dvh grid-cols-2">
-      <section className="flex">
+      <section className="flex flex-col">
+        <HeaderAuthNav />
         <Form
           method="post"
           className="m-auto w-full max-w-lg rounded-lg bg-white p-8"
@@ -222,6 +220,15 @@ export default function Signup() {
           >
             {isSubmitting ? "Sign in..." : "Create Account"}
           </button>
+          <footer className="mt-[15%] flex items-center justify-center gap-1">
+            Have an account?
+            <Link
+              to="/login"
+              className="text-zinc-600 underline hover:text-primary-100"
+            >
+              Login
+            </Link>
+          </footer>
         </Form>
       </section>
 

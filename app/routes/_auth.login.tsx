@@ -5,25 +5,27 @@ import {
   Form,
   useNavigation,
   useLoaderData,
+  Link,
 } from "@remix-run/react";
 import bcrypt from "bcryptjs";
 import { createSession, storage } from "utils/session.server";
 import { useEffect, useState } from "react";
-import RemixButton from "~/components/Elements/RemixButton";
 import LoginBanner from "~/components/Layouts/LoginBanner";
+import HeaderAuthNav from "~/components/Fragments/HeaderAuthNav";
 
+// TYPE DEFINE
 type ActionData = {
   error?: string;
   request?: string;
   state: boolean;
   success?: boolean;
 };
+
+// BACKEND LOGIC
 export async function action({ request }) {
   const formData = await request.formData();
   const username = formData.get("username");
   const password = formData.get("password");
-  const session = await storage.getSession(request.headers.get("Cookie"));
-  const successMessage = session.get("successMessage") || null;
 
   try {
     console.log("Processing login for user:", username);
@@ -36,8 +38,6 @@ export async function action({ request }) {
       console.error("User not found");
       return json({ error: "Username atau password salah" }, { status: 400 });
     }
-
-    // Periksa kecocokan password
     const passwordMatch = await bcrypt.compare(password, user.password);
     console.log("Password match:", passwordMatch);
 
@@ -51,8 +51,6 @@ export async function action({ request }) {
       where: { id: user.id },
       data: { lastLogin: new Date() },
     });
-
-    // Buat sesi login
     return createSession(user.id, "/");
   } catch (error) {
     console.error("Error during login:", error);
@@ -62,8 +60,6 @@ export async function action({ request }) {
 export async function loader({ request }) {
   const session = await storage.getSession(request.headers.get("Cookie"));
   const successMessage = session.get("successMessage") || null;
-
-  // Menghapus pesan setelah dibaca
   session.unset("successMessage");
 
   return json(
@@ -75,6 +71,8 @@ export async function loader({ request }) {
     },
   );
 }
+
+//  FRONTEND LOGIC
 export default function Login() {
   const actionData = useActionData<ActionData>();
   const navigation = useNavigation();
@@ -164,8 +162,11 @@ export default function Login() {
           </div>
         </div>
       )}
+      {/* end toast */}
 
-      <section className="flex">
+      {/* main component */}
+      <section className="flex flex-col">
+        <HeaderAuthNav />
         <Form
           method="post"
           className="m-auto w-full max-w-lg rounded-lg bg-white p-8"
@@ -255,12 +256,15 @@ export default function Login() {
             >
               {isSubmitting ? "Logging in..." : "Login"}
             </button>
-            <RemixButton
-              to="/signup"
-              stylebtn="bg-white border-2 border-primary-100 text-primary-100 flex justify-center uppercase text-base py-2"
-              title="Sign Up"
-            />
           </div>
+          <footer className="mt-[20%] flex items-center justify-center">
+            <Link
+              to="/signup"
+              className="text-zinc-600 underline hover:text-primary-100"
+            >
+              Create Account
+            </Link>
+          </footer>
         </Form>
       </section>
       <section className="flex h-screen p-4">
