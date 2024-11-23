@@ -28,7 +28,9 @@ model Menu {
   description String
   kategori    String   @default("bread")
   thumb       String
+  thumbPublicId   String
   gallery     String[]
+  galleryPublicIds String[] 
   price       Float
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
