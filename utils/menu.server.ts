@@ -1,3 +1,4 @@
+import { deleteFromCloudinary } from "./cloudinary.server";
 import { prisma } from "./db.server";
 
 // :GET  semua data menu dari database
@@ -18,13 +19,27 @@ export async function getLatestMenu() {
   });
 }
 // :DELETE data menu berdasarkan id
-export async function deleteMenu(id: string) {
-  try {
-    return await prisma.menu.delete({
-      where: { id },
-    });
-  } catch (error) {
-    console.error("Error deleting menu:", error);
-    throw new Error("Failed to delete menu. Ensure the ID is correct.");
+export async function deleteMenu(id: string): Promise<void> {
+  const menu = await prisma.menu.findUnique({ where: { id } });
+
+  if (!menu) {
+    throw new Error("Menu not found");
   }
+
+  // Hapus gambar thumbnail dari Cloudinary jika ada
+  if (menu.thumbPublicId) {
+    const isDeleted = await deleteFromCloudinary(menu.thumbPublicId);
+    if (!isDeleted) {
+      throw new Error("Failed to delete image from Cloudinary");
+    }
+  }
+
+  // Hapus gambar galeri dari Cloudinary jika ada
+  for (const publicId of menu.galleryPublicIds) {
+    const isGalleryImageDeleted = await deleteFromCloudinary(publicId);
+    if (!isGalleryImageDeleted) {
+      throw new Error("Failed to delete gallery image from Cloudinary");
+    }
+  }
+  await prisma.menu.delete({ where: { id } });
 }
