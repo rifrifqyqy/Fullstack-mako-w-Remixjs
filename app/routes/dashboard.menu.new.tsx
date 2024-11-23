@@ -1,6 +1,6 @@
 // app/routes/dashboard/menu/new.tsx
 import { Form, useActionData } from "@remix-run/react";
-import { json, redirect } from "@remix-run/node";
+import { json, LoaderFunction, redirect } from "@remix-run/node";
 import { prisma } from "utils/db.server";
 import LoadingModal from "~/components/Fragments/LoadingModal";
 import { uploadToCloudinary } from "utils/cloudinary.server";
@@ -8,7 +8,7 @@ import { useState } from "react";
 import { requireAdmin } from "utils/session.server";
 type ActionData = { error?: string };
 
-export const loader = async ({ request }) => {
+export const loader: LoaderFunction = async ({ request }) => {
   await requireAdmin(request);
   return null;
 };
@@ -27,10 +27,10 @@ export async function action({ request }: { request: Request }) {
   }
 
   // Upload thumbnail ke Cloudinary
-  const thumbUrl = await uploadToCloudinary(thumb);
+  const thumbData = await uploadToCloudinary(thumb);
 
   // Upload gallery images ke Cloudinary
-  const galleryUrls = await Promise.all(
+  const galleryData = await Promise.all(
     gallery.map((file) => uploadToCloudinary(file)),
   );
 
@@ -40,11 +40,14 @@ export async function action({ request }: { request: Request }) {
       title,
       description,
       kategori,
-      thumb: thumbUrl,
-      gallery: galleryUrls,
+      thumb: thumbData.url,
+      gallery: galleryData.map((item) => item.url),
       price,
+      thumbPublicId: thumbData.publicId,
+      galleryPublicIds: galleryData.map((item) => item.publicId),
     },
   });
+
   return redirect("/");
 }
 
