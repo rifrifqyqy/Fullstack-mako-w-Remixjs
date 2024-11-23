@@ -36,7 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-white text-zinc-800" >
-        {isLoading && <LoadingModal title=" Memuat..." />}
+        {isLoading && <LoadingModal title=" Memuat Roti..." />}
         {children}
         <ScrollRestoration />
         <Scripts />
