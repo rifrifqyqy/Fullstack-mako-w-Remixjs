@@ -18,6 +18,7 @@ model User {
   username     String   @unique
   password     String
   role         String   @default("user") 
+  reviews  Review[]  @relation("UserReviews")
   createdAt    DateTime @default(now())
   lastLogin    DateTime?
 }
@@ -32,6 +33,21 @@ model Menu {
   gallery     String[]
   galleryPublicIds String[] 
   price       Float
+  reviews   Review[]  @relation("MenuReviews") 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Review {
+  id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  rating   Int      
+  comment  String
+  menu     Menu      @relation("MenuReviews", fields: [menuId], references: [id])
+  menuId   String    @db.ObjectId
+  user     User      @relation("UserReviews", fields: [userId], references: [id])
+  userId   String    @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, menuId]) // Menjamin bahwa user hanya bisa memberi satu review per menu
 }
