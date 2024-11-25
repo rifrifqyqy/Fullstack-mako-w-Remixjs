@@ -4,7 +4,7 @@ export default function RemixFooter() {
   return (
     <footer className="mt-24 flex h-full w-full flex-col items-center justify-center gap-6 bg-primary-100 px-8 pb-4 pt-16">
       <h1 className="overflow-hidden rounded-lg bg-white px-4 py-2 text-3xl font-semibold text-white">
-        <img src="images/mako.svg" alt="" className="h-12" />
+        <img src="/images/mako.svg" alt="" className="h-12" />
       </h1>
       <article className="flex flex-col items-center">
         <ul className="flex gap-16 text-lg text-zinc-200">

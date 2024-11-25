@@ -157,8 +157,6 @@ export const meta: MetaFunction<typeof loader> = ({ data }) => {
 export default function MenuDetail() {
   const { menuData, currentUser, reviews, alreadyReview, userReview } =
     useLoaderData<LoaderData>();
-  console.log(menuData);
-  console.log(alreadyReview);
   const [activeImage, setActiveImage] = useState(0);
   // end state and hooks
 
@@ -183,13 +181,16 @@ export default function MenuDetail() {
   };
 
   return (
-    <main className="px-8">
+    <main className="">
       {/* navbar */}
-      <RemixNavbarMenu NavbarTitle={menuData.title} />
+      <nav className="px-8">
+        <RemixNavbarMenu NavbarTitle={menuData.title} />
+      </nav>
+
       {/* end navbar */}
 
       {/* main content */}
-      <main className="mt-8 grid grid-cols-3 gap-8">
+      <main className="mt-8 grid grid-cols-3 gap-8 px-8">
         <section className="col-span-2">
           <figure className="relative flex flex-col justify-center gap-4">
             <AnimatePresence mode="wait">
