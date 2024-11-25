@@ -19,7 +19,7 @@ export default function BreadCard({ children }: BreadTypes) {
   );
 }
 
-function Toppings({ title, thumb, kategori, DirecTo }: ToppingsTypes) {
+function Toppings({ title, thumb, kategori, DirecTo, rating }: ToppingsTypes) {
   const [isLoaded, setIsLoaded] = useState(false);
   return (
     <figure className="relative">
@@ -41,9 +41,24 @@ function Toppings({ title, thumb, kategori, DirecTo }: ToppingsTypes) {
           }`}
           onLoad={() => setIsLoaded(true)}
         />
-        <div className="absolute bottom-0 flex h-fit w-full p-3">
-          <h1 className="ml-auto rounded-full bg-primary-100 px-4 py-1 text-sm font-semibold uppercase text-white">
+        <div className="absolute bottom-0 flex h-fit w-full items-center justify-between p-3">
+          <h1 className="rounded-full bg-primary-100 px-4 py-1 text-sm font-semibold uppercase text-white">
             {transformHyphenToSpace(kategori)}
+          </h1>
+          <h1 className="flex gap-2 rounded-full bg-white pr-3 pl-2 py-1 text-sm font-semibold uppercase">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              className="text-yellow-500"
+            >
+              <path
+                fill="currentColor"
+                d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2L9.19 8.62L2 9.24l5.45 4.73L5.82 21z"
+              />
+            </svg>
+            {rating}
           </h1>
         </div>
       </Link>
@@ -90,7 +105,9 @@ type ToppingsTypes = {
   thumb: string;
   kategori: string;
   DirecTo: string;
+  rating: number;
 };
+
 type LayerTypes = {
   title: string;
   description: string;
