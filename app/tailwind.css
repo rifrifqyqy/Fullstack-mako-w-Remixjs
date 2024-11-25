@@ -41,3 +41,7 @@ body {
   appearance: none;
   -webkit-appearance: none;
 }
+
+.title-style {
+  @apply text-2xl font-semibold text-zinc-800 dark:text-white;
+}
