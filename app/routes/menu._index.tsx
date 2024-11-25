@@ -1,13 +1,8 @@
 /* eslint-disable import/no-unresolved */
 // app/routes/dashboard/menu.tsx
-import { json, LoaderFunction } from "@remix-run/node";
-import {
-  replace,
-  useLoaderData,
-  useNavigate,
-  useSearchParams,
-} from "@remix-run/react";
-import { deleteMenu, getAllMenu } from "utils/menu.server";
+import { json, LoaderFunction, MetaFunction } from "@remix-run/node";
+import { useLoaderData, useNavigate, useSearchParams } from "@remix-run/react";
+import { getAllMenu } from "utils/menu.server";
 import categoryMenu from "data/category.json";
 import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
 import { Suspense, useEffect } from "react";
@@ -15,8 +10,23 @@ import { AnimatePresence } from "framer-motion";
 import BreadCard from "~/components/Fragments/CardProduct";
 import { useCategory } from "helper/CategoryContext";
 import RemixFooter from "~/components/Layouts/RemixFooter";
+import { calculateAverageRating } from "helper/averageRating";
 
+export const meta: MetaFunction = () => {
+  return [
+    { title: "MAKO | Menu" },
+    { name: "description", content: "Menu di Mako Bakery" },
+  ];
+};
+
+type Review = {
+  id: number;
+  rating: number;
+  comment: string;
+  userId: string;
+};
 type Menu = {
+  averageRating: any;
   id: number;
   title: string;
   description: string;
@@ -24,19 +34,20 @@ type Menu = {
   gallery: string[];
   kategori: string;
   price: number;
+  reviews: Review[];
 };
 // Loader function untuk mengambil data menu
 export const loader: LoaderFunction = async () => {
-  const menu = await getAllMenu();
-  return json(menu);
+  const menus = await getAllMenu();
+  return json({ menus });
 };
 
 export default function Menu() {
-  const menus = useLoaderData<Menu[]>();
+  const { menus } = useLoaderData<{ menus: Menu[] }>();
+  console.log(menus);
   const { activeCategory, setActiveCategory } = useCategory();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-
   const filteredMenus = menus.filter(
     (menu) => menu.kategori === activeCategory,
   );
@@ -112,6 +123,7 @@ export default function Menu() {
                       thumb={menu.thumb}
                       title={menu.title}
                       kategori={menu.kategori}
+                      rating={menu.averageRating?.toFixed(1)}
                     />
                     <BreadCard.Layer
                       title={menu.title}
