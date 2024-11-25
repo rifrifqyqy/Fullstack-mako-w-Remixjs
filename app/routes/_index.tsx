@@ -17,8 +17,8 @@ import HeroBanner from "~/components/Layouts/HeroBanner";
 // =============================================== END IMPORTS STORE =============================================== //
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
+    { title: "MAKO | Beranda" },
+    { name: "description", content: "Selamat Datang di Mako Bakery" },
   ];
 };
 type menuType = {
@@ -38,7 +38,7 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (userId) {
     currentUser = await prisma.user.findUnique({
       where: { id: userId },
-      select: { username: true },
+      select: { username: true, id: true },
     });
   }
   const bakery = await getLatestMenu();
@@ -48,6 +48,7 @@ export const loader: LoaderFunction = async ({ request }) => {
 type LoaderData = {
   currentUser: {
     username: string;
+    id: string;
   } | null;
   bakery: menuType;
 };
@@ -109,6 +110,7 @@ export default function Index() {
       {/* end herosection banner */}
 
       {/* category layout */}
+
       <section className="mt-24 flex flex-col gap-16 px-8">
         <article className="flex flex-col gap-2">
           <motion.div
