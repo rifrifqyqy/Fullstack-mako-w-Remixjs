@@ -10,6 +10,8 @@ export const useGlobalLoading = () => {
       setIsLoading(true);
     } else if (navigation.state === "idle") {
       setIsLoading(false);
+    } else if (navigation.state === "submitting") {
+      setIsLoading(true);
     }
   }, [navigation.state]);
 
