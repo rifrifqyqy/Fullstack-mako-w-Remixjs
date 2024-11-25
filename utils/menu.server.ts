@@ -3,13 +3,36 @@ import { prisma } from "./db.server";
 
 // :GET  semua data menu dari database
 export async function getAllMenu() {
-  return await prisma.menu.findMany();
+  const menus = await prisma.menu.findMany({
+    include: {
+      reviews: true,
+    },
+  });
+
+  return menus.map((menu) => ({
+    ...menu,
+    averageRating: calculateAverageRating(menu.reviews || []),
+  }));
+}
+
+// Utility untuk menghitung rata-rata rating
+function calculateAverageRating(reviews: Array<{ rating: number }>) {
+  if (reviews.length === 0) return 0;
+  const totalRating = reviews.reduce((sum, review) => sum + review.rating, 0);
+  return parseFloat((totalRating / reviews.length).toFixed(2));
 }
 // :GET(:id) data menu berdasarkan id
 export async function getMenu(id: string) {
-  return await prisma.menu.findUnique({
+  const menu = await prisma.menu.findUnique({
     where: { id },
+    include: {
+      reviews: true,
+    },
   });
+
+  if (!menu) return null;
+  const averageRating = calculateAverageRating(menu.reviews || []);
+  return { ...menu, averageRating };
 }
 
 // :GET(updated: at)  data menu terbaru
