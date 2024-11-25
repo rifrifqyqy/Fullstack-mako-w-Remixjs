@@ -19,6 +19,7 @@ import EditReviewForm from "~/components/Fragments/form/UpdateReview";
 import DeleteReview from "~/components/Fragments/form/DeleteReview";
 import AddReviewForm from "~/components/Fragments/form/AddReview";
 import formatDate from "helper/formatDate";
+import RemixFooter from "~/components/Layouts/RemixFooter";
 
 // ================== BACKEND LOGIC ==========================
 
@@ -481,6 +482,7 @@ export default function MenuDetail() {
         </section>
       </main>
       {/* end main content */}
+      <RemixFooter />
     </main>
   );
 }
