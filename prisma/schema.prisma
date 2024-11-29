@@ -49,5 +49,5 @@ model Review {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([userId, menuId]) // Menjamin bahwa user hanya bisa memberi satu review per menu
+  @@unique([userId, menuId])
 }
