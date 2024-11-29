@@ -1,13 +1,21 @@
-import { Form } from "@remix-run/react";
+import { Form, useFetcher } from "@remix-run/react";
 
-export default function DeleteReview({ reviewId }: { reviewId: any }) {
+export default function DeleteReview({
+  reviewId,
+  actionFetcher,
+}: {
+  reviewId: any;
+  actionFetcher: string;
+}) {
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
   return (
-    <Form method="post">
+    <fetcher.Form method="post" action={actionFetcher}>
       <input type="hidden" name="_action" value="delete" />
       <input type="hidden" name="reviewId" value={reviewId} />
       <button type="submit" className="text-sm text-red-800 hover:text-red-600">
-        Hapus
+        {isSubmitting ? "Menghapus..." : "Hapus"}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 }
