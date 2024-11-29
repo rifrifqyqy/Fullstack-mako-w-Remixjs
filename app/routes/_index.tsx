@@ -7,12 +7,14 @@ import { getUserSession } from "utils/session.server";
 import { RemixNavbarHome } from "~/components/Fragments/RemixNavbar";
 import { AnimatePresence, motion } from "framer-motion";
 import BreadMarquee from "~/components/Fragments/RemixMarquee";
-import { getLatestMenu } from "utils/menu.server";
+import { getAllMenu, getLatestMenu } from "utils/menu.server";
 import { useEffect, useState } from "react";
 import HomeCategoryLayout from "~/components/Layouts/_home.CategoryLayouts";
 import Accordion from "~/components/Elements/RAccordion";
 import RemixFooter from "~/components/Layouts/RemixFooter";
 import HeroBanner from "~/components/Layouts/HeroBanner";
+import BreadCard from "~/components/Fragments/Card/CardProduct";
+import RemixButton from "~/components/Elements/RemixButton";
 
 // =============================================== END IMPORTS STORE =============================================== //
 export const meta: MetaFunction = () => {
@@ -22,6 +24,8 @@ export const meta: MetaFunction = () => {
   ];
 };
 type menuType = {
+  averageRating: any;
+  price: number;
   id: string;
   title: string;
   thumb: string;
@@ -34,7 +38,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserSession(request);
 
   let currentUser = null;
-
   if (userId) {
     currentUser = await prisma.user.findUnique({
       where: { id: userId },
@@ -42,7 +45,13 @@ export const loader: LoaderFunction = async ({ request }) => {
     });
   }
   const bakery = await getLatestMenu();
-  return json({ currentUser, bakery });
+  const menuData = await getAllMenu();
+  // Sorting berdasarkan `createdAt` (terbaru di atas)
+  const sortedMenuData = menuData.sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+  });
+
+  return json({ currentUser, bakery, sortedMenuData });
 };
 // Tipe untuk loader data
 type LoaderData = {
@@ -51,10 +60,12 @@ type LoaderData = {
     id: string;
   } | null;
   bakery: menuType;
+  menuData: menuType[];
+  sortedMenuData: menuType[];
 };
 
 export default function Index() {
-  const { currentUser, bakery } = useLoaderData<LoaderData>();
+  const { currentUser, bakery, sortedMenuData } = useLoaderData<LoaderData>();
   const [showToast, setShowToast] = useState(false);
   useEffect(() => {
     if (currentUser && !localStorage.getItem("toastShown")) {
@@ -65,11 +76,14 @@ export default function Index() {
       }, 3000);
     }
   }, [currentUser]);
-  // button handle previous image index
 
   const sentence =
     "Temukan berbagai pilihan roti, kue, dan pastry yang disiapkan khusus untuk Anda.";
   const words = sentence.split(" ");
+
+  const sentence2 =
+    "Jadilah yang pertama menikmati kreasi roti dan pastry terbaru kami!";
+  const words2 = sentence2.split(" ");
 
   return (
     <main className="">
@@ -148,8 +162,71 @@ export default function Index() {
         <HomeCategoryLayout />
       </section>
       {/* end category layout */}
+      {/* menu data loop */}
+      <main className="flex flex-col">
+        <section className="mt-24 flex flex-col gap-2 px-8">
+          <motion.article
+            variants={sentenceAnimation}
+            initial="hidden"
+            whileInView="visible"
+            className="w-[80%] self-end text-end text-[54px] font-semibold"
+          >
+            {words2.map((word, index) => (
+              <span key={index} className="inline-block overflow-clip">
+                <motion.span
+                  variants={wordAnimation}
+                  className={`mr-2 inline-block ${
+                    ["menikmati", "terbaru"].includes(word)
+                      ? "text-primary-100"
+                      : ""
+                  }`}
+                >
+                  {word}
+                </motion.span>
+              </span>
+            ))}
+          </motion.article>
+        </section>
+        <section className="mt-16 grid grid-cols-2 gap-8 px-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+          {sortedMenuData.slice(0, 5).map((menu) => (
+            <BreadCard key={menu.id}>
+              <BreadCard.Toppings
+                DirecTo={`/menu/${menu.id}`}
+                thumb={menu.thumb}
+                title={menu.title}
+                kategori={menu.kategori}
+                rating={menu.averageRating.toFixed(1)}
+              />
+              <BreadCard.Layer
+                title={menu.title}
+                description={menu.description}
+                price={menu.price}
+              />
+            </BreadCard>
+          ))}
+        </section>
+        <div className="mx-auto mt-8">
+          <RemixButton title="Lihat Semua" stylebtn="pr-2" to="/menu">
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+              className="order-2 text-white"
+            >
+              <path
+                d="M9.68356 6.47716C9.26947 6.48726 8.94197 6.83113 8.95207 7.24522C8.96217 7.65931 9.30605 7.98681 9.72014 7.97671L9.68356 6.47716ZM16.968 7.79994C17.3821 7.78984 17.7096 7.44596 17.6995 7.03187C17.6894 6.61778 17.3455 6.29028 16.9314 6.30038L16.968 7.79994ZM17.6995 7.06845C17.7096 6.65436 17.3821 6.31048 16.968 6.30038C16.5539 6.29028 16.21 6.61778 16.1999 7.03187L17.6995 7.06845ZM16.0231 14.2797C16.013 14.6938 16.3405 15.0377 16.7546 15.0478C17.1687 15.0579 17.5126 14.7304 17.5227 14.3163L16.0231 14.2797ZM17.48 7.58049C17.7729 7.2876 17.7729 6.81272 17.48 6.51983C17.1871 6.22694 16.7123 6.22694 16.4194 6.51983L17.48 7.58049ZM6.51987 16.4193C6.22698 16.7122 6.22698 17.1871 6.51987 17.48C6.81276 17.7729 7.28764 17.7729 7.58053 17.48L6.51987 16.4193ZM9.72014 7.97671L16.968 7.79994L16.9314 6.30038L9.68356 6.47716L9.72014 7.97671ZM16.1999 7.03187L16.0231 14.2797L17.5227 14.3163L17.6995 7.06845L16.1999 7.03187ZM16.4194 6.51983L6.51987 16.4193L7.58053 17.48L17.48 7.58049L16.4194 6.51983Z"
+                fill="currentColor"
+              />
+            </svg>
+          </RemixButton>
+        </div>
+      </main>
+      {/* end menu data loop */}
+
       {/* accordion */}
-      <section className="mt-32 px-8">
+      <section className="mt-24 px-8">
         <div className="flex flex-col gap-12 rounded-3xl border-2 border-zinc-200 px-8 pb-4 pt-12">
           <article className="mx-auto flex w-fit items-center gap-4">
             <motion.img
