@@ -1,6 +1,5 @@
-import { prisma } from "utils/db.server"; // Pastikan path ke Prisma sesuai
+import { prisma } from "utils/db.server";
 import { getUserSession } from "utils/session.server";
-// Pastikan path ke session sesuai
 
 export async function getCurrentUser(request: Request) {
   const userId = await getUserSession(request);
