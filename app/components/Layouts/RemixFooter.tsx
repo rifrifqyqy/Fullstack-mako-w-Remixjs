@@ -1,4 +1,4 @@
-import { Link } from "@remix-run/react";
+import { NavLink } from "@remix-run/react";
 
 export default function RemixFooter() {
   return (
@@ -8,15 +8,15 @@ export default function RemixFooter() {
       </h1>
       <article className="flex flex-col items-center">
         <ul className="flex gap-16 text-lg text-zinc-200">
-          <Link to="">Home</Link>
-          <Link to="">Menu</Link>
-          <Link to="">Outlet</Link>
-          <Link to="">About</Link>
-          <Link to="">Contact</Link>
+          <NavLink to="">Home</NavLink>
+          <NavLink to="">Menu</NavLink>
+          <NavLink to="">Outlet</NavLink>
+          <NavLink to="">About</NavLink>
+          <NavLink to="">Contact</NavLink>
         </ul>
         <div className="mt-6 flex items-center gap-4">
-          <img src="images/fb.svg" alt="" className="h-10" />
-          <img src="images/insta.svg" alt="" className="h-10" />
+          <img src="/images/fb.svg" alt="" className="h-10" />
+          <img src="/images/insta.svg" alt="" className="h-10" />
           <p className="text-zinc-200">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum iusto
             quaerat aliquid!
