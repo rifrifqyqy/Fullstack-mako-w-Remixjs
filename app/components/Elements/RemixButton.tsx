@@ -24,7 +24,7 @@ export default function RemixButton({
   onClick = () => {},
 }: RemixButtonProps) {
   const buttonClass = twMerge(
-    `py-2 px-4 font-bold rounded-full text-white transition-all hover:opacity-90 flex gap-4 items-center`,
+    `py-2 px-4 w-fit font-bold rounded-full text-white transition-all hover:opacity-90 flex gap-4 items-center`,
     color,
     stylebtn,
   );
