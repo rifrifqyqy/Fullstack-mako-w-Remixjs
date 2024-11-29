@@ -29,7 +29,14 @@ const navbarMenu: RemixNavbarProps[] = [
 
 export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
   const goBack = () => {
-    window.history.back();
+    if (
+      !document.referrer ||
+      document.referrer.includes(window.location.href)
+    ) {
+      window.location.href = "/";
+    } else {
+      window.history.back();
+    }
   };
   const scrollDirection = useScrollDirection();
   const showNavbar = scrollDirection !== "down";
