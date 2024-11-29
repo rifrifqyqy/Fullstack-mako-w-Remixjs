@@ -5,6 +5,11 @@
     "displayName": "Bread"
   },
   {
+    "name": "danish",
+    "img": "https://bromleysbread.com.au/wp-content/uploads/2024/09/Sweet-Danish.jpeg",
+    "displayName": "Danish"
+  },
+  {
     "name": "toast",
     "img": "https://assets.makobakery.com/cdn/web/product_category_thumb/1621548518_category-toast.jpg",
     "displayName": "Toast"
