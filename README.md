@@ -66,6 +66,13 @@ app/ - Folder utama untuk Remix, mencakup semua route, komponen, dan logika bisn
 prisma/ - Folder untuk skema Prisma.
 public/ - File statis, seperti gambar dan CSS.
 routes/ - Menyimpan semua file route sesuai dengan struktur Remix v2.
+utils/ - menyimpan semua logika server: get menu, get review, get user info
+helper/ - menyimpan semua logika fungsi helper: formatCurrency, formatDate, transformWord
+data/ - menyimpan semua hard data json: data kategori.
+==atomic folder==
+app/components/elements - meyimpan semua elemen atom
+app/components/fragment - menyimpan semua kumpulan elemen
+app/components/layout - menyimpan semua kumpulan layout fragment
 ```
 
 ## Kontribusi
