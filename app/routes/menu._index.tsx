@@ -7,10 +7,9 @@ import categoryMenu from "data/category.json";
 import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
 import { Suspense, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
-import BreadCard from "~/components/Fragments/CardProduct";
+import BreadCard from "~/components/Fragments/Card/CardProduct";
 import { useCategory } from "helper/CategoryContext";
 import RemixFooter from "~/components/Layouts/RemixFooter";
-import { calculateAverageRating } from "helper/averageRating";
 
 export const meta: MetaFunction = () => {
   return [
