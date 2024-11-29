@@ -1,14 +1,35 @@
 import { useState } from "react";
-import { Form } from "@remix-run/react";
+import { Form, useFetcher } from "@remix-run/react";
 
-export default function AddReviewForm() {
+export default function AddReviewForm({
+  actionFetcher,
+}: {
+  actionFetcher: string;
+}) {
   const [rating, setRating] = useState(0);
+  const fetcher = useFetcher();
+  const isSubmitting = fetcher.state === "submitting";
+  const isLoading = fetcher.state === "loading";
   const handleStarClick = (starRating: number) => {
     setRating(starRating);
   };
+  const renderButtonText = () => {
+    switch (fetcher.state) {
+      case "submitting":
+        return "Menyimpan Ulasan...";
+      case "loading":
+        return "Berhasil Menyimpan...";
+      default:
+        return "Simpan Ulasan";
+    }
+  };
 
   return (
-    <Form method="post" className="flex flex-col gap-4">
+    <fetcher.Form
+      method="post"
+      className="flex flex-col gap-4"
+      action={actionFetcher}
+    >
       <input type="hidden" name="_action" value="add" />
       <input type="hidden" name="rating" value={rating} />{" "}
       <div>
@@ -40,8 +61,8 @@ export default function AddReviewForm() {
         type="submit"
         className="rounded-full bg-primary-100 px-4 py-2 text-white hover:opacity-85"
       >
-        Simpan Ulasan
+        {renderButtonText()}
       </button>
-    </Form>
+    </fetcher.Form>
   );
 }
