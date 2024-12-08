@@ -70,7 +70,7 @@ export default function SearchBar({ dataSearch }: { dataSearch: MenuItem[] }) {
           ref={searchInputRef}
           type="text"
           placeholder="Cari roti..."
-          className="w-full text-sm outline-none md:text-base"
+          className="w-full bg-white text-sm outline-none md:text-base"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           onBlur={handleBlur}
