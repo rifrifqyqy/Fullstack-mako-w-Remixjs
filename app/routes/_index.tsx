@@ -15,6 +15,7 @@ import RemixFooter from "~/components/Layouts/RemixFooter";
 import HeroBanner from "~/components/Layouts/HeroBanner";
 import BreadCard from "~/components/Fragments/Card/CardProduct";
 import RemixButton from "~/components/Elements/RemixButton";
+import SearchBar from "~/components/Elements/_SearchBar";
 
 // =============================================== END IMPORTS STORE =============================================== //
 export const meta: MetaFunction = () => {
@@ -51,7 +52,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
   });
 
-  return json({ currentUser, bakery, sortedMenuData });
+  return json({ currentUser, bakery, sortedMenuData, menuData });
 };
 // Tipe untuk loader data
 type LoaderData = {
@@ -65,7 +66,8 @@ type LoaderData = {
 };
 
 export default function Index() {
-  const { currentUser, bakery, sortedMenuData } = useLoaderData<LoaderData>();
+  const { currentUser, bakery, sortedMenuData, menuData } =
+    useLoaderData<LoaderData>();
   const [showToast, setShowToast] = useState(false);
   useEffect(() => {
     if (currentUser && !localStorage.getItem("toastShown")) {
@@ -91,6 +93,7 @@ export default function Index() {
         to="/"
         btn_title={currentUser ? `` : "Login"}
         btn_to={currentUser ? "/logout" : "/login"}
+        btn_title_mobile={currentUser ? `Logout` : ""}
         color={
           currentUser
             ? "bg-primary-100 capitalize px-2 text-white"
@@ -98,18 +101,24 @@ export default function Index() {
         }
         userIcon={currentUser ? true : false}
       />
-      <nav className="flex justify-between gap-8 px-8 py-2">
-        <BreadMarquee />
-        <ul className="flex gap-4">
+      <nav className="flex px-4 py-2 md:gap-8 md:px-8">
+        <div className="w-full gap-8 md:grid md:grid-cols-2">
+          <div className="hidden md:flex">
+            <BreadMarquee />
+          </div>
+          <SearchBar dataSearch={menuData} />
+        </div>
+
+        <ul className="hidden gap-4 md:flex">
           <NavLink
             to="/menu"
-            className="h-fit rounded-full px-4 py-2 font-medium ring-[1px] ring-zinc-300 transition-all hover:bg-primary-100 hover:text-white hover:ring-0"
+            className="h-fit rounded-full px-4 py-2 font-medium ring-2 ring-zinc-200 transition-all hover:bg-primary-100 hover:text-white hover:ring-0"
           >
             Menu
           </NavLink>
           <NavLink
             to="/"
-            className="h-fit rounded-full px-4 py-2 font-medium ring-[1px] ring-zinc-300 transition-all hover:bg-primary-100 hover:text-white hover:ring-0"
+            className="h-fit rounded-full px-4 py-2 font-medium ring-2 ring-zinc-200 transition-all hover:bg-primary-100 hover:text-white hover:ring-0"
           >
             Outlet
           </NavLink>
@@ -125,7 +134,7 @@ export default function Index() {
 
       {/* category layout */}
 
-      <section className="mt-24 flex flex-col gap-16 px-8">
+      <section className="mt-8 flex flex-col gap-4 px-8 md:mt-24 md:gap-16">
         <article className="flex flex-col gap-2">
           <motion.div
             variants={ANIMATE_TITLE_1}
@@ -133,15 +142,15 @@ export default function Index() {
             animate="visible"
             className="flex w-fit gap-4 rounded-full bg-zinc-200 px-4 py-1"
           >
-            <img src="images/danish.png" alt="" className="h-8" />
-            <img src="images/buns.png" alt="" className="h-8" />
-            <img src="images/cookie.png" alt="" className="h-8" />
+            <img src="images/danish.png" alt="" className="h-6 md:h-8" />
+            <img src="images/buns.png" alt="" className="h-6 md:h-8" />
+            <img src="images/cookie.png" alt="" className="h-6 md:h-8" />
           </motion.div>
           <motion.div
             variants={sentenceAnimation}
             initial="hidden"
             whileInView="visible"
-            className="text-[54px] font-semibold"
+            className="text-[2em] font-semibold md:text-[54px]"
           >
             {words.map((word, index) => (
               <span key={index} className="inline-block overflow-clip">

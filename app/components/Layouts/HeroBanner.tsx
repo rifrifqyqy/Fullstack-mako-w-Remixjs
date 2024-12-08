@@ -29,8 +29,8 @@ export default function HeroBanner({
   bakeryThumb,
 }: Bakery) {
   return (
-    <section className="mt-4 flex px-8">
-      <figure className="relative flex h-[620px] w-full justify-center overflow-hidden rounded-3xl">
+    <section className="mt-4 flex px-4 md:px-8">
+      <figure className="relative flex h-[450px] w-full overflow-hidden rounded-3xl md:h-[620px] md:justify-center">
         <AnimatePresence mode="wait">
           <Swiper
             modules={[Navigation, Autoplay]}
@@ -59,12 +59,11 @@ export default function HeroBanner({
             ))}
           </Swiper>
         </AnimatePresence>
-        <div className="absolute right-0 top-0 z-30 mr-6 mt-8 flex gap-4">
-          <button className={`swiper-prev ${style.swiperBtn}`}>
+        <div className="absolute right-0 top-0 z-30 m-4 flex gap-4 md:mr-6 md:mt-8">
+          <button className={`swiper-prev hidden md:block ${style.swiperBtn}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              className={`${style.iconSwiper}`}
               viewBox="0 0 24 24"
             >
               <path
@@ -77,11 +76,10 @@ export default function HeroBanner({
               />
             </svg>
           </button>
-          <button className={`swiper-next ${style.swiperBtn}`}>
+          <button className={`swiper-next hidden md:block ${style.swiperBtn}`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              className={`${style.iconSwiper}`}
               viewBox="0 0 24 24"
             >
               <path
@@ -95,9 +93,9 @@ export default function HeroBanner({
             </svg>
           </button>
         </div>
-        <article className="absolute left-0 top-0 z-10 ml-4 mt-12 rounded-3xl p-4">
+        <article className="absolute left-0 top-0 z-10 ml-4 rounded-3xl pr-4 pt-4 md:mt-12 md:p-4">
           <motion.h1
-            className="flex max-w-[60%] flex-col gap-6 text-[62px] leading-tight text-white"
+            className="flex w-full flex-col gap-2 text-[2em] leading-tight text-white md:max-w-[60%] md:gap-6 md:text-[62px]"
             variants={ANIMATION_BANNER}
             initial="hidden"
             animate="visible"
@@ -123,24 +121,59 @@ export default function HeroBanner({
                   d="m12 19l-7-7l7-7m7 7H5"
                 />
               </svg>
-              <p className="max-w-[70%] text-lg font-normal text-zinc-300">
+              <p className="text-[0.5em] font-normal text-zinc-300 md:max-w-[80%]">
                 Freshly baked every morning, our bread and pastries are made
                 with the best ingredients.
               </p>
             </motion.div>
           </motion.h1>
         </article>
-        <h1 className="absolute bottom-0 z-20 mb-[5%]">
+        <h1 className="absolute bottom-0 z-20 mb-[5%] px-4 md:px-0">
           <motion.div
             variants={ANIMATE_SCALE}
             initial="hidden"
             animate="visible"
+            className="flex items-center gap-4"
           >
             <RemixButton
               to="/menu"
-              stylebtn="text-[18px] font-medium px-6 py-3"
+              stylebtn="md:text-[18px] text-sm font-medium px-4 py-2 md:px-6 md:py-3"
               title="Browse Pastries"
             />
+            <main className="flex gap-4 rounded-full bg-white/60 p-1 backdrop-blur-md md:hidden">
+              <button className={`swiper-prev ${style.swiperBtn}`}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`${style.iconSwiper}`}
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m12 19l-7-7l7-7m7 7H5"
+                  />
+                </svg>
+              </button>
+              <button className={`swiper-next ${style.swiperBtn}`}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={`${style.iconSwiper}`}
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M5 12h14m-7-7l7 7l-7 7"
+                  />
+                </svg>
+              </button>
+            </main>
           </motion.div>
         </h1>
 
@@ -153,7 +186,7 @@ export default function HeroBanner({
               animate="visible"
               className="absolute bottom-0 right-0 z-20 m-4 flex flex-col gap-2"
             >
-              <h1 className="w-fit rounded-full bg-zinc-200/20 px-4 py-2 font-medium text-white backdrop-blur-md">
+              <h1 className="w-fit rounded-full bg-zinc-200/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-md md:text-base">
                 Latest Menu
               </h1>
               <div
@@ -161,13 +194,12 @@ export default function HeroBanner({
                 className="flex flex-col gap-2 rounded-2xl bg-zinc-200/20 p-2 backdrop-blur-md transition-shadow duration-300"
               >
                 <article className="flex items-center justify-between">
-                  <h1 className="text-lg font-medium text-white">
+                  <h1 className="text-sm font-medium text-white md:text-lg">
                     {bakeryTitle}
                   </h1>
                   <div className="rounded-full bg-white p-1">
                     <svg
-                      width="24"
-                      height="24"
+                      className="h-4 md:h-6"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -183,7 +215,7 @@ export default function HeroBanner({
                 <img
                   src={bakeryThumb}
                   alt=""
-                  className="aspect-square w-[240px] rounded-xl object-cover"
+                  className="aspect-square w-[140px] rounded-xl object-cover md:w-[240px]"
                 />
               </div>
             </motion.div>
@@ -261,5 +293,6 @@ const ANIMATE_SCALE = {
 // ====================== style =========================
 const style = {
   swiperBtn:
-    " rounded-full bg-white p-2 text-primary-100 hover:opacity-90 active:scale-90 transition-all",
+    " rounded-full bg-white p-1.5 md:p-2 text-primary-100 hover:opacity-90 active:scale-90 transition-all",
+  iconSwiper: "w-[1.2rem] md:w-[2rem]",
 };
