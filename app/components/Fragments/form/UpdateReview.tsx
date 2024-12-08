@@ -6,10 +6,10 @@ export default function EditReviewForm({
   onSubmit,
 }: {
   userReview: any;
+  actionFetcher: string;
   onSubmit: () => void;
 }) {
   const [rating, setRating] = useState(userReview?.rating || 0);
-
   const handleStarClick = (starRating: number) => {
     setRating(starRating);
   };
