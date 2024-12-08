@@ -84,6 +84,7 @@ export default function CardReview({
             </header>
             {type === "yourReview" && isEditing ? (
               <EditReviewForm
+                actionFetcher={actionFetcher}
                 userReview={userReview}
                 onSubmit={() => setIsEditing(!isEditing)}
               />
