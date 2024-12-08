@@ -36,6 +36,32 @@ body {
   scrollbar-width: none; /* Untuk Firefox */
 }
 
+/* Global Scrollbar Style */
+::-webkit-scrollbar {
+  width: 12px; /* Lebar scrollbar */
+  height: 12px; /* Tinggi scrollbar (horizontal) */
+}
+
+/* Track (latar belakang scrollbar) */
+::-webkit-scrollbar-track {
+  background: #f0f0f0; /* Warna latar belakang */
+  border-radius: 10px; /* Membuat sudut rounded */
+}
+
+/* Thumb (pegangan scrollbar) */
+::-webkit-scrollbar-thumb {
+  background: #8e1538;
+  opacity: 0.5;
+  border-radius: 10px; /* Membuat sudut rounded */
+  border: 2px solid #f0f0f0; /* Memberikan padding */
+}
+
+/* Hover Effect */
+::-webkit-scrollbar-thumb:hover {
+  background: #cd4068;
+  cursor: pointer;
+}
+
 .default-input {
   background-color: white; /* Atur ke warna yang Anda inginkan */
   appearance: none;
@@ -44,4 +70,8 @@ body {
 
 .title-style {
   @apply text-2xl font-semibold text-zinc-800 dark:text-white;
+}
+
+a.active {
+  @apply text-primary-100;
 }
