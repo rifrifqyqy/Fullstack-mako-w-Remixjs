@@ -54,7 +54,7 @@ export default function AddReviewForm({
           name="comment"
           id="comment"
           required
-          className="w-full appearance-none rounded-lg border-2 border-zinc-200 bg-zinc-200 p-2 outline-none focus-within:border-primary-100 focus-within:bg-white"
+          className="min-h-32 w-full resize-none appearance-none rounded-lg border-2 border-zinc-200 bg-zinc-200 p-3 outline-none focus-within:border-primary-100 focus-within:bg-white"
         ></textarea>
       </div>
       <button
