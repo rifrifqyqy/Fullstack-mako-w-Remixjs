@@ -1,8 +1,9 @@
-import { Link, NavLink } from "@remix-run/react";
+import { Link, NavLink, useLocation } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useScrollDirection } from "helper/scrollDirection";
+
 
 // interface types navbar
 type RemixNavbarProps = {
@@ -10,6 +11,7 @@ type RemixNavbarProps = {
   title?: string;
   btn_to?: string;
   btn_title?: string;
+  btn_title_mobile?: string;
   color?: string;
   userIcon?: boolean;
   goBack?: () => void;
@@ -24,6 +26,25 @@ const navbarMenu: RemixNavbarProps[] = [
   {
     title: "Contact",
     to: "/contact",
+  },
+];
+
+const navbarMobileMenu = [
+  {
+    title: "Home",
+    to: "/",
+  },
+  {
+    title: "Menu",
+    to: "/menu",
+  },
+  {
+    title: "Outlet",
+    to: "/outlet",
+  },
+  {
+    title: "About",
+    to: "/about",
   },
 ];
 
@@ -53,7 +74,7 @@ export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
         animate="visible"
         className=""
       >
-        <nav className="flex items-center justify-between rounded-2xl border-2 border-zinc-300 bg-white/80 px-8 py-3 backdrop-blur-md">
+        <nav className="flex items-center justify-between rounded-2xl border-2 border-zinc-300 bg-white/80 px-4 py-3 backdrop-blur-md md:px-8">
           <NavLink
             to=""
             role="button"
@@ -89,13 +110,15 @@ export function RemixNavbarHome({
   title,
   btn_to = "",
   btn_title = "Button",
+  btn_title_mobile = "Button",
   color,
   userIcon = false,
 }: RemixNavbarProps) {
   const [showModal, setShowModal] = useState(false);
-
+  const [isNavToggled, setIsNavToggled] = useState(false);
   const scrollDirection = useScrollDirection();
   const showNavbar = scrollDirection !== "down";
+  const location = useLocation();
 
   // logout modal logic
   const handleLogout = async () => {
@@ -106,6 +129,16 @@ export function RemixNavbarHome({
     if (btn_to === "/logout") {
       e.preventDefault();
       setShowModal(true);
+    }
+  };
+
+  // logic toggle nav menu
+  const handleToggle = () => {
+    setIsNavToggled(!isNavToggled);
+    if (isNavToggled) {
+      document.body.style.overflow = "auto";
+    } else {
+      document.body.style.overflow = "hidden";
     }
   };
 
@@ -125,18 +158,18 @@ export function RemixNavbarHome({
       variants={NAV_ANIMATION}
       initial="hidden"
       animate="visible"
-      className="sticky top-0 z-[999] flex w-full px-4"
+      className="sticky top-0 z-[999] flex w-full md:px-4"
     >
       <motion.nav
         variants={NAV_ANIMATION_SCROLL}
         initial="begin"
         animate={showNavbar ? "begin" : "end"}
-        className="relative flex w-full items-center justify-between rounded-2xl bg-white p-4"
+        className={`${isNavToggled ? "border-b-[1px] border-zinc-200" : ""} relative z-[999] flex w-full items-center justify-between bg-white p-4 py-4 md:rounded-2xl`}
       >
         <h1 className="flex">
           {title}
           <svg
-            className="h-8"
+            className="h-6 md:h-8"
             viewBox="0 0 344 254"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +196,7 @@ export function RemixNavbarHome({
         </h1>
 
         <div className="z-20 flex items-center gap-4">
-          <ul className="flex items-center">
+          <ul className="hidden items-center md:flex">
             {navbarMenu.map((menu, index) => (
               <NavLink
                 key={index}
@@ -203,6 +236,7 @@ export function RemixNavbarHome({
             title={btn_title}
             color={color}
             onClick={handleClick}
+            stylebtn="hidden md:flex"
           >
             {userIcon && (
               <svg
@@ -218,8 +252,39 @@ export function RemixNavbarHome({
               </svg>
             )}
           </RemixButton>
+          <div
+            className={`hamburger flex text-primary-100 transition-all hover:text-light-600 md:hidden`}
+            role="button"
+            onClick={handleToggle}
+          >
+            {isNavToggled ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2.3em"
+                height="2.3em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2.3em"
+                height="2.3em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M21 15.61L19.59 17l-5.01-5l5.01-5L21 8.39L17.44 12zM3 6h13v2H3zm0 7v-2h10v2zm0 5v-2h13v2z"
+                />
+              </svg>
+            )}
+          </div>
         </div>
-        <div className="absolute flex h-[70px] w-full items-center">
+        <div className="absolute hidden h-[70px] w-full items-center md:flex">
           <Link to="/" className="mx-auto w-fit">
             <img
               src="images/mako.svg"
@@ -229,6 +294,78 @@ export function RemixNavbarHome({
           </Link>
         </div>
       </motion.nav>
+      {/* Hamburger Menu */}
+      <main
+        className={`hamburger-menu absolute left-0 top-0 h-dvh w-full bg-white pb-4 pl-4 pr-2 pt-24 text-white transition-transform duration-300 md:hidden ${
+          isNavToggled ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
+        <ul className="space-y-4">
+          {navbarMobileMenu.map((menu, index) => {
+            const isCurrent = location.pathname === menu.to;
+
+            return (
+              <Link
+                to={isCurrent ? "#" : menu.to}
+                onClick={(e) => {
+                  if (isCurrent) e.preventDefault();
+                }}
+                key={index}
+                className={`${isCurrent ? "cursor-default text-primary-100" : "text-light-500"} flex items-center justify-between hover:text-primary-100`}
+              >
+                <NavLink
+                  to={menu.to}
+                  onClick={(e) => {
+                    if (isCurrent) e.preventDefault();
+                  }}
+                  className={`${isCurrent ? "text-primary-100" : ""}`}
+                >
+                  {menu.title}
+                </NavLink>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="1.5em"
+                  height="1.5em"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="none"
+                    stroke={`${isCurrent ? "#8e1538" : "currentColor"} `}
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="1.5"
+                    d="m10 17l5-5l-5-5"
+                  />
+                </svg>
+              </Link>
+            );
+          })}
+        </ul>
+        <RemixButton
+          to={btn_to}
+          title={btn_title}
+          color={color}
+          onClick={handleClick}
+          stylebtn="flex mt-8 w-full text-center justify-center max-md:font-medium"
+        >
+          {userIcon && (
+            <div className="flex items-center gap-4 mx-auto font-medium">
+              <h1>{btn_title_mobile}</h1>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.3em"
+                height="1.3em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z"
+                />
+              </svg>
+            </div>
+          )}
+        </RemixButton>
+      </main>
     </motion.section>
   );
 }
