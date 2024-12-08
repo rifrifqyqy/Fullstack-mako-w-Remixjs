@@ -134,7 +134,7 @@ export default function Index() {
 
       {/* category layout */}
 
-      <section className="mt-8 flex flex-col gap-4 px-8 md:mt-24 md:gap-16">
+      <section className="mt-8 flex flex-col gap-4 px-4 md:px-8 md:mt-24 md:gap-16">
         <article className="flex flex-col gap-2">
           <motion.div
             variants={ANIMATE_TITLE_1}
