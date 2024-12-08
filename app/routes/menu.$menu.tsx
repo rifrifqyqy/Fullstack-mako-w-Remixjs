@@ -316,7 +316,7 @@ export default function MenuDetail() {
               <RemixButton
                 title="Beli di GoFood"
                 to=""
-                stylebtn="flex justify-center mt-4 font-medium uppercase"
+                stylebtn="flex justify-center mt-4 font-medium uppercase w-full"
               />
             </article>
             <article className="flex flex-col">
@@ -379,6 +379,7 @@ export default function MenuDetail() {
                     displayReview={review.comment}
                     dateReview={review.createdAt}
                     rating={review.rating}
+                    actionFetcher={""}
                   />
 
                   // end card
