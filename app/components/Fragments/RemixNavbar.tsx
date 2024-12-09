@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useScrollDirection } from "helper/scrollDirection";
 
-
 // interface types navbar
 type RemixNavbarProps = {
   to: string;
@@ -296,11 +295,11 @@ export function RemixNavbarHome({
       </motion.nav>
       {/* Hamburger Menu */}
       <main
-        className={`hamburger-menu absolute left-0 top-0 h-dvh w-full bg-white pb-4 pl-4 pr-2 pt-24 text-white transition-transform duration-300 md:hidden ${
+        className={`hamburger-menu absolute left-0 top-0 h-dvh w-full bg-white px-4 pt-24 text-white transition-transform duration-300 md:hidden ${
           isNavToggled ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <ul className="space-y-4">
+        <ul className="-pr-2 space-y-4">
           {navbarMobileMenu.map((menu, index) => {
             const isCurrent = location.pathname === menu.to;
 
@@ -346,10 +345,10 @@ export function RemixNavbarHome({
           title={btn_title}
           color={color}
           onClick={handleClick}
-          stylebtn="flex mt-8 w-full text-center justify-center max-md:font-medium"
+          stylebtn="flex mt-8 w-full text-center justify-center max-md:font-medium "
         >
           {userIcon && (
-            <div className="flex items-center gap-4 mx-auto font-medium">
+            <div className="mx-auto flex items-center gap-4 font-medium">
               <h1>{btn_title_mobile}</h1>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
