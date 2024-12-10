@@ -82,7 +82,7 @@ export default function Signup() {
   };
 
   return (
-    <main className="grid max-h-dvh grid-cols-2">
+    <main className="relative max-h-dvh md:grid md:grid-cols-2">
       <section className="flex flex-col">
         <HeaderAuthNav />
         <Form
@@ -90,15 +90,15 @@ export default function Signup() {
           className="m-auto w-full max-w-lg rounded-lg bg-white p-8"
         >
           <article className="flex flex-col items-center gap-4">
-            <h1 className="text-5xl font-semibold text-gray-800">
+            <h1 className="text-[2em] font-semibold text-gray-800 md:text-5xl">
               create account!
             </h1>
-            <p className="text-center text-zinc-600">
+            <p className="text-center text-[1em] text-zinc-600">
               Daftar Sekarang dan Temukan Nikmatnya Roti Artisan Kami!
             </p>
           </article>
 
-          <div className="mt-24 flex flex-col gap-6">
+          <div className="mt-12 flex flex-col gap-6 md:mt-24">
             <div
               className={`${inputStyle} relative flex items-center justify-between focus-within:ring-2 focus-within:ring-primary-100`}
             >
@@ -213,14 +213,14 @@ export default function Signup() {
           )}
           <button
             type="submit"
-            className={`mt-12 w-full rounded-full bg-primary-100 px-4 py-2 text-base font-semibold uppercase text-white transition duration-200 hover:bg-primary-200 active:scale-90 ${
+            className={`mt-12 w-full rounded-full bg-primary-100 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-200 hover:bg-primary-200 active:scale-90 md:text-base ${
               isSubmitting ? "cursor-not-allowed opacity-50" : ""
             }`}
             disabled={isSubmitting}
           >
             {isSubmitting ? "Sign in..." : "Create Account"}
           </button>
-          <footer className="mt-[15%] flex items-center justify-center gap-1">
+          <footer className="mt-[15%] flex items-center justify-center gap-1 max-md:text-sm">
             Have an account?
             <Link
               to="/login"
@@ -233,11 +233,11 @@ export default function Signup() {
       </section>
 
       {/* image banner */}
-      <section className="flex h-screen p-4">
+      <section className="flex h-screen p-4 max-md:hidden">
         <LoginBanner />
       </section>
     </main>
   );
 }
 const inputStyle =
-  "w-full appearance-none rounded-full border border-gray-300 text-gray-800 shadow-sm outline-none focus:border-transparent focus:ring-[2px] focus:ring-primary-100";
+  "w-full appearance-none rounded-full border border-gray-300 text-gray-800 shadow-sm outline-none focus:border-transparent focus:ring-[2px] focus:ring-primary-100 max-md:text-sm";

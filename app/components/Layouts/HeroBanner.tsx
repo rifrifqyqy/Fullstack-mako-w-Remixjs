@@ -135,7 +135,7 @@ export default function HeroBanner({
               animate="visible"
               className="z-20 flex flex-col gap-2 max-md:mt-6 md:m-4 md:hidden"
             >
-              <h1 className="w-fit rounded-full bg-zinc-200/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-md md:text-base">
+              <h1 className="w-fit rounded-full bg-zinc-200/20 px-2 py-1 text-xs font-medium text-white backdrop-blur-md md:px-4 md:py-2 md:text-base">
                 Latest Menu
               </h1>
               <div
@@ -171,7 +171,7 @@ export default function HeroBanner({
           </Link>
         </article>
 
-        <h1 className="absolute bottom-0 z-20 mb-[5%] px-4 md:px-0 max-md:w-full">
+        <h1 className="absolute bottom-0 z-20 mb-[5%] px-4 max-md:w-full md:px-0">
           <motion.div
             variants={ANIMATE_SCALE}
             initial="hidden"

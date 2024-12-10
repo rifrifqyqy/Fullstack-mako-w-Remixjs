@@ -134,7 +134,7 @@ export default function Index() {
 
       {/* category layout */}
 
-      <section className="mt-8 flex flex-col gap-4 px-4 md:px-8 md:mt-24 md:gap-16">
+      <section className="mt-12 flex flex-col gap-4 px-4 md:mt-24 md:gap-16 md:px-8">
         <article className="flex flex-col gap-2">
           <motion.div
             variants={ANIMATE_TITLE_1}
@@ -173,12 +173,12 @@ export default function Index() {
       {/* end category layout */}
       {/* menu data loop */}
       <main className="flex flex-col">
-        <section className="mt-24 flex flex-col gap-2 px-8">
+        <section className="mt-12 flex flex-col gap-2 px-4 md:mt-24 md:px-8">
           <motion.article
             variants={sentenceAnimation}
             initial="hidden"
             whileInView="visible"
-            className="w-[80%] self-end text-end text-[54px] font-semibold"
+            className="w-[80%] self-end text-end text-[2em] font-semibold md:text-[54px]"
           >
             {words2.map((word, index) => (
               <span key={index} className="inline-block overflow-clip">
@@ -196,9 +196,9 @@ export default function Index() {
             ))}
           </motion.article>
         </section>
-        <section className="mt-16 grid grid-cols-2 gap-8 px-8 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
-          {sortedMenuData.slice(0, 5).map((menu) => (
-            <BreadCard key={menu.id}>
+        <section className="mt-8 grid grid-cols-2 gap-4 px-4 sm:grid-cols-3 md:mt-16 md:grid-cols-4 md:gap-8 md:px-8 xl:grid-cols-5 2xl:grid-cols-5">
+          {sortedMenuData.slice(0, 5).map((menu, index) => (
+            <BreadCard key={menu.id} index={index}>
               <BreadCard.Toppings
                 DirecTo={`/menu/${menu.id}`}
                 thumb={menu.thumb}
@@ -215,7 +215,11 @@ export default function Index() {
           ))}
         </section>
         <div className="mx-auto mt-8">
-          <RemixButton title="Lihat Semua" stylebtn="pr-2" to="/menu">
+          <RemixButton
+            title="Lihat Semua"
+            stylebtn="pr-2 md:text-base text-sm md:font-semibold font-medium"
+            to="/menu"
+          >
             <svg
               width="24"
               height="24"
@@ -235,18 +239,18 @@ export default function Index() {
       {/* end menu data loop */}
 
       {/* accordion */}
-      <section className="mt-24 px-8">
-        <div className="flex flex-col gap-12 rounded-3xl border-2 border-zinc-200 px-8 pb-4 pt-12">
+      <section className="mt-12 px-4 md:mt-24 md:px-8">
+        <div className="flex flex-col gap-12 rounded-3xl border-2 border-zinc-200 px-4 pb-4 pt-8 md:px-8 md:pt-12">
           <article className="mx-auto flex w-fit items-center gap-4">
             <motion.img
               variants={ANIMATE_KEYFRAME_2}
               initial="hidden"
               animate="visible"
               src="images/toast.png"
-              className="h-12"
+              className="h-8 md:h-12"
               alt=""
             />
-            <h1 className="text-3xl font-semibold text-primary-100">
+            <h1 className="text-xl font-semibold text-primary-100 md:text-3xl">
               Frequently Asked Questions
             </h1>
             <motion.img
@@ -254,7 +258,7 @@ export default function Index() {
               initial="hidden"
               animate="visible"
               src="images/cookie.png"
-              className="h-12"
+              className="h-8 md:h-12"
               alt=""
             />
           </article>
@@ -263,20 +267,20 @@ export default function Index() {
       </section>
 
       {/* cta layout */}
-      <section className="mt-24 h-[280px] px-8">
+      <section className="mt-24 h-[500px] px-4 md:h-[280px] md:px-8">
         <figure
-          className="relative grid h-full w-full grid-cols-2 items-center justify-between rounded-3xl border-2 border-primary-100 bg-cover bg-center bg-repeat"
+          className="relative h-full w-full items-center justify-center gap-8 rounded-3xl border-2 border-primary-100 bg-cover bg-center bg-repeat max-md:flex max-md:flex-col max-md:p-4 md:grid md:grid-cols-2 md:justify-between"
           style={{ backgroundImage: "url(images/dotpattern.png)" }}
         >
-          <div className="relative h-full">
+          <div className="relative h-full w-full max-md:flex max-md:justify-center">
             <img
               src="images/mockupmako.png"
               alt=""
-              className="absolute bottom-0 left-1/3 w-[220px]"
+              className="absolute bottom-0 aspect-auto h-full md:left-1/3 md:w-[220px]"
             />
           </div>
           <article className="flex flex-col gap-6 pr-8">
-            <h1 className="text-3xl font-semibold text-zinc-800">
+            <h1 className="text-xl font-semibold text-zinc-800 md:text-3xl">
               Download <span className="text-primary-100">MAKO</span> App on
               Google Play Store & Apple App Store
             </h1>
@@ -285,13 +289,21 @@ export default function Index() {
                 to="https://play.google.com/store/apps/details?id=com.mako.app"
                 className="flex h-fit w-fit transition-all hover:opacity-80 active:scale-95"
               >
-                <img src="images/googleplay-btn.png" className="h-12" alt="" />
+                <img
+                  src="images/googleplay-btn.png"
+                  className="h-10 md:h-12"
+                  alt=""
+                />
               </Link>
               <Link
                 to="https://apps.apple.com/id/app/mako-cake-and-bakery/id1623760961"
                 className="flex h-fit w-fit transition-all hover:opacity-80 active:scale-95"
               >
-                <img src="images/appstore-btn.png" className="h-12" alt="" />
+                <img
+                  src="images/appstore-btn.png"
+                  className="h-10 md:h-12"
+                  alt=""
+                />
               </Link>
             </div>
           </article>

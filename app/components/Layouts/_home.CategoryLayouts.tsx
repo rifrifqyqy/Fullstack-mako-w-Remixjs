@@ -23,7 +23,7 @@ export default function HomeCategoryLayout() {
           variants={ANIMATION_WRAP}
           initial="hidden"
           animate="visible"
-          className="flex w-fit gap-4 md:flex-col"
+          className="flex w-fit gap-2 md:gap-4 md:flex-col"
         >
           {dataCategory.map((category) => (
             <motion.div

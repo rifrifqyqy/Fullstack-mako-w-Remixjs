@@ -101,7 +101,7 @@ export default function Login() {
     setToast((prev) => !prev);
   };
   return (
-    <main className="relative grid max-h-dvh grid-cols-2">
+    <main className="relative max-h-dvh md:grid md:grid-cols-2">
       {toast && successMessage && (
         <div className="fixed right-0 top-0 z-50 m-4 flex h-fit w-fit items-start gap-4 rounded-xl bg-white px-4 py-3 shadow-md">
           <svg
@@ -172,16 +172,17 @@ export default function Login() {
           className="m-auto w-full max-w-lg rounded-lg bg-white p-8"
         >
           <article className="flex flex-col items-center gap-4">
-            <h1 className="text-5xl font-semibold text-gray-800">
+            <img src="/images/mako.svg" alt="" className="h-12" />
+            <h1 className="text-[2em] font-semibold text-gray-800 md:text-5xl">
               welcome back!
             </h1>
-            <p className="text-center text-zinc-600">
+            <p className="text-center text-[1em] text-zinc-600">
               Selamat datang kembali! Masuk untuk menikmati berbagai menu
               menarik dari Mako Bakery.
             </p>
           </article>
 
-          <div className="mt-24 flex flex-col gap-6">
+          <div className="mt-12 flex flex-col gap-6 md:mt-24">
             <div
               className={`${inputStyle} relative flex items-center justify-between focus-within:ring-2 focus-within:ring-primary-100`}
             >
@@ -249,7 +250,7 @@ export default function Login() {
           <div className="flex flex-col gap-4">
             <button
               type="submit"
-              className={`mt-12 w-full rounded-full bg-primary-100 px-4 py-2 text-base font-semibold uppercase text-white transition duration-200 hover:bg-primary-200 active:scale-90 ${
+              className={`mt-12 w-full rounded-full bg-primary-100 px-4 py-2 text-sm font-semibold uppercase text-white transition duration-200 hover:bg-primary-200 active:scale-90 md:text-base ${
                 isSubmitting ? "cursor-not-allowed opacity-50" : ""
               }`}
               disabled={isSubmitting}
@@ -260,14 +261,14 @@ export default function Login() {
           <footer className="mt-[20%] flex items-center justify-center">
             <Link
               to="/signup"
-              className="text-zinc-600 underline hover:text-primary-100"
+              className="text-zinc-600 underline hover:text-primary-100 max-md:text-sm"
             >
               Create Account
             </Link>
           </footer>
         </Form>
       </section>
-      <section className="flex h-screen p-4">
+      <section className="flex h-screen p-4 max-md:hidden">
         <LoginBanner />
       </section>
     </main>
@@ -277,4 +278,4 @@ export default function Login() {
 // ========================= style =========================
 
 const inputStyle =
-  "w-full appearance-none rounded-full border border-gray-300 text-gray-800 shadow-sm outline-none focus:border-transparent focus:ring-[2px] focus:ring-primary-100";
+  "w-full appearance-none rounded-full border border-gray-300 text-gray-800 shadow-sm outline-none focus:border-transparent focus:ring-[2px] focus:ring-primary-100 max-md:text-sm";

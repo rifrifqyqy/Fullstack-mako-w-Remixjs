@@ -4,10 +4,10 @@ import { priceFormat } from "helper/priceFormat";
 import { transformHyphenToSpace } from "helper/transformText";
 import { useState } from "react";
 
-export default function BreadCard({ children }: BreadTypes) {
+export default function BreadCard({ children, index }: BreadTypes) {
   return (
     <motion.div
-      className="menu-item group flex flex-col gap-2 rounded-2xl border-2 border-transparent bg-white p-2 transition-all hover:border-primary-100"
+      className={` ${index >= 4 ? "hidden md:flex" : ""} menu-item group flex flex-col gap-2 rounded-2xl border-2 border-transparent bg-white p-2 transition-all hover:border-primary-100`}
       style={{ boxShadow: "rgba(0, 0, 0, 0.1) -4px 9px 25px -6px" }}
       variants={CARD_ANIMATION}
       initial="hidden"
@@ -41,11 +41,11 @@ function Toppings({ title, thumb, kategori, DirecTo, rating }: ToppingsTypes) {
           }`}
           onLoad={() => setIsLoaded(true)}
         />
-        <div className="absolute bottom-0 flex h-fit w-full items-center justify-between p-3">
-          <h1 className="rounded-full bg-primary-100 px-4 py-1 text-sm font-semibold uppercase text-white">
+        <div className="absolute bottom-0 flex h-fit w-full items-center justify-between p-2 md:p-3">
+          <h1 className="rounded-full bg-primary-100 px-2 py-1 text-xs font-medium uppercase text-white md:px-4 md:text-sm md:font-semibold">
             {transformHyphenToSpace(kategori)}
           </h1>
-          <h1 className="flex gap-2 rounded-full bg-white py-1 pl-2 pr-3 text-sm font-semibold uppercase">
+          <h1 className="flex items-center gap-2 rounded-full bg-white py-0.5 pl-1 pr-2 text-xs font-semibold uppercase md:py-1 md:pl-2 md:pr-3 md:text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -78,12 +78,14 @@ function Layer({ title, description, price, deleteID }: LayerTypes) {
     );
   };
   return (
-    <article className="flex h-full flex-col gap-2 rounded-xl bg-zinc-100 p-3">
-      <h1 className="line-clamp-1 text-xl font-semibold text-primary-100">
+    <article className="flex h-full flex-col gap-1 rounded-xl bg-zinc-100 p-2 md:gap-2 md:p-3">
+      <h1 className="line-clamp-1 text-base font-semibold text-primary-100 md:text-xl">
         {title}
       </h1>
-      <p className="line-clamp-2 text-[.875rem] text-zinc-600">{description}</p>
-      <p className="ml-auto mt-auto text-xl font-bold capitalize text-zinc-800">
+      <p className="line-clamp-2 text-sm text-zinc-500 md:text-[0.875rem]">
+        {description}
+      </p>
+      <p className="ml-auto mt-auto text-base font-bold capitalize text-zinc-800 md:text-xl">
         {priceFormat(price)}
       </p>
 
@@ -99,6 +101,7 @@ function Layer({ title, description, price, deleteID }: LayerTypes) {
 
 type BreadTypes = {
   children: React.ReactNode;
+  index?: number | any;
 };
 type ToppingsTypes = {
   title: string;

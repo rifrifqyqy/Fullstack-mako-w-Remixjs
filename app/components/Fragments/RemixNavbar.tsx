@@ -295,11 +295,45 @@ export function RemixNavbarHome({
       </motion.nav>
       {/* Hamburger Menu */}
       <main
-        className={`hamburger-menu absolute left-0 top-0 h-dvh w-full bg-white px-4 pt-24 text-white transition-transform duration-300 md:hidden ${
+        className={`hamburger-menu absolute left-0 top-0 h-dvh w-full bg-white px-4 pt-4 text-white transition-transform duration-300 md:hidden ${
           isNavToggled ? "translate-y-0" : "-translate-y-full"
         }`}
       >
-        <ul className="-pr-2 space-y-4">
+        <header className="flex w-full items-center justify-between border-b border-zinc-200 pb-3">
+          <img src="images/mako.svg" className="h-10" alt="" />
+          <div
+            className={`hamburger flex text-primary-100 transition-all hover:text-light-600 md:hidden`}
+            role="button"
+            onClick={handleToggle}
+          >
+            {isNavToggled ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2.3em"
+                height="2.3em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12z"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="2.3em"
+                height="2.3em"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M21 15.61L19.59 17l-5.01-5l5.01-5L21 8.39L17.44 12zM3 6h13v2H3zm0 7v-2h10v2zm0 5v-2h13v2z"
+                />
+              </svg>
+            )}
+          </div>
+        </header>
+        <ul className="-pr-2 mt-8 space-y-4">
           {navbarMobileMenu.map((menu, index) => {
             const isCurrent = location.pathname === menu.to;
 

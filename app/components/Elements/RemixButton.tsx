@@ -1,4 +1,4 @@
-import { NavLink } from "@remix-run/react";
+import { Link, NavLink } from "@remix-run/react";
 import { twMerge } from "tailwind-merge";
 
 // RemixButton Props Type
@@ -30,7 +30,7 @@ export default function RemixButton({
   );
 
   return (
-    <NavLink
+    <Link
       onClick={onClick}
       className={buttonClass}
       to={to}
@@ -39,6 +39,6 @@ export default function RemixButton({
     >
       {children}
       {title}
-    </NavLink>
+    </Link>
   );
 }
