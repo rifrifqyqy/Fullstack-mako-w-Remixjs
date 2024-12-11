@@ -48,8 +48,7 @@ export default function CardReview({
           <div className="mt-2 rounded-full bg-gray-200 p-2">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              className="h-6 md:h-8"
               viewBox="0 0 24 24"
             >
               <path
@@ -60,13 +59,14 @@ export default function CardReview({
           </div>
           <article className="flex w-full flex-col gap-2">
             <header className="flex w-full justify-between">
-              <p className="text-lg font-semibold capitalize">
+              <p className="text-base font-semibold capitalize md:text-lg">
                 {displayUsername}
-                <p className="text-sm font-normal text-zinc-500">
+                <p className="text-xs font-normal text-zinc-500 md:text-sm">
                   {displayDate}
                 </p>
               </p>
-              <div className="star flex h-fit items-center gap-2 rounded-full bg-zinc-200 py-1 pl-2 pr-3 font-semibold">
+              {/* star rating */}
+              <div className="star flex h-fit items-center gap-2 rounded-full bg-zinc-200 py-1 pl-2 pr-3 font-semibold max-md:text-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="20"
@@ -79,7 +79,7 @@ export default function CardReview({
                     d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2L9.19 8.62L2 9.24l5.45 4.73L5.82 21z"
                   />
                 </svg>
-                <p>{displayRating}</p>
+                <p className="max-md:text-sm">{displayRating}</p>
               </div>
             </header>
             {type === "yourReview" && isEditing ? (
@@ -89,9 +89,11 @@ export default function CardReview({
                 onSubmit={() => setIsEditing(!isEditing)}
               />
             ) : (
-              <p>{userReview?.comment}</p>
+              <p className="max-md:text-sm">{userReview?.comment}</p>
             )}
-            {type === "generalReview" && <p>{displayReview}</p>}
+            {type === "generalReview" && (
+              <p className="max-md:text-sm">{displayReview}</p>
+            )}
             {/* Tombol Edit */}
             {type === "yourReview" && (
               <div className="_edit-layout flex items-center gap-2">
