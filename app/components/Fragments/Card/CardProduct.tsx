@@ -42,10 +42,10 @@ function Toppings({ title, thumb, kategori, DirecTo, rating }: ToppingsTypes) {
           onLoad={() => setIsLoaded(true)}
         />
         <div className="absolute bottom-0 flex h-fit w-full items-center justify-between p-2 md:p-3">
-          <h1 className="rounded-full bg-primary-100 px-2 py-1 text-xs font-medium uppercase text-white md:px-4 md:text-sm md:font-semibold">
+          <h1 className="hidden rounded-full bg-primary-100 px-2 py-1 text-xs font-medium uppercase text-white md:block md:px-4 md:text-sm md:font-semibold">
             {transformHyphenToSpace(kategori)}
           </h1>
-          <h1 className="flex items-center gap-2 rounded-full bg-white py-0.5 pl-1 pr-2 text-xs font-semibold uppercase md:py-1 md:pl-2 md:pr-3 md:text-sm">
+          <h1 className="flex items-center gap-1 rounded-full bg-white py-0.5 pl-1 pr-2 text-xs font-semibold uppercase max-md:ml-auto md:gap-2 md:py-1 md:pl-2 md:pr-3 md:text-sm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -66,7 +66,7 @@ function Toppings({ title, thumb, kategori, DirecTo, rating }: ToppingsTypes) {
   );
 }
 
-function Layer({ title, description, price, deleteID }: LayerTypes) {
+function Layer({ title, description, price, deleteID, kategori }: LayerTypes) {
   const fetcher = useFetcher();
 
   // handle delete menu
@@ -79,13 +79,16 @@ function Layer({ title, description, price, deleteID }: LayerTypes) {
   };
   return (
     <article className="flex h-full flex-col gap-1 rounded-xl bg-zinc-100 p-2 md:gap-2 md:p-3">
-      <h1 className="line-clamp-1 text-base font-semibold text-primary-100 md:text-xl">
+      <h1 className="line-clamp-1 text-sm font-semibold text-primary-100 md:text-xl">
         {title}
       </h1>
-      <p className="line-clamp-2 text-sm text-zinc-500 md:text-[0.875rem]">
+      <h1 className="w-fit rounded-full bg-primary-100/15 px-2 py-0.5 text-xs lowercase text-primary-100 md:px-3 md:py-1 md:text-sm">
+        {transformHyphenToSpace(kategori)}
+      </h1>
+      <p className="line-clamp-2 hidden text-xs text-zinc-500 md:block md:text-[0.875rem]">
         {description}
       </p>
-      <p className="ml-auto mt-auto text-base font-bold capitalize text-zinc-800 md:text-xl">
+      <p className="ml-auto mt-auto text-sm font-bold capitalize text-zinc-800 md:text-xl">
         {priceFormat(price)}
       </p>
 
@@ -116,6 +119,7 @@ type LayerTypes = {
   description: string;
   price: number;
   deleteID?: number;
+  kategori: string;
 };
 BreadCard.Toppings = Toppings;
 BreadCard.Layer = Layer;

@@ -41,7 +41,7 @@ export default function CardReview({
   return (
     <>
       <figure
-        className="flex w-full flex-col rounded-2xl border-2 border-zinc-200 bg-white px-3 py-4 md:px-4"
+        className="flex w-full flex-col rounded-2xl border-2 border-zinc-200 bg-white px-3 pb-3 pt-2 md:px-4 md:py-4"
         key={key}
       >
         <section className="header-comment flex items-start gap-4">
@@ -57,7 +57,7 @@ export default function CardReview({
               />
             </svg>
           </div>
-          <article className="flex w-full flex-col gap-2">
+          <article className="flex w-full flex-col gap-1 md:gap-2">
             <header className="flex w-full justify-between">
               <p className="text-base font-semibold capitalize md:text-lg">
                 {displayUsername}
