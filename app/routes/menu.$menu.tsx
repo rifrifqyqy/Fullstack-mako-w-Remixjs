@@ -345,7 +345,7 @@ export default function MenuDetail() {
             </article>
             <article className="flex flex-col">
               {/* cara menghitung data reviews gimana */}
-              <h1 className="title-style flex items-center gap-2 max-md:text-base">
+              <h1 className="title-style flex items-center gap-2 text-dark-200 max-md:text-base">
                 Ulasan{" "}
                 <p className="aspect-square h-fit w-fit rounded-full bg-zinc-200 px-2 py-0.5 text-sm md:text-base">
                   {reviews.length}
@@ -391,7 +391,7 @@ export default function MenuDetail() {
                 )}
               </section>
               <section className="__ulasan-semua-WRAPPER mt-6 flex flex-col gap-4">
-                <h1 className="max-md:text-base">
+                <h1 className="max-md:text-sm">
                   Semua Ulasan <span>({reviews.length})</span>
                 </h1>
                 {reviews.map((review) => (
