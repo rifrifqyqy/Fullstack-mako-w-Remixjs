@@ -209,7 +209,7 @@ export default function MenuDetail() {
         {/* end navbar */}
 
         {/* main content */}
-        <main className="mt-8 flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-8">
+        <main className="mt-4 flex flex-col gap-4 md:mt-8 md:grid md:grid-cols-3 md:gap-8">
           <section className="col-span-2">
             <figure className="flex flex-col justify-center gap-4">
               <div className="relative flex w-full overflow-hidden rounded-2xl">
@@ -230,7 +230,7 @@ export default function MenuDetail() {
                 <div className="absolute inset-0 my-auto flex w-full items-center justify-between">
                   <button
                     onClick={handlePrev}
-                    className="h-full bg-gradient-to-r from-transparent to-transparent px-8 text-light-100 transition-all duration-500 active:from-primary-100/30 md:px-12"
+                    className="h-full bg-gradient-to-r from-transparent to-transparent pl-4 pr-8 text-light-100 transition-all duration-500 active:from-primary-100/30 md:px-12"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -250,7 +250,7 @@ export default function MenuDetail() {
                   </button>
                   <button
                     onClick={handleNext}
-                    className="h-full bg-gradient-to-l from-transparent to-transparent px-8 text-light-100 transition-all duration-500 active:from-primary-100/30 md:px-12"
+                    className="h-full bg-gradient-to-l from-transparent to-transparent pl-8 pr-4 text-light-100 transition-all duration-500 active:from-primary-100/30 md:px-12"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
