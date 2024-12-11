@@ -21,8 +21,8 @@ export default function RemixFooter() {
           </figure>
 
           <p className="text-zinc-200">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum iusto
-            quaerat aliquid!
+            Temukan kami di media sosial dan tetap terhubung untuk kelezatan
+            terbaru!
           </p>
         </div>
       </article>
