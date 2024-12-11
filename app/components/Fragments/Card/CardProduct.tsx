@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function BreadCard({ children, index }: BreadTypes) {
   return (
     <motion.div
-      className={` ${index >= 4 ? "hidden md:flex" : ""} menu-item group flex flex-col gap-2 rounded-2xl border-2 border-transparent bg-white p-1 md:p-2 transition-all hover:border-primary-100`}
+      className={` ${index >= 4 ? "hidden md:flex" : ""} menu-item group flex flex-col gap-2 rounded-lg border-2 border-transparent bg-white p-1 transition-all hover:border-primary-100 md:rounded-2xl md:p-2`}
       style={{ boxShadow: "rgba(0, 0, 0, 0.1) -4px 9px 25px -6px" }}
       variants={CARD_ANIMATION}
       initial="hidden"
@@ -29,14 +29,14 @@ function Toppings({ title, thumb, kategori, DirecTo, rating }: ToppingsTypes) {
           <img
             src="images/placeholder-img.jpg"
             alt=""
-            className="absolute inset-0 aspect-square w-full rounded-xl object-cover"
+            className="absolute inset-0 aspect-square w-full rounded-sm object-cover md:rounded-xl"
           />
         )}
 
         <img
           src={thumb}
           alt={title}
-          className={`aspect-square w-full rounded-xl object-cover transition-opacity duration-500 ${
+          className={`aspect-square w-full rounded-md object-cover transition-opacity duration-500 md:rounded-xl ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
           onLoad={() => setIsLoaded(true)}

@@ -41,7 +41,7 @@ export default function CardReview({
   return (
     <>
       <figure
-        className="flex w-full flex-col rounded-2xl border-2 border-zinc-200 bg-white p-4"
+        className="flex w-full flex-col rounded-2xl border-2 border-zinc-200 bg-white px-3 py-4 md:px-4"
         key={key}
       >
         <section className="header-comment flex items-start gap-4">
@@ -69,10 +69,8 @@ export default function CardReview({
               <div className="star flex h-fit items-center gap-2 rounded-full bg-zinc-200 py-1 pl-2 pr-3 font-semibold max-md:text-sm">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
                   viewBox="0 0 24 24"
-                  className="text-amber-500"
+                  className="h-5 text-amber-500 md:h-6"
                 >
                   <path
                     fill="currentColor"
