@@ -211,11 +211,7 @@ export default function MenuDetail() {
         {/* main content */}
         <main className="mt-8 flex flex-col gap-8 md:grid md:grid-cols-3">
           <section className="col-span-2">
-            <figure
-              className="relative flex flex-col justify-center gap-4"
-              onTouchStartCapture={handleTouchStart}
-              onTouchEndCapture={handleTouchEnd}
-            >
+            <figure className="relative flex flex-col justify-center gap-4">
               <AnimatePresence mode="wait">
                 <motion.img
                   variants={ANIMA_TAB_IMG}
@@ -224,6 +220,8 @@ export default function MenuDetail() {
                   key={menuData.gallery[activeImage]}
                   exit="exit"
                   src={menuData.gallery[activeImage]}
+                  onTouchStartCapture={handleTouchStart}
+                  onTouchEndCapture={handleTouchEnd}
                   alt=""
                   className="menu-show h-[550px] rounded-2xl bg-zinc-200 object-contain"
                 />
