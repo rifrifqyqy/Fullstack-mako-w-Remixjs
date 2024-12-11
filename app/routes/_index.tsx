@@ -207,6 +207,7 @@ export default function Index() {
                 rating={menu.averageRating.toFixed(1)}
               />
               <BreadCard.Layer
+                kategori={menu.kategori}
                 title={menu.title}
                 description={menu.description}
                 price={menu.price}

@@ -126,6 +126,7 @@ export default function Menu() {
                     />
                     <BreadCard.Layer
                       title={menu.title}
+                      kategori={menu.kategori}
                       description={menu.description}
                       price={menu.price}
                       deleteID={menu.id}
