@@ -98,7 +98,7 @@ export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
             </svg>
             Kembali
           </NavLink>
-          <h1 className="text-base font-semibold uppercase md:text-xl">
+          <h1 className="text-sm font-semibold uppercase md:text-xl">
             {NavbarTitle}
           </h1>
         </nav>
