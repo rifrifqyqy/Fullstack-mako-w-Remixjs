@@ -15,10 +15,7 @@ import {
 } from "utils/reviews.server";
 import RemixButton from "~/components/Elements/RemixButton";
 import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
-import EditReviewForm from "~/components/Fragments/form/UpdateReview";
-import DeleteReview from "~/components/Fragments/form/DeleteReview";
 import AddReviewForm from "~/components/Fragments/form/AddReview";
-import formatDate from "helper/formatDate";
 import RemixFooter from "~/components/Layouts/RemixFooter";
 import CardReview from "~/components/Fragments/Card/CardReview";
 
@@ -337,6 +334,7 @@ export default function MenuDetail() {
                 </h2>
               </article>
               <RemixButton
+                to="https://gofood.co.id/search?q=mako"
                 title="Beli di GoFood"
                 stylebtn="flex justify-center mt-4 font-medium uppercase w-full max-md:text-sm"
               />
