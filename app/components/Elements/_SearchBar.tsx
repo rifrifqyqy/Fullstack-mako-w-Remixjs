@@ -92,12 +92,12 @@ export default function SearchBar({ dataSearch }: { dataSearch: MenuItem[] }) {
         {isLoad ? (
           <p className="text-center text-gray-500">Loading...</p>
         ) : noResultsFound ? (
-          <p className="absolute left-0 top-0 z-50 w-full rounded-lg bg-white p-4 text-center text-gray-500">
+          <p className="absolute left-0 top-0 z-50 w-full rounded-lg bg-white p-4 text-center text-gray-500 max-md:text-sm">
             Roti tidak ditemukan.
           </p>
         ) : (
           <main
-            className={`scrollbar-hide absolute left-0 top-6 z-50 flex max-h-96 w-full flex-col gap-4 divide-y-2 overflow-y-auto rounded-lg bg-white p-2 ${searchResults.length === 0 ? "hidden" : "block"} `}
+            className={`scrollbar-hide absolute left-0 top-6 z-50 flex max-h-96 w-full flex-col divide-y-2 overflow-y-auto rounded-lg bg-white p-2 md:gap-4 ${searchResults.length === 0 ? "hidden" : "block"} `}
           >
             {searchResults.map((menu: any) => (
               <Link to={`/menu/${menu.id}`}>
@@ -108,11 +108,13 @@ export default function SearchBar({ dataSearch }: { dataSearch: MenuItem[] }) {
                   <img
                     src={menu.thumb}
                     alt={menu.title}
-                    className="aspect-square h-20 rounded-lg object-cover"
+                    className="aspect-square h-16 rounded-lg object-cover md:h-20"
                   />
                   <div className="flex flex-col justify-between gap-2">
-                    <h1 className="text-lg font-semibold">{menu.title}</h1>
-                    <p className="font-semibold text-primary-100">
+                    <h1 className="text-base font-semibold md:text-lg">
+                      {menu.title}
+                    </h1>
+                    <p className="font-semibold text-primary-100 max-md:text-sm">
                       {priceFormat(menu.price)}
                     </p>
                   </div>

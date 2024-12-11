@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { getCurrentUser } from "helper/currentUser";
 import { priceFormat } from "helper/priceFormat";
 import { transformHyphenToSpace } from "helper/transformText";
-import { ReactNode, useState } from "react";
+import { ReactNode, useCallback, useState } from "react";
 import { getMenu } from "utils/menu.server";
 import {
   deleteReview,
@@ -159,21 +159,22 @@ export default function MenuDetail() {
   const { menuData, currentUser, reviews, alreadyReview, userReview } =
     useLoaderData<LoaderData>();
   const [activeImage, setActiveImage] = useState(0);
+  const [touchStartX, setTouchStartX] = useState(null);
+  const [touchEndX, setTouchEndX] = useState(null);
   // end state and hooks
 
   // Fungsi untuk mengubah gambar aktif
-  const handleImageClick = (index: number) => {
+  const handleImageClick = useCallback((index: number) => {
     setActiveImage(index);
-  };
-
+  }, []);
   // handle button prev | next
   const handlePrev = () => {
-    setActiveImage((prevIndex) =>
-      prevIndex === 0 ? menuData.gallery.length - 1 : prevIndex - 1,
+    setActiveImage((prev) =>
+      prev > 0 ? prev - 1 : menuData.gallery.length - 1,
     );
   };
   const handleNext = () => {
-    setActiveImage((prevIndex) => (prevIndex + 1) % menuData.gallery.length);
+    setActiveImage((prev) => (prev + 1) % menuData.gallery.length);
   };
   const [isEditing, setIsEditing] = useState(false); // Tambahkan state untuk toggle form edit
 
@@ -181,18 +182,40 @@ export default function MenuDetail() {
     setIsEditing(!isEditing);
   };
 
+  // swipe index logic
+  const handleTouchStart = (e) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e) => {
+    setTouchEndX(e.changedTouches[0].clientX);
+
+    // Calculate swipe direction
+    if (touchStartX - e.changedTouches[0].clientX > 50) {
+      // Swipe left
+      handleNext();
+    } else if (touchStartX - e.changedTouches[0].clientX < -50) {
+      // Swipe right
+      handlePrev();
+    }
+  };
+
   return (
     <main>
-      <main className="px-8">
+      <main className="px-4 md:px-8">
         {/* navbar */}
         <RemixNavbarMenu NavbarTitle={menuData.title} />
 
         {/* end navbar */}
 
         {/* main content */}
-        <main className="mt-8 grid grid-cols-3 gap-8">
+        <main className="mt-8 flex flex-col gap-8 md:grid md:grid-cols-3">
           <section className="col-span-2">
-            <figure className="relative flex flex-col justify-center gap-4">
+            <figure
+              className="relative flex flex-col justify-center gap-4"
+              onTouchStartCapture={handleTouchStart}
+              onTouchEndCapture={handleTouchEnd}
+            >
               <AnimatePresence mode="wait">
                 <motion.img
                   variants={ANIMA_TAB_IMG}
@@ -315,7 +338,6 @@ export default function MenuDetail() {
               </article>
               <RemixButton
                 title="Beli di GoFood"
-                to=""
                 stylebtn="flex justify-center mt-4 font-medium uppercase w-full"
               />
             </article>
