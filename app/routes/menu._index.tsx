@@ -88,7 +88,7 @@ export default function Menu() {
           />
         </section>
         <header className="mt-6 flex w-full md:mt-8">
-          <ul className="scrollbar-hide flex w-full justify-between gap-4 overflow-x-scroll">
+          <ul className="scrollbar-hide flex w-full justify-between gap-2 overflow-x-scroll md:gap-4">
             <Suspense fallback={<div>Loading...</div>}>
               {categoryMenu.map((category) => (
                 <button
@@ -111,7 +111,7 @@ export default function Menu() {
             </Suspense>
           </ul>
         </header>
-        <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-2 md:gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+        <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-2 sm:grid-cols-3 md:grid-cols-4 md:gap-6 xl:grid-cols-5 2xl:grid-cols-5">
           <Suspense fallback={<div>Loading...</div>}>
             <AnimatePresence mode="wait">
               {filteredMenus.length > 0 ? (

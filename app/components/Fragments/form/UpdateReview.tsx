@@ -47,7 +47,7 @@ export default function EditReviewForm({
       </div>
       <button
         type="submit"
-        className="rounded-full bg-primary-100 px-4 py-2 text-white hover:opacity-85"
+        className="rounded-full bg-primary-100 px-4 py-2 text-white hover:opacity-85 max-md:text-sm"
       >
         Simpan Ulasan
       </button>

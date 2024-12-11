@@ -70,14 +70,14 @@ export default function CardReview({
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
-                  className="h-5 text-amber-500 md:h-6"
+                  className="h-4 text-amber-500 md:h-6"
                 >
                   <path
                     fill="currentColor"
                     d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2L9.19 8.62L2 9.24l5.45 4.73L5.82 21z"
                   />
                 </svg>
-                <p className="max-md:text-sm">{displayRating}</p>
+                <p className="max-md:text-xs">{displayRating}</p>
               </div>
             </header>
             {type === "yourReview" && isEditing ? (
