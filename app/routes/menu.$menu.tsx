@@ -209,64 +209,66 @@ export default function MenuDetail() {
         {/* end navbar */}
 
         {/* main content */}
-        <main className="mt-8 flex flex-col gap-8 md:grid md:grid-cols-3">
+        <main className="mt-8 flex flex-col gap-6 md:grid md:grid-cols-3 md:gap-8">
           <section className="col-span-2">
-            <figure className="relative flex flex-col justify-center gap-4">
-              <AnimatePresence mode="wait">
-                <motion.img
-                  variants={ANIMA_TAB_IMG}
-                  initial="hidden"
-                  animate="visible"
-                  key={menuData.gallery[activeImage]}
-                  exit="exit"
-                  src={menuData.gallery[activeImage]}
-                  onTouchStartCapture={handleTouchStart}
-                  onTouchEndCapture={handleTouchEnd}
-                  alt=""
-                  className="menu-show h-[550px] rounded-2xl bg-zinc-200 object-contain"
-                />
-              </AnimatePresence>
-              <div className="absolute inset-0 my-auto mb-[10%] flex w-full items-center justify-between px-6">
-                <button
-                  onClick={handlePrev}
-                  className="rounded-full bg-white p-2 text-primary-100 transition-all active:scale-90"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
+            <figure className="flex flex-col justify-center gap-4">
+              <div className="relative flex w-full overflow-hidden rounded-2xl">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    variants={ANIMA_TAB_IMG}
+                    initial="hidden"
+                    animate="visible"
+                    key={menuData.gallery[activeImage]}
+                    exit="exit"
+                    src={menuData.gallery[activeImage]}
+                    onTouchStartCapture={handleTouchStart}
+                    onTouchEndCapture={handleTouchEnd}
+                    alt=""
+                    className="menu-show h-[300px] w-full rounded-xl bg-zinc-200 object-contain md:h-[550px] md:rounded-2xl"
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 my-auto flex w-full items-center justify-between">
+                  <button
+                    onClick={handlePrev}
+                    className="h-full bg-gradient-to-r from-transparent to-transparent px-8 text-light-100 transition-all duration-500 active:from-primary-100/30 md:px-12"
                   >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m12 19l-7-7l7-7m7 7H5"
-                    />
-                  </svg>
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="rounded-full bg-white p-2 text-primary-100 transition-all active:scale-90"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="m12 19l-7-7l7-7m7 7H5"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    className="h-full bg-gradient-to-l from-transparent to-transparent px-8 text-light-100 transition-all duration-500 active:from-primary-100/30 md:px-12"
                   >
-                    <path
-                      fill="none"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 12h14m-7-7l7 7l-7 7"
-                    />
-                  </svg>
-                </button>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="32"
+                      height="32"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="none"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 12h14m-7-7l7 7l-7 7"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </div>
               <figure className="scrollbar-hide flex w-full items-center gap-2 overflow-x-scroll p-1">
                 {menuData.gallery.map((image, index) => (
@@ -277,7 +279,7 @@ export default function MenuDetail() {
                         if (e.key === "Enter" || e.key === " ")
                           handleImageClick(index);
                       }}
-                      className={`aspect-video h-24 overflow-hidden rounded-xl transition-all ${
+                      className={`aspect-video h-14 overflow-hidden rounded-md transition-all md:h-24 md:rounded-xl ${
                         activeImage === index
                           ? "ring-2 ring-primary-100"
                           : "brightness-50"
@@ -300,12 +302,12 @@ export default function MenuDetail() {
             </figure>
           </section>
           <section className="flex flex-col gap-6 rounded-2xl">
-            <article className="flex w-full flex-col gap-1 rounded-2xl border-2 border-zinc-300 p-6 text-primary-100">
+            <article className="flex w-full flex-col gap-0 rounded-2xl border-2 border-zinc-300 p-4 text-primary-100 md:p-6">
               <header className="flex items-start justify-between">
-                <h1 className="text-2xl font-bold uppercase">
+                <h1 className="text-base font-bold uppercase md:text-2xl">
                   {menuData.title}
                 </h1>
-                <h1 className="flex items-center gap-2 rounded-full bg-zinc-200 py-1 pl-2 pr-3 text-base font-semibold uppercase text-zinc-800">
+                <h1 className="flex items-center gap-2 rounded-full bg-zinc-200 py-1 pl-2 pr-3 text-sm font-semibold lowercase text-zinc-800 md:text-base">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="20"
@@ -322,28 +324,30 @@ export default function MenuDetail() {
                 </h1>
               </header>
 
-              <div className="w-fit rounded-full bg-primary-100/15 px-3 py-1 text-sm capitalize text-primary-100">
+              <div className="w-fit rounded-full bg-primary-100/15 px-2 py-0.5 text-xs lowercase text-primary-100 md:px-3 md:py-1 md:text-sm">
                 {transformHyphenToSpace(menuData.kategori)}
               </div>
-              <p className="mt-2 text-zinc-600">{menuData.description}</p>
+              <p className="mt-2 text-zinc-600 max-md:text-sm">
+                {menuData.description}
+              </p>
               <article className="mt-2 grid w-full grid-cols-2 gap-1 border-t-2 border-zinc-300 pt-4">
-                <h2 className="mb-auto text-2xl font-bold text-primary-100">
+                <h2 className="mb-auto text-lg font-bold text-primary-100 md:text-2xl">
                   {priceFormat(menuData.price)}
                 </h2>
-                <h2 className="trasition-all flex cursor-pointer items-center justify-end text-sm text-zinc-500 hover:text-zinc-900">
+                <h2 className="trasition-all flex cursor-pointer items-center justify-end text-end text-sm text-zinc-500 hover:text-zinc-900 max-sm:text-xs">
                   ⓘ informasi pembelian
                 </h2>
               </article>
               <RemixButton
                 title="Beli di GoFood"
-                stylebtn="flex justify-center mt-4 font-medium uppercase w-full"
+                stylebtn="flex justify-center mt-4 font-medium uppercase w-full max-md:text-sm"
               />
             </article>
             <article className="flex flex-col">
               {/* cara menghitung data reviews gimana */}
-              <h1 className="title-style flex items-center gap-2">
+              <h1 className="title-style flex items-center gap-2 max-md:text-base">
                 Ulasan{" "}
-                <p className="aspect-square h-fit w-fit rounded-full bg-zinc-200 px-2 py-0.5 text-base">
+                <p className="aspect-square h-fit w-fit rounded-full bg-zinc-200 px-2 py-0.5 text-sm md:text-base">
                   {reviews.length}
                 </p>{" "}
               </h1>
@@ -373,10 +377,10 @@ export default function MenuDetail() {
                       <img
                         src="/images/toastknife.png"
                         alt=""
-                        className="aspect-auto h-[160px]"
+                        className="aspect-auto h-32 md:h-[160px]"
                       />
                     </figure>
-                    <p className="text-center">
+                    <p className="text-center max-md:text-sm">
                       Anda harus{" "}
                       <Link to="/login" className="text-primary-100 underline">
                         login
@@ -387,7 +391,7 @@ export default function MenuDetail() {
                 )}
               </section>
               <section className="__ulasan-semua-WRAPPER mt-6 flex flex-col gap-4">
-                <h1>
+                <h1 className="max-md:text-base">
                   Semua Ulasan <span>({reviews.length})</span>
                 </h1>
                 {reviews.map((review) => (
