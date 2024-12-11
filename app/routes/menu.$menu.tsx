@@ -310,17 +310,15 @@ export default function MenuDetail() {
                 <h1 className="flex items-center gap-2 rounded-full bg-zinc-200 py-1 pl-2 pr-3 text-sm font-semibold lowercase text-zinc-800 md:text-base">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
                     viewBox="0 0 24 24"
-                    className="text-amber-500"
+                    className="h-4 text-amber-500 md:h-5"
                   >
                     <path
                       fill="currentColor"
                       d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.62L12 2L9.19 8.62L2 9.24l5.45 4.73L5.82 21z"
                     />
                   </svg>
-                  <p>{menuData.averageRating}</p>
+                  <p className="max-md:text-xs">{menuData.averageRating}</p>
                 </h1>
               </header>
 
