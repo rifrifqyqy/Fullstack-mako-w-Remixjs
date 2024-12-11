@@ -25,11 +25,9 @@ export default function EditReviewForm({
             <svg
               key={star}
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
               viewBox="0 0 24 24"
               onClick={() => handleStarClick(star)}
-              className={`cursor-pointer ${star <= rating ? "fill-amber-500" : "fill-zinc-400"}`}
+              className={`cursor-pointer ${star <= rating ? "fill-amber-500" : "fill-zinc-400"} h-6 md:h-7`}
             >
               <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-6.91-.58L12 2 9.91 8.66 3 9.24l5.46 4.73L5.82 21z" />
             </svg>
@@ -47,7 +45,7 @@ export default function EditReviewForm({
       </div>
       <button
         type="submit"
-        className="rounded-full bg-primary-100 px-4 py-2 text-white hover:opacity-85 max-md:text-sm"
+        className="rounded-full bg-primary-100 px-4 py-1.5 text-white hover:opacity-85 max-md:text-sm md:py-2"
       >
         Simpan Ulasan
       </button>
