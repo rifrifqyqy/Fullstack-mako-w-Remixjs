@@ -42,7 +42,7 @@ export default function EditReviewForm({
           id="edit-comment"
           defaultValue={userReview?.comment}
           required
-          className="w-full appearance-none rounded border-2 border-zinc-200 bg-zinc-200 p-2 outline-none focus-within:border-primary-100 focus-within:bg-white"
+          className="w-full appearance-none rounded border-2 border-zinc-200 bg-zinc-200 p-2 outline-none focus-within:border-primary-100 focus-within:bg-white max-md:text-sm"
         ></textarea>
       </div>
       <button
