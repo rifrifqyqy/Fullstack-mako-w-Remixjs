@@ -68,9 +68,9 @@ export default function Menu() {
   return (
     <main className="wrapper">
       {/* component menu */}
-      <main className="flex flex-col px-8">
+      <main className="flex flex-col px-4 md:px-8">
         <RemixNavbarMenu NavbarTitle="Menu Books" />
-        <section className="relative mt-8 flex h-[200px] w-full overflow-hidden rounded-3xl bg-cover">
+        <section className="relative mt-8 hidden h-[200px] w-full overflow-hidden rounded-3xl bg-cover md:flex">
           <article className="m-auto flex flex-col gap-2">
             <h1 className="z-10 mx-auto w-fit text-5xl font-semibold uppercase text-white">
               Menu
@@ -87,12 +87,12 @@ export default function Menu() {
             className="absolute h-full w-full object-cover brightness-50"
           />
         </section>
-        <header className="mt-8 flex w-full">
+        <header className="mt-6 flex w-full md:mt-8">
           <ul className="scrollbar-hide flex w-full justify-between gap-4 overflow-x-scroll">
             <Suspense fallback={<div>Loading...</div>}>
               {categoryMenu.map((category) => (
                 <button
-                  className={`flex w-full items-center justify-center gap-2 text-nowrap rounded-xl px-4 py-2 text-center font-semibold capitalize transition-all duration-300 ${
+                  className={`flex w-full items-center justify-center gap-2 text-nowrap rounded-xl px-4 py-2 text-center font-semibold capitalize transition-all duration-300 max-md:text-sm ${
                     activeCategory === category.name
                       ? "bg-primary-100 text-white"
                       : "bg-zinc-200"
@@ -102,7 +102,7 @@ export default function Menu() {
                 >
                   {category.displayName}
                   {activeCategory === category.name && (
-                    <p className="rounded-full bg-white px-2 text-sm text-primary-100">
+                    <p className="rounded-full bg-white px-1.5 text-xs text-primary-100 md:px-2 md:text-sm">
                       {filteredMenus.length}
                     </p>
                   )}
@@ -111,7 +111,7 @@ export default function Menu() {
             </Suspense>
           </ul>
         </header>
-        <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
+        <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-2 md:gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-5">
           <Suspense fallback={<div>Loading...</div>}>
             <AnimatePresence mode="wait">
               {filteredMenus.length > 0 ? (

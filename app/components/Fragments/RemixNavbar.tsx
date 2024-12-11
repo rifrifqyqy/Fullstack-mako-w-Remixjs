@@ -73,19 +73,18 @@ export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
         animate="visible"
         className=""
       >
-        <nav className="flex items-center justify-between rounded-2xl border-2 border-zinc-300 bg-white/80 px-4 py-3 backdrop-blur-md md:px-8">
+        <nav className="flex items-center justify-between rounded-2xl border-2 border-zinc-300 bg-white/80 px-3 py-3 backdrop-blur-md md:px-8 md:py-3">
           <NavLink
             to=""
             role="button"
             className={
-              "flex items-center justify-center gap-2 rounded-full py-1 pr-3 font-semibold uppercase text-primary-100 transition-all hover:bg-zinc-200 active:scale-95"
+              "flex items-center justify-center gap-2 rounded-full py-1 pr-3 font-semibold uppercase text-primary-100 transition-all hover:bg-zinc-200 active:scale-95 max-md:text-sm"
             }
             onClick={goBack}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
+              className="h-6 md:h-8"
               viewBox="0 0 24 24"
             >
               <path
@@ -99,7 +98,9 @@ export function RemixNavbarMenu({ NavbarTitle }: { NavbarTitle: string }) {
             </svg>
             Kembali
           </NavLink>
-          <h1 className="text-xl font-semibold uppercase">{NavbarTitle}</h1>
+          <h1 className="text-base font-semibold uppercase md:text-xl">
+            {NavbarTitle}
+          </h1>
         </nav>
       </motion.nav>
     </motion.section>

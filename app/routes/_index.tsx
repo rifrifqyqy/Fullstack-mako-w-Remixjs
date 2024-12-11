@@ -196,7 +196,7 @@ export default function Index() {
             ))}
           </motion.article>
         </section>
-        <section className="mt-8 grid grid-cols-2 gap-4 px-4 sm:grid-cols-3 md:mt-16 md:grid-cols-4 md:gap-8 md:px-8 xl:grid-cols-5 2xl:grid-cols-5">
+        <section className="mt-8 grid grid-cols-2 gap-2 px-4 sm:grid-cols-3 md:mt-16 md:grid-cols-4 md:gap-8 md:px-8 xl:grid-cols-5 2xl:grid-cols-5">
           {sortedMenuData.slice(0, 5).map((menu, index) => (
             <BreadCard key={menu.id} index={index}>
               <BreadCard.Toppings
@@ -250,7 +250,7 @@ export default function Index() {
               className="h-8 md:h-12"
               alt=""
             />
-            <h1 className="text-xl font-semibold text-primary-100 md:text-3xl">
+            <h1 className="text-center text-xl font-semibold text-primary-100 md:text-3xl">
               Frequently Asked Questions
             </h1>
             <motion.img

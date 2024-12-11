@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function BreadCard({ children, index }: BreadTypes) {
   return (
     <motion.div
-      className={` ${index >= 4 ? "hidden md:flex" : ""} menu-item group flex flex-col gap-2 rounded-2xl border-2 border-transparent bg-white p-2 transition-all hover:border-primary-100`}
+      className={` ${index >= 4 ? "hidden md:flex" : ""} menu-item group flex flex-col gap-2 rounded-2xl border-2 border-transparent bg-white p-1 md:p-2 transition-all hover:border-primary-100`}
       style={{ boxShadow: "rgba(0, 0, 0, 0.1) -4px 9px 25px -6px" }}
       variants={CARD_ANIMATION}
       initial="hidden"
