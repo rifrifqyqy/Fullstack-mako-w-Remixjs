@@ -13,7 +13,10 @@ export default function DeleteReview({
     <fetcher.Form method="post" action={actionFetcher}>
       <input type="hidden" name="_action" value="delete" />
       <input type="hidden" name="reviewId" value={reviewId} />
-      <button type="submit" className="text-sm text-red-800 hover:text-red-600">
+      <button
+        type="submit"
+        className="text-xs text-red-800 hover:text-red-600 md:text-sm"
+      >
         {isSubmitting ? "Menghapus..." : "Hapus"}
       </button>
     </fetcher.Form>

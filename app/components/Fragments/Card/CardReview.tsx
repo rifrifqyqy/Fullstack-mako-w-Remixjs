@@ -98,7 +98,7 @@ export default function CardReview({
                 <button
                   type="button"
                   onClick={() => setIsEditing(!isEditing)}
-                  className="text-sm text-zinc-600 hover:text-zinc-900"
+                  className="text-xs text-zinc-600 hover:text-zinc-900 md:text-sm"
                 >
                   {isEditing ? "Batal Edit" : "Edit"}
                 </button>
