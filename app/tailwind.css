@@ -69,7 +69,7 @@ body {
 }
 
 .title-style {
-  @apply text-2xl font-semibold text-zinc-800 dark:text-white;
+  @apply text-xl md:text-2xl font-semibold text-zinc-800 dark:text-white;
 }
 
 a.active {
