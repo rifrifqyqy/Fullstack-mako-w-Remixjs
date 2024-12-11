@@ -201,7 +201,7 @@ export default function MenuDetail() {
   };
 
   return (
-    <main>
+    <main className="flex flex-col">
       <main className="px-4 md:px-8">
         {/* navbar */}
         <RemixNavbarMenu NavbarTitle={menuData.title} />
