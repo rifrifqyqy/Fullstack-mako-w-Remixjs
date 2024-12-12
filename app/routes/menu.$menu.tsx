@@ -156,8 +156,6 @@ export default function MenuDetail() {
   const { menuData, currentUser, reviews, alreadyReview, userReview } =
     useLoaderData<LoaderData>();
   const [activeImage, setActiveImage] = useState(0);
-  const [touchStartX, setTouchStartX] = useState(null);
-  const [touchEndX, setTouchEndX] = useState(null);
   // end state and hooks
 
   // Fungsi untuk mengubah gambar aktif
@@ -177,24 +175,6 @@ export default function MenuDetail() {
 
   const handleEditToggle = () => {
     setIsEditing(!isEditing);
-  };
-
-  // swipe index logic
-  const handleTouchStart = (e) => {
-    setTouchStartX(e.touches[0].clientX);
-  };
-
-  const handleTouchEnd = (e) => {
-    setTouchEndX(e.changedTouches[0].clientX);
-
-    // Calculate swipe direction
-    if (touchStartX - e.changedTouches[0].clientX > 50) {
-      // Swipe left
-      handleNext();
-    } else if (touchStartX - e.changedTouches[0].clientX < -50) {
-      // Swipe right
-      handlePrev();
-    }
   };
 
   return (
@@ -218,8 +198,6 @@ export default function MenuDetail() {
                     key={menuData.gallery[activeImage]}
                     exit="exit"
                     src={menuData.gallery[activeImage]}
-                    onTouchStartCapture={handleTouchStart}
-                    onTouchEndCapture={handleTouchEnd}
                     alt=""
                     className="menu-show h-[300px] w-full rounded-xl bg-zinc-200 object-contain md:h-[550px] md:rounded-2xl"
                   />
@@ -322,7 +300,7 @@ export default function MenuDetail() {
               <div className="w-fit rounded-full bg-primary-100/15 px-2 py-0.5 text-xs lowercase text-primary-100 md:px-3 md:py-1 md:text-sm">
                 {transformHyphenToSpace(menuData.kategori)}
               </div>
-              <p className="mt-2 text-zinc-600 max-md:text-sm">
+              <p className="mt-2 line-clamp-1 text-zinc-600 max-md:text-sm">
                 {menuData.description}
               </p>
               <article className="mt-2 grid w-full grid-cols-2 gap-1 border-t-2 border-zinc-300 pt-4">
