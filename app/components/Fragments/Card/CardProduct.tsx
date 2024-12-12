@@ -70,22 +70,22 @@ function Layer({ title, description, price, deleteID, kategori }: LayerTypes) {
   const fetcher = useFetcher();
 
   // handle delete menu
-  const handleDelete = () => {
-    if (!confirm("Are you sure you want to delete this menu?")) return;
-    fetcher.submit(
-      { id: deleteID },
-      { method: "post", action: "/menu/delete" },
-    );
-  };
+  // const handleDelete = () => {
+  //   if (!confirm("Are you sure you want to delete this menu?")) return;
+  //   fetcher.submit(
+  //     { id: deleteID },
+  //     { method: "post", action: "/menu/delete" },
+  //   );
+  // };
   return (
     <article className="flex h-full flex-col gap-1 rounded-xl bg-zinc-100 p-2 md:gap-2 md:p-3">
       <h1 className="line-clamp-1 text-sm font-semibold text-primary-100 md:text-xl">
         {title}
       </h1>
-      <h1 className="w-fit rounded-full bg-primary-100/15 px-2 py-0.5 text-xs lowercase text-primary-100 md:px-3 md:py-1 md:text-sm">
+      <h1 className="w-fit rounded-full bg-primary-100/15 px-2 py-0.5 text-xs lowercase text-primary-100 md:hidden md:px-3 md:py-1 md:text-sm">
         {transformHyphenToSpace(kategori)}
       </h1>
-      <p className="line-clamp-2 hidden text-xs text-zinc-500 md:block md:text-[0.875rem]">
+      <p className="line-clamp-2 text-xs text-zinc-500 max-md:hidden md:text-sm">
         {description}
       </p>
       <p className="ml-auto mt-auto text-sm font-bold capitalize text-zinc-800 md:text-xl">
