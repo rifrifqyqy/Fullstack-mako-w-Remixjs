@@ -365,8 +365,8 @@ export function RemixNavbarHome({
                   <path
                     fill="none"
                     stroke={`${isCurrent ? "#8e1538" : "currentColor"} `}
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     stroke-width="1.5"
                     d="m10 17l5-5l-5-5"
                   />
