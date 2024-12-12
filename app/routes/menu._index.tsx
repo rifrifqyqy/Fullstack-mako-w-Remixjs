@@ -112,39 +112,37 @@ export default function Menu() {
           </ul>
         </header>
         <section className="menu-data mt-6 grid grid-cols-2 justify-items-center gap-2 sm:grid-cols-3 md:grid-cols-4 md:gap-6 xl:grid-cols-5 2xl:grid-cols-5">
-          <Suspense fallback={<div>Loading...</div>}>
-            <AnimatePresence mode="wait">
-              {filteredMenus.length > 0 ? (
-                filteredMenus.map((menu) => (
-                  <BreadCard key={menu.id}>
-                    <BreadCard.Toppings
-                      DirecTo={`/menu/${menu.id}`}
-                      thumb={menu.thumb}
-                      title={menu.title}
-                      kategori={menu.kategori}
-                      rating={menu.averageRating?.toFixed(1)}
-                    />
-                    <BreadCard.Layer
-                      title={menu.title}
-                      kategori={menu.kategori}
-                      description={menu.description}
-                      price={menu.price}
-                      deleteID={menu.id}
-                    />
-                  </BreadCard>
-                ))
-              ) : (
-                <div className="col-span-5 flex h-full w-full flex-col items-center justify-center gap-4 rounded-3xl border-2 p-8">
-                  <img
-                    src="/images/no-data.png"
-                    className="aspect-auto h-32"
-                    alt=""
+          <AnimatePresence mode="wait">
+            {filteredMenus.length > 0 ? (
+              filteredMenus.map((menu) => (
+                <BreadCard key={menu.id}>
+                  <BreadCard.Toppings
+                    DirecTo={`/menu/${menu.id}`}
+                    thumb={menu.thumb}
+                    title={menu.title}
+                    kategori={menu.kategori}
+                    rating={menu.averageRating?.toFixed(1)}
                   />
-                  <p className="text-center font-semibold">No menu available</p>
-                </div>
-              )}
-            </AnimatePresence>
-          </Suspense>
+                  <BreadCard.Layer
+                    title={menu.title}
+                    kategori={menu.kategori}
+                    description={menu.description}
+                    price={menu.price}
+                    deleteID={menu.id}
+                  />
+                </BreadCard>
+              ))
+            ) : (
+              <div className="col-span-5 flex h-full w-full flex-col items-center justify-center gap-4 rounded-3xl border-2 p-8">
+                <img
+                  src="/images/no-data.png"
+                  className="aspect-auto h-32"
+                  alt=""
+                />
+                <p className="text-center font-semibold">No menu available</p>
+              </div>
+            )}
+          </AnimatePresence>
         </section>
       </main>
       {/* end component menu */}
