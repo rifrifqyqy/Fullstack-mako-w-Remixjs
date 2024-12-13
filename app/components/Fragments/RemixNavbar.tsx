@@ -297,7 +297,7 @@ export function RemixNavbarHome({
       {/* Hamburger Menu */}
       <main
         className={`hamburger-menu absolute left-0 top-0 h-dvh w-full bg-white px-4 pt-4 text-white transition-transform duration-300 md:hidden ${
-          isNavToggled ? "translate-y-0" : "-translate-y-full"
+          isNavToggled ? "translate-y-0" : "-translate-y-[150%]"
         }`}
       >
         <header className="flex w-full items-center justify-between border-b border-zinc-200 pb-3">

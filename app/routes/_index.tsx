@@ -103,7 +103,7 @@ export default function Index() {
       />
       <nav className="flex px-4 py-2 md:gap-8 md:px-8">
         <div className="w-full gap-8 md:grid md:grid-cols-2">
-          <p className="line-clamp-1 h-full rounded-full bg-light-200 px-4 py-2 font-medium"></p>
+          <p className="line-clamp-1 h-full rounded-full bg-light-200 px-4 py-2 font-medium max-md:hidden"></p>
           <SearchBar dataSearch={menuData} />
         </div>
 
