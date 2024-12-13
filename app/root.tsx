@@ -48,7 +48,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="bg-white text-zinc-800">
-        <main className="mx-auto w-full md:container">
+        <main className="mx-auto min-h-screen w-full md:container">
           {isLoading && <LoadingModal title=" Memuat Roti..." />}
           {children}
           <ScrollRestoration />
@@ -106,14 +106,14 @@ export function ErrorBoundary() {
           <h1 className="text-2xl font-bold text-primary-100 md:text-5xl">
             {error.status} {error.statusText}
           </h1>
-          <p className="text-xl text-gray-700">
+          <p className="text-center text-sm text-gray-700 md:text-xl">
             {error?.data || "Something went wrong."}
           </p>
         </article>
         <RemixButton
           to="/"
           title="Back to Homepage"
-          stylebtn="mt-4"
+          stylebtn="mt-4 max-md:text-xs font-medium"
           color="bg-gray-800"
         />
       </main>
