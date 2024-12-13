@@ -38,11 +38,9 @@ export default function AddReviewForm({
             <svg
               key={star}
               xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
               viewBox="0 0 24 24"
               onClick={() => handleStarClick(star)}
-              className={`cursor-pointer ${star <= rating ? "fill-amber-500" : "fill-zinc-400"}`}
+              className={`cursor-pointer ${star <= rating ? "fill-amber-500" : "fill-zinc-400"} h-5 md:h-8`}
             >
               <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-6.91-.58L12 2 9.91 8.66 3 9.24l5.46 4.73L5.82 21z" />
             </svg>
@@ -54,12 +52,12 @@ export default function AddReviewForm({
           name="comment"
           id="comment"
           required
-          className="min-h-32 w-full resize-none appearance-none rounded-lg border-2 border-zinc-200 bg-zinc-200 p-3 outline-none focus-within:border-primary-100 focus-within:bg-white"
+          className="min-h-24 w-full resize-none appearance-none rounded-lg border-2 border-zinc-200 bg-zinc-200 p-3 outline-none focus-within:border-primary-100 focus-within:bg-white max-md:text-sm md:min-h-32"
         ></textarea>
       </div>
       <button
         type="submit"
-        className="rounded-full bg-primary-100 px-4 py-2 text-white hover:opacity-85"
+        className="rounded-full bg-primary-100 px-4 py-2 text-white hover:opacity-85 max-md:text-sm"
       >
         {renderButtonText()}
       </button>
