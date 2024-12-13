@@ -136,7 +136,7 @@ export default function Menu() {
               <div className="col-span-5 flex h-full w-full flex-col items-center justify-center gap-4 rounded-3xl border-2 p-8">
                 <img
                   src="/images/no-data.png"
-                  className="aspect-auto h-32"
+                  className="aspect-auto h-20 md:h-32"
                   alt=""
                 />
                 <p className="text-center font-semibold">No menu available</p>

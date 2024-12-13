@@ -27,7 +27,7 @@ export default function EditReviewForm({
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               onClick={() => handleStarClick(star)}
-              className={`cursor-pointer ${star <= rating ? "fill-amber-500" : "fill-zinc-400"} h-6 md:h-7`}
+              className={`cursor-pointer ${star <= rating ? "fill-amber-500" : "fill-zinc-400"} h-5 md:h-8`}
             >
               <path d="M12 17.27L18.18 21 16.54 13.97 22 9.24l-6.91-.58L12 2 9.91 8.66 3 9.24l5.46 4.73L5.82 21z" />
             </svg>
@@ -40,7 +40,7 @@ export default function EditReviewForm({
           id="edit-comment"
           defaultValue={userReview?.comment}
           required
-          className="w-full appearance-none rounded border-2 border-zinc-200 bg-zinc-200 p-2 outline-none focus-within:border-primary-100 focus-within:bg-white max-md:text-sm"
+          className="min-h-24 md:min-h-32 w-full resize-none appearance-none rounded-lg border-2 border-zinc-200 bg-zinc-200 p-3 outline-none focus-within:border-primary-100 focus-within:bg-white max-md:text-sm"
         ></textarea>
       </div>
       <button

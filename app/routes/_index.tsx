@@ -249,7 +249,7 @@ export default function Index() {
               className="h-8 md:h-12"
               alt=""
             />
-            <h1 className="text-center text-xl font-semibold text-primary-100 md:text-3xl">
+            <h1 className="text-center text-lg font-semibold text-primary-100 md:text-3xl">
               Frequently Asked Questions
             </h1>
             <motion.img
