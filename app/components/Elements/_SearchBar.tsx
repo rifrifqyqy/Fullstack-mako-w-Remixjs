@@ -88,7 +88,7 @@ export default function SearchBar({ dataSearch }: { dataSearch: MenuItem[] }) {
         </svg>
       </div>
 
-      <div className="result relative flex h-full w-full bg-blue-600">
+      <div className={`${isLoad ? "hidden" : ""} result relative flex h-full w-full`}>
         {isLoad ? (
           <p className="text-center text-gray-500">Loading...</p>
         ) : noResultsFound ? (
