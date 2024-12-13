@@ -19,11 +19,11 @@ const AccordionItem = ({
     <div className="">
       <button
         onClick={onClick}
-        className={`flex w-full items-center justify-between rounded-full py-3 pl-6 pr-2 text-left text-base font-semibold transition-all focus:outline-none max-sm:gap-4 md:pl-8 md:pr-3 md:text-lg ${isActive ? "bg-primary-100 text-white" : "bg-white text-zinc-600 hover:bg-zinc-200"}`}
+        className={`flex w-full items-center justify-between rounded-full py-3 pl-6 pr-2 text-left text-sm font-semibold transition-all focus:outline-none max-sm:gap-4 md:pl-8 md:pr-3 md:text-lg ${isActive ? "bg-primary-100 text-white" : "bg-white text-zinc-600 hover:bg-zinc-200"}`}
       >
         {title}
         <span
-          className={`rounded-full p-2 transition-all ${isActive ? "rotate-180 bg-white text-primary-100" : "rotate-0"}`}
+          className={`rounded-full p-1 transition-all md:p-2 ${isActive ? "rotate-180 bg-white text-primary-100" : "rotate-0"}`}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -48,7 +48,7 @@ const AccordionItem = ({
         }}
         className={`overflow-hidden pb-4 transition-all duration-300 ${isActive ? "border-zinc-300" : "border-transparent"}`}
       >
-        <div className="px-6 py-4 text-sm text-gray-700 md:text-base">
+        <div className="px-6 py-4 text-xs text-gray-700 md:text-base">
           {content}
         </div>
       </div>
