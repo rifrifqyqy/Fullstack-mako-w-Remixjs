@@ -331,8 +331,7 @@ export default function Index() {
       </AnimatePresence>
       {/* end toast */}
 
-      {/* footer */}
-      <RemixFooter />
+      
     </main>
   );
 }

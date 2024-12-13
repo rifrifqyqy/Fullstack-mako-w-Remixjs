@@ -4,6 +4,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
@@ -11,6 +12,7 @@ import "./tailwind.css";
 import { CategoryProvider } from "helper/CategoryContext";
 import { useGlobalLoading } from "helper/LoadingContext";
 import LoadingModal from "./components/Fragments/LoadingModal";
+import RemixFooter from "./components/Layouts/RemixFooter";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -27,6 +29,9 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   const { isLoading } = useGlobalLoading();
+  const location = useLocation();
+  const loginpage = location.pathname.includes("/login");
+  const signuppage = location.pathname.includes("/signup");
   return (
     <html lang="en">
       <head>
@@ -35,11 +40,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-white text-zinc-800" >
-        {isLoading && <LoadingModal title=" Memuat Roti..." />}
-        {children}
-        <ScrollRestoration />
-        <Scripts />
+      <body className="bg-white text-zinc-800">
+        <main className="container mx-auto w-full">
+          {isLoading && <LoadingModal title=" Memuat Roti..." />}
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </main>
+        {/* footer */}
+        {signuppage || loginpage ? null : <RemixFooter />}
       </body>
     </html>
   );

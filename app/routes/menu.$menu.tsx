@@ -16,7 +16,6 @@ import {
 import RemixButton from "~/components/Elements/RemixButton";
 import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
 import AddReviewForm from "~/components/Fragments/form/AddReview";
-import RemixFooter from "~/components/Layouts/RemixFooter";
 import CardReview from "~/components/Fragments/Card/CardReview";
 
 // ================== BACKEND LOGIC ==========================
@@ -388,7 +387,6 @@ export default function MenuDetail() {
         </main>
         {/* end main content */}
       </main>
-      <RemixFooter />
     </main>
   );
 }

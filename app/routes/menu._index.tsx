@@ -146,9 +146,6 @@ export default function Menu() {
         </section>
       </main>
       {/* end component menu */}
-
-      {/* footer */}
-      <RemixFooter />
     </main>
   );
 }
