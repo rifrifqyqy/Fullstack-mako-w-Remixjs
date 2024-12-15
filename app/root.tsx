@@ -47,8 +47,8 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="bg-white text-zinc-800">
-        <main className="mx-auto min-h-screen w-full md:container">
+      <body className="text-zinc-800">
+        <main className="mx-auto min-h-screen w-full 2xl:container">
           {isLoading && <LoadingModal title=" Memuat Roti..." />}
           {children}
           <ScrollRestoration />

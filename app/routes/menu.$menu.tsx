@@ -327,7 +327,7 @@ export default function MenuDetail() {
               <section>
                 {alreadyReview ? (
                   <div className="mt-4 flex flex-col gap-1 rounded-2xl bg-zinc-200 pt-2">
-                    <p className="ml-2 w-fit rounded-full bg-white px-2 text-sm font-semibold lowercase text-primary-100">
+                    <p className="ml-2 w-fit rounded-full bg-white px-2 text-xs font-semibold lowercase text-primary-100 md:text-sm">
                       Ulasan Anda
                     </p>
                     {/* your comment card */}
