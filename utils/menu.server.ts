@@ -66,3 +66,28 @@ export async function deleteMenu(id: string): Promise<void> {
   }
   await prisma.menu.delete({ where: { id } });
 }
+
+// get paginated menu
+export const getPaginatedMenu = async (page: number, limit: number) => {
+  const skip = (page - 1) * limit;
+
+  const [menus, totalItems] = await Promise.all([
+    prisma.menu.findMany({
+      skip,
+      take: limit,
+      orderBy: { createdAt: "desc" },
+      include: {
+        reviews: true,
+      },
+    }),
+    prisma.menu.count(),
+  ]);
+  const menuspaginate = menus.map((menu) => ({
+    ...menu,
+    averageRating: calculateAverageRating(menu.reviews || []),
+  }));
+  return {
+    menuspaginate,
+    totalItems,
+  };
+};
