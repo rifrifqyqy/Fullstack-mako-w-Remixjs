@@ -1,9 +1,9 @@
 import { ActionFunction, LoaderFunction, MetaFunction } from "@remix-run/node";
 import { json, Link, redirect, useLoaderData } from "@remix-run/react";
 import { AnimatePresence, motion } from "framer-motion";
-import { getCurrentUser } from "helper/currentUser";
-import { priceFormat } from "helper/priceFormat";
-import { transformHyphenToSpace } from "helper/transformText";
+import { getCurrentUser } from "hooks/currentUser";
+import { priceFormat } from "hooks/priceFormat";
+import { transformHyphenToSpace } from "hooks/transformText";
 import { ReactNode, useCallback, useState } from "react";
 import { getMenu } from "utils/menu.server";
 import {
