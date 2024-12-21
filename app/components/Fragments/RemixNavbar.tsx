@@ -2,7 +2,7 @@ import { Link, NavLink, useLocation } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { useScrollDirection } from "helper/scrollDirection";
+import { useScrollDirection } from "hooks/scrollDirection";
 
 // interface types navbar
 type RemixNavbarProps = {
@@ -13,6 +13,11 @@ type RemixNavbarProps = {
   btn_title_mobile?: string;
   color?: string;
   userIcon?: boolean;
+  dataUser?: {
+    username?: string;
+    id?: string;
+    role?: string;
+  };
   goBack?: () => void;
 };
 
@@ -113,6 +118,7 @@ export function RemixNavbarHome({
   btn_title_mobile = "Button",
   color,
   userIcon = false,
+  dataUser,
 }: RemixNavbarProps) {
   const [showModal, setShowModal] = useState(false);
   const [isNavToggled, setIsNavToggled] = useState(false);
@@ -126,10 +132,8 @@ export function RemixNavbarHome({
     localStorage.removeItem("toastShown");
   };
   const handleClick = (e: React.MouseEvent) => {
-    if (btn_to === "/logout") {
-      e.preventDefault();
-      setShowModal(true);
-    }
+    e.preventDefault();
+    setShowModal(!showModal);
   };
 
   // logic toggle nav menu
@@ -231,27 +235,75 @@ export function RemixNavbarHome({
               </div>
             </div>
           )}
-          <RemixButton
-            to={btn_to}
-            title={btn_title}
-            color={color}
-            onClick={handleClick}
-            stylebtn="hidden md:flex"
-          >
-            {userIcon && (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  fill="currentColor"
-                  d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
-                />
-              </svg>
+          <main className="group relative flex h-full flex-col overflow-hidden hover:overflow-visible">
+            <RemixButton
+              to={btn_to}
+              title={btn_title}
+              color={color}
+              stylebtn={`${btn_to === "/logout" ? "" : " cursor-default "} hidden md:flex`}
+            >
+              {userIcon && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
+                  />
+                </svg>
+              )}
+            </RemixButton>
+            {/* dropdown menu profile */}
+            {dataUser && (
+              <div className="absolute right-0 top-8 h-fit w-fit pt-5 opacity-0 transition-all duration-300 group-hover:opacity-100">
+                <ul className="divide-y overflow-hidden rounded-lg border bg-white shadow-md">
+                  {dataUser && dataUser.role === "admin" && (
+                    <Link
+                      to={"/dashboard"}
+                      className="flex cursor-pointer items-center gap-4 p-4 pr-12 font-medium hover:bg-zinc-200"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="1.3em"
+                        height="1.3em"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M14 9q-.425 0-.712-.288T13 8V4q0-.425.288-.712T14 3h6q.425 0 .713.288T21 4v4q0 .425-.288.713T20 9zM4 13q-.425 0-.712-.288T3 12V4q0-.425.288-.712T4 3h6q.425 0 .713.288T11 4v8q0 .425-.288.713T10 13zm10 8q-.425 0-.712-.288T13 20v-8q0-.425.288-.712T14 11h6q.425 0 .713.288T21 12v8q0 .425-.288.713T20 21zM4 21q-.425 0-.712-.288T3 20v-4q0-.425.288-.712T4 15h6q.425 0 .713.288T11 16v4q0 .425-.288.713T10 21z"
+                        ></path>
+                      </svg>
+                      Dashboard
+                    </Link>
+                  )}
+
+                  <li
+                    className="flex cursor-pointer items-center gap-4 p-4 pr-12 font-medium hover:bg-zinc-200"
+                    role="button"
+                    onClick={handleClick}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="1.3em"
+                      height="1.3em"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="m17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5M4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4z"
+                      ></path>
+                    </svg>
+                    Logout
+                  </li>
+                </ul>
+              </div>
             )}
-          </RemixButton>
+
+            {/* dropdown end */}
+          </main>
           <div
             className={`hamburger flex text-primary-100 transition-all hover:text-light-600 md:hidden`}
             role="button"
