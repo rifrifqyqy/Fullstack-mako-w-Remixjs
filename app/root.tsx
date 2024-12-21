@@ -11,8 +11,8 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 
 import "./tailwind.css";
-import { CategoryProvider } from "helper/CategoryContext";
-import { useGlobalLoading } from "helper/LoadingContext";
+import { CategoryProvider } from "hooks/CategoryContext";
+import { useGlobalLoading } from "hooks/LoadingContext";
 import LoadingModal from "./components/Fragments/LoadingModal";
 import RemixFooter from "./components/Layouts/RemixFooter";
 import { motion } from "framer-motion";
@@ -36,6 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
   const loginpage = location.pathname.includes("/login");
   const signuppage = location.pathname.includes("/signup");
+  const dashboardpage = location.pathname.includes("/dashboard");
   const routeError = useRouteError();
   const isError = routeError ? true : false;
 
@@ -55,7 +56,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Scripts />
         </main>
         {/* footer */}
-        {!signuppage && !loginpage && !isError && <RemixFooter />}
+        {!signuppage && !loginpage && !isError && !dashboardpage && (
+          <RemixFooter />
+        )}
       </body>
     </html>
   );
