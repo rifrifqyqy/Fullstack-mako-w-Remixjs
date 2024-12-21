@@ -1,10 +1,10 @@
 import { Link } from "@remix-run/react";
-import { priceFormat } from "helper/priceFormat";
-import { useDebounce } from "helper/useDebounce";
+import { priceFormat } from "hooks/priceFormat";
+import { useDebounce } from "hooks/useDebounce";
 import { useState, useEffect, useRef, useCallback } from "react";
 
 interface MenuItem {
-  id: string;
+  id: number;
   title: string;
   price: number;
   thumb: string;
@@ -88,7 +88,9 @@ export default function SearchBar({ dataSearch }: { dataSearch: MenuItem[] }) {
         </svg>
       </div>
 
-      <div className={`${isLoad ? "hidden" : ""} result relative flex h-full w-full`}>
+      <div
+        className={`${isLoad ? "hidden" : ""} result relative flex h-full w-full`}
+      >
         {isLoad ? (
           <p className="text-center text-gray-500">Loading...</p>
         ) : noResultsFound ? (
