@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { NavLink } from "@remix-run/react";
 import RemixButton from "../Elements/RemixButton";
-import { transformHyphenToSpace } from "helper/transformText";
+import { transformHyphenToSpace } from "hooks/transformText";
 
 // types
 interface CategoryType {
@@ -23,7 +23,7 @@ export default function HomeCategoryLayout() {
           variants={ANIMATION_WRAP}
           initial="hidden"
           animate="visible"
-          className="flex w-fit gap-2 md:gap-4 md:flex-col"
+          className="flex w-fit gap-2 md:flex-col md:gap-4"
         >
           {dataCategory.map((category) => (
             <motion.div

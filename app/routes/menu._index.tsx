@@ -8,8 +8,9 @@ import { RemixNavbarMenu } from "~/components/Fragments/RemixNavbar";
 import { Suspense, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import BreadCard from "~/components/Fragments/Card/CardProduct";
-import { useCategory } from "helper/CategoryContext";
+import { useCategory } from "hooks/CategoryContext";
 import RemixFooter from "~/components/Layouts/RemixFooter";
+import { menuType } from "types/bakeryTypes";
 
 export const meta: MetaFunction = () => {
   return [
@@ -42,7 +43,7 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function Menu() {
-  const { menus } = useLoaderData<{ menus: Menu[] }>();
+  const { menus } = useLoaderData<{ menus: menuType[] }>();
   console.log(menus);
   const { activeCategory, setActiveCategory } = useCategory();
   const [searchParams] = useSearchParams();
