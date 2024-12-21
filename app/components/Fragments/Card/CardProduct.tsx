@@ -1,7 +1,7 @@
 import { Link, useFetcher } from "@remix-run/react";
 import { motion } from "framer-motion";
-import { priceFormat } from "helper/priceFormat";
-import { transformHyphenToSpace } from "helper/transformText";
+import { priceFormat } from "hooks/priceFormat";
+import { transformHyphenToSpace } from "hooks/transformText";
 import { useState } from "react";
 
 export default function BreadCard({ children, index }: BreadTypes) {
