@@ -1,0 +1,43 @@
+/* NavLink classes condition */
+
+a#dashboard.active {
+  @apply bg-primary-100 text-white;
+}
+
+a#dashboard:not(.active) {
+  &:hover {
+    @apply text-primary-100;
+  }
+}
+
+a#dashboard.active {
+  @apply cursor-default;
+  &:hover {
+    @apply ring-transparent;
+  }
+}
+
+.pagination {
+  a {
+    @apply rounded-lg bg-light-200 px-4 py-2 text-dark-200 transition-all;
+
+    &:hover {
+      @apply bg-light-400;
+    }
+  }
+  a.active {
+    @apply bg-primary-100 text-white;
+  }
+}
+
+.pagination .disabled {
+  @apply cursor-default bg-light-300 text-dark-100 hover:bg-light-300 hover:text-dark-100;
+}
+
+.__table-wrapper {
+  @apply items-center gap-4 rounded-xl border-2 border-gray-200 bg-light-100 px-6 py-2 transition-all;
+}
+
+.__table-content {
+  @apply text-gray-600 hover:border-primary-100 hover:bg-primary-100/10;
+}
