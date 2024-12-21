@@ -1,21 +1,19 @@
 /* eslint-disable import/no-unresolved */
 import type { MetaFunction } from "@remix-run/node";
-import { prisma } from "utils/db.server";
 import { json, LoaderFunction } from "@remix-run/node";
 import { Link, NavLink, useLoaderData } from "@remix-run/react";
-import { getUserSession } from "utils/session.server";
 import { RemixNavbarHome } from "~/components/Fragments/RemixNavbar";
 import { AnimatePresence, motion } from "framer-motion";
-import BreadMarquee from "~/components/Fragments/RemixMarquee";
 import { getAllMenu, getLatestMenu } from "utils/menu.server";
 import { useEffect, useState } from "react";
 import HomeCategoryLayout from "~/components/Layouts/_home.CategoryLayouts";
 import Accordion from "~/components/Elements/RAccordion";
-import RemixFooter from "~/components/Layouts/RemixFooter";
 import HeroBanner from "~/components/Layouts/HeroBanner";
 import BreadCard from "~/components/Fragments/Card/CardProduct";
 import RemixButton from "~/components/Elements/RemixButton";
 import SearchBar from "~/components/Elements/_SearchBar";
+import { getCurrentUser } from "hooks/currentUser";
+import { menuType } from "types/bakeryTypes";
 
 // =============================================== END IMPORTS STORE =============================================== //
 export const meta: MetaFunction = () => {
@@ -24,27 +22,10 @@ export const meta: MetaFunction = () => {
     { name: "description", content: "Selamat Datang di Mako Bakery" },
   ];
 };
-type menuType = {
-  averageRating: any;
-  price: number;
-  id: string;
-  title: string;
-  thumb: string;
-  description: string;
-  gallery: string[];
-  kategori: string;
-};
+
 // Loader function
 export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await getUserSession(request);
-
-  let currentUser = null;
-  if (userId) {
-    currentUser = await prisma.user.findUnique({
-      where: { id: userId },
-      select: { username: true, id: true },
-    });
-  }
+  let currentUser = await getCurrentUser(request);
   const bakery = await getLatestMenu();
   const menuData = await getAllMenu();
   // Sorting berdasarkan `createdAt` (terbaru di atas)
@@ -59,6 +40,7 @@ type LoaderData = {
   currentUser: {
     username: string;
     id: string;
+    role: string;
   } | null;
   bakery: menuType;
   menuData: menuType[];
@@ -92,7 +74,7 @@ export default function Index() {
       <RemixNavbarHome
         to="/"
         btn_title={currentUser ? `` : "Login"}
-        btn_to={currentUser ? "/logout" : "/login"}
+        btn_to={currentUser ? "" : "/login"}
         btn_title_mobile={currentUser ? `Logout` : ""}
         color={
           currentUser
@@ -100,6 +82,7 @@ export default function Index() {
             : "bg-primary-100"
         }
         userIcon={currentUser ? true : false}
+        dataUser={currentUser}
       />
       <nav className="flex px-4 py-2 md:gap-8 md:px-8">
         <div className="w-full gap-8 md:grid md:grid-cols-2">
