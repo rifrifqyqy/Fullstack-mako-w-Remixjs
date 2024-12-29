@@ -91,3 +91,8 @@ export const getPaginatedMenu = async (page: number, limit: number) => {
     totalItems,
   };
 };
+
+export const getAllMenuByRating = async () => {
+  const menus = await getAllMenu();
+  return menus.sort((a, b) => b.averageRating - a.averageRating);
+};
