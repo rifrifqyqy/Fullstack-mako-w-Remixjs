@@ -19,7 +19,10 @@ import { motion } from "framer-motion";
 import RemixButton from "./components/Elements/RemixButton";
 
 export const links: LinksFunction = () => [
-  { rel: "preconnect", href: "https://fonts.googleapis.com" },
+  {
+    rel: "preconnect",
+    href: "https://fonts.googleapis.com",
+  },
   {
     rel: "preconnect",
     href: "https://fonts.gstatic.com",
@@ -37,9 +40,12 @@ export function Layout({ children }: { children: React.ReactNode }) {
   const loginpage = location.pathname.includes("/login");
   const signuppage = location.pathname.includes("/signup");
   const dashboardpage = location.pathname.includes("/dashboard");
+  const intruderpage = location.pathname.includes("/intruder");
+
   const routeError = useRouteError();
   const isError = routeError ? true : false;
-
+  const ruleComponents =
+    dashboardpage || intruderpage || isError || loginpage || signuppage;
   return (
     <html lang="en">
       <head>
@@ -48,7 +54,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="text-zinc-800">
+      <body className="font-['Ubuntu'] text-zinc-800">
         <main className="mx-auto min-h-screen w-full 2xl:container">
           {isLoading && <LoadingModal title=" Memuat Roti..." />}
           {children}
@@ -56,9 +62,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Scripts />
         </main>
         {/* footer */}
-        {!signuppage && !loginpage && !isError && !dashboardpage && (
-          <RemixFooter />
-        )}
+        {!ruleComponents && <RemixFooter />}
       </body>
     </html>
   );
