@@ -54,7 +54,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className="font-['Ubuntu'] text-zinc-800">
+      <body className="font-['Inter'] text-zinc-800">
         <main className="mx-auto min-h-screen w-full 2xl:container">
           {isLoading && <LoadingModal title=" Memuat Roti..." />}
           {children}

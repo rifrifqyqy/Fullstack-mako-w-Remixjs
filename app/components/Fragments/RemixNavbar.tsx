@@ -3,6 +3,7 @@ import RemixButton from "../Elements/RemixButton";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useScrollDirection } from "hooks/scrollDirection";
+import { button } from "framer-motion/client";
 
 // interface types navbar
 type RemixNavbarProps = {
@@ -427,26 +428,37 @@ export function RemixNavbarHome({
             );
           })}
         </ul>
-        <RemixButton
-          to={btn_to}
-          title={btn_title}
-          color={color}
-          stylebtn={`${btn_to === "/logout" ? "" : " cursor-pointer "} w-full flex justify-center mt-8 text-center`}
-        >
-          {userIcon && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-            >
-              <path
-                fill="currentColor"
-                d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
-              />
-            </svg>
-          )}
-        </RemixButton>
+        {!dataUser && (
+          <RemixButton
+            to={btn_to}
+            title={btn_title}
+            color={color}
+            stylebtn={`${btn_to === "/logout" ? "" : " cursor-pointer "} w-full flex justify-center mt-8 text-center`}
+          >
+            {userIcon && (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4"
+                />
+              </svg>
+            )}
+          </RemixButton>
+        )}
+
+        {dataUser && (
+          <button
+            onClick={handleLogout}
+            className="mt-8 flex w-full justify-center rounded-full bg-primary-100 py-2 text-center font-semibold"
+          >
+            Logout
+          </button>
+        )}
       </main>
     </motion.section>
   );
